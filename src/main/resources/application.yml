@@ -5,7 +5,8 @@ spring:
   # Freemarker静态资源配置
   freemarker:
     ### 设定ftl文件路径
-    template-loader-path: classpath:/templates/
+    template-loader-path: /WEB-INF/views/
+
     ### 关闭缓存，及时刷新，上线生产环境需要修改为true
     cache: false
     charset: utf-8
