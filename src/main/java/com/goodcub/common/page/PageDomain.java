@@ -1,6 +1,6 @@
 package com.goodcub.common.page;
 
-import com.manhui.core.utils.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * 分页数据
@@ -24,7 +24,8 @@ public class PageDomain {
 		if (StringUtils.isEmpty(sortField)) {
 			return "";
 		}
-		return StringUtils.toUnderScoreCase(sortField) + " " + sortOrder;
+		//return StringUtils.uner .toUnderScoreCase(sortField) + " " + sortOrder;
+		return null;
 	}
 
 	public Integer getPageIndex() {

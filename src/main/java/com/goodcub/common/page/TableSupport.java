@@ -1,8 +1,5 @@
 package com.goodcub.common.page;
 
-import com.manhui.core.constant.Constants;
-import com.manhui.core.utils.ServletUtils;
-
 /**
  * 表格数据处理
  * 
@@ -20,10 +17,10 @@ public class TableSupport {
 	 */
 	public static PageDomain buildPageDomain() {
 		PageDomain pageDomain = new PageDomain();
-		pageDomain.setPageIndex(ServletUtils.getParameterToInt(Constants.PAGE_INDEX, DEFAULE_PAGE_INDEX));
-		pageDomain.setPageSize(ServletUtils.getParameterToInt(Constants.PAGE_SIZE, DEFAULE_PAGE_SIZE));
-		pageDomain.setSortField(ServletUtils.getParameter(Constants.SORT_FIELD));
-		pageDomain.setSortOrder(ServletUtils.getParameter(Constants.SORT_ORDER));
+		//pageDomain.setPageIndex(ServletUtils.getParameterToInt(Constants.PAGE_INDEX, DEFAULE_PAGE_INDEX));
+		//pageDomain.setPageSize(ServletUtils.getParameterToInt(Constants.PAGE_SIZE, DEFAULE_PAGE_SIZE));
+		//pageDomain.setSortField(ServletUtils.getParameter(Constants.SORT_FIELD));
+		//pageDomain.setSortOrder(ServletUtils.getParameter(Constants.SORT_ORDER));
 		return pageDomain;
 	}
 }
