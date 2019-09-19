@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("manage")
 public class UserLoginController {
+
     @GetMapping(value = "/login")
     public String to_login(){
         return "admin/login";
     }
+
 }
