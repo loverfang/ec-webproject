@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <title>登录-Vci网站管理系统</title>
     <!--必要样式-->
-    <link href="${basePath}/static/login/css/styles.css" rel="stylesheet" type="text/css" />
-    <script src="${basePath}/static/login/js/jquery-2.1.1.min.js" ></script>
-    <script src="${basePath}/static/login/js/jquery-ui.min.js" ></script>
-    <link href="${basePath}/static/login/layui/css/layui.css" rel="stylesheet" type="text/css" />
-    <script src="${basePath}/static/login/layui/layui.js" type="text/javascript" ></script>
-    <script src="${basePath}/static/login/js/canvas-particle.js" type="text/javascript"></script>
+    <link href="${base}/res/login/css/styles.css" rel="stylesheet" type="text/css" />
+    <script src="${base}/res/login/js/jquery-2.1.1.min.js" ></script>
+    <script src="${base}/res/login/js/jquery-ui.min.js" ></script>
+    <link href="${base}/res/login/layui/css/layui.css" rel="stylesheet" type="text/css" />
+    <script src="${base}/res/login/layui/layui.js" type="text/javascript" ></script>
+    <script src="${base}/res/login/js/canvas-particle.js" type="text/javascript"></script>
     <script type="javascript">
         if(window.top!==window.self){window.top.location=window.location};
     </script>
@@ -37,27 +37,27 @@
 </div>
 
 <div class='login'>
-    <img class="MyLogo" src="${basePath}/static/login/img/logo.png" alt="LOGO" width="126">
+    <img class="MyLogo" src="${base}/res/login/img/logo.png" alt="LOGO" width="126">
     <!-- <div class='login_title'>
         <span>欢迎使用</span>
     </div> -->
     <div class='login_fields'>
         <div class='login_fields__user'>
             <div class='icon'>
-                <img alt="" src='${basePath}/static/login/img/user_icon_copy.png'>
+                <img alt="" src='${base}/res/login/img/user_icon_copy.png'>
             </div>
             <input name="login" placeholder='用户名' maxlength="16" class="username" type='text' autocomplete="off" value=""/>
             <div class='validation'>
-                <img alt="" src='${basePath}/static/login/img/tick.png'>
+                <img alt="" src='${base}/res/login/img/tick.png'>
             </div>
         </div>
         <div class='login_fields__password'>
             <div class='icon'>
-                <img alt="" src='${basePath}/static/login/img/lock_icon_copy.png'>
+                <img alt="" src='${base}/res/login/img/lock_icon_copy.png'>
             </div>
             <input name="pwd" class="passwordNumder" placeholder='密码' maxlength="16" type='text' autocomplete="off">
             <div class='validation'>
-                <img alt="" src='${basePath}/static/login/img/tick.png'>
+                <img alt="" src='${base}/res/login/img/tick.png'>
             </div>
         </div>
         <div class='login_fields__submit'>
@@ -171,7 +171,7 @@
                 //此处做为ajax内部判断
                 $.ajax({
                     type: "post",
-                    url:"${basePath}/manage/mlogin",
+                    url:"${base}/manage/dologin",
                     data: JsonData,
                     dataType: 'json',
                     async: 'false',
@@ -192,14 +192,18 @@
                             $('.login').removeClass('testtwo'); //平移特效
                         }, 2000);
                         setTimeout(function () {
+                            console.log('进了' + data.flag)
                             $('.authent').hide();
                             $('.login').removeClass('test');
-                            if (data.code == 0) {
+                            if (data.flag == 1) {
                                 //登录成功
                                 $('.login div').fadeOut(100);
                                 $('.success').fadeIn(1000);
                                 $('.success').html(data.msg);
-                                window.top.location = "index";
+
+
+
+                                window.top.location = "${base}/manage/index";
 
                             } else {
                                 ErroAlert(data.msg);

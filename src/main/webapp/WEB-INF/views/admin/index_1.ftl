@@ -109,7 +109,9 @@
     <!--  右边主体 E-->
 
     <!--  底部 S-->
-    <div class="ui-footer"><span class="fl"> 感谢使用管理后台系统。</span> <span class="fr pr20">V1.0.0版</span></div>
+    <!--
+
+    -->
     <!--  底部 E-->
 </div>
 </body>

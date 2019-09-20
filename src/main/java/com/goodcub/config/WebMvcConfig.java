@@ -40,7 +40,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
         // addResourceHandler表示页面中使用的路径，addResourceLocations实际存在的文件夹路径/注意区分window与linux
         //指定了静态资源文件的位置
-        registry.addResourceHandler("/static/**")
+        registry.addResourceHandler("/res/**")
                 .addResourceLocations("classpath:/static/");
     }
 

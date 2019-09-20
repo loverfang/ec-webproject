@@ -21,7 +21,7 @@ public class BasePathInterceptor implements HandlerInterceptor {
         String serverName = httpServletRequest.getServerName();
         int port = httpServletRequest.getServerPort();
         String basePath = scheme + "://" + serverName + ":" + port + path;
-        httpServletRequest.setAttribute("basePath", basePath);
+        httpServletRequest.setAttribute("base", basePath);
         return true;
     }
 }
