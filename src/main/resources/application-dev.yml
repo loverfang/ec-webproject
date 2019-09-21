@@ -1,7 +1,7 @@
 server:
-  port: 9999
+  port: 8888
   servlet:
-    context-path: /vci
+    context-path: /
 
 spring:
   datasource:

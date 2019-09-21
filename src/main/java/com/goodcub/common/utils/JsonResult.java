@@ -10,9 +10,9 @@ public class JsonResult extends BaseResult{
     public static JsonResult success(Object data){
         JsonResult result = new JsonResult();
         result.setFlag(1);
+        result.setCode(200);
         result.setMessage("OK");
         result.setResultObj(data);
-
         return result;
     }
 

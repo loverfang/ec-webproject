@@ -1,5 +1,6 @@
 package com.goodcub.auth.controller;
 
+import com.goodcub.common.annotation.UserLoginToken;
 import com.goodcub.common.utils.JsonResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,14 +18,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping("manage")
 public class UserLoginController {
 
-    @GetMapping(value = "/login")
-    public String to_login(){
-        return "admin/login";
-    }
-
     @PostMapping(value = "/dologin")
     @ResponseBody
     public JsonResult do_login(){
         return JsonResult.success();
+    }
+
+    @GetMapping(value = "/userInfo")
+    @UserLoginToken
+    public String to_login(){
+        return "admin/login";
     }
 }

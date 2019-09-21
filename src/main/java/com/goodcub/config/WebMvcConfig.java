@@ -1,5 +1,6 @@
 package com.goodcub.config;
 
+import com.goodcub.auth.interceptor.AuthenticationInterceptor;
 import com.goodcub.interceptor.BasePathInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -47,11 +48,17 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         registry.addInterceptor(basePathInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(authenticationInterceptor()).addPathPatterns("/**");    // 拦截所有请求,通过判断是否有 @LoginRequired 注解 决定是否需要登录
     }
 
     @Bean
     public BasePathInterceptor basePathInterceptor() {
         return new BasePathInterceptor();
+    }
+
+    @Bean
+    public AuthenticationInterceptor authenticationInterceptor() {
+        return new AuthenticationInterceptor();
     }
 
 }
