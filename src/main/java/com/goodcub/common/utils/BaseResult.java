@@ -11,5 +11,5 @@ public class BaseResult{
     /**具体错误提示信息**/
     private String message;
     /**返回数据**/
-    private Object resultObj;
+    private Object data;
 }

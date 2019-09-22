@@ -12,7 +12,7 @@ public class JsonResult extends BaseResult{
         result.setFlag(1);
         result.setCode(200);
         result.setMessage("OK");
-        result.setResultObj(data);
+        result.setData(data);
         return result;
     }
 

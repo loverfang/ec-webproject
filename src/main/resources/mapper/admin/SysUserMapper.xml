@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.goodcub.vci.mapper.SysUserMapper">
+
+    <select id="queryAccountList" resultType="com.goodcub.vci.entity.SysUser" parameterType="java.util.Map">
+        SELECT * FROM sys_user WHERE account=#{account}
+    </select>
+
+    <select id="queryAccountInfo" resultType="com.goodcub.vci.vo.admin.SysUserVO">
+        SELECT
+          u.user_id,u.account,u.status,u.create_time,u.last_login_time,u.skin,e.emp_name,e.tel,e.dept_id
+        FROM
+          sys_user as u
+          inner join sys_employee as e on e.user_id = u.user_id
+        WHERE
+        u.user_id=#{userId}
+    </select>
+
+</mapper>

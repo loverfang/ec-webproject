@@ -60,7 +60,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
             // 40001: 错误的Token或已过期; 40002: 您的账号在其他设备登录;
             // 首先从请求头中获取jwt串,与页面约定好存放jwt值的请求头属性名为User-Token
-            String jwt = httpServletRequest.getHeader("User-Token");
+            String jwt = httpServletRequest.getHeader("EC-Token");
             logger.info("[登录校验拦截器]-从header中获取的jwt为:{}", jwt);
 
             // 判断jwt是否有效

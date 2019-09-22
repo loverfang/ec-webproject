@@ -7,7 +7,7 @@ import java.util.Map;
 import javax.crypto.spec.SecretKeySpec;
 import javax.xml.bind.DatatypeConverter;
 
-import com.sun.org.apache.xml.internal.security.algorithms.SignatureAlgorithm;
+import com.alibaba.fastjson.JSONObject;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -63,7 +63,7 @@ public class JwtHelper {
               "typ": "JWT"
             }
          */
-        headMap.put("alg", SignatureAlgorithm.HS256.getValue());
+        headMap.put("alg", io.jsonwebtoken.SignatureAlgorithm.HS256.getValue());
         headMap.put("typ", "JWT");
         JwtBuilder builder = Jwts.builder().setHeader(headMap)
                 /*

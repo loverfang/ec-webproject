@@ -14,8 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("manage")
 public class MainController {
 
-    @GetMapping("/index")
+    @GetMapping({"/","/index"})
     public String to_main(){
         return "admin/index";
     }
+
 }
