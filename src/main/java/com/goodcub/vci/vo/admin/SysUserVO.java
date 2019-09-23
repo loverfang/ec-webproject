@@ -2,17 +2,18 @@ package com.goodcub.vci.vo.admin;
 
 import com.goodcub.vci.entity.SysUser;
 import lombok.Data;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * @ClassName SysUserVO
- * @Description TODO
  * @Author Luo.z.x
- * @Date 2019/9/220:05
- * @Version 1.0
- */
+ * @Description: TODO
+ * @Date 2019/9/23
+ * @Version V1.0
+ **/
 @Data
 public class SysUserVO extends SysUser {
     private String empName;
     private String tel;
-    private String depId;
+    private String deptId;
 }
