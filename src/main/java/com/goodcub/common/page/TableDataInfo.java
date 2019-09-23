@@ -9,17 +9,19 @@ import java.util.List;
  * @author liuyong
  */
 public class TableDataInfo implements Serializable {
+
 	private static final long serialVersionUID = 1L;
+
 	/** 总记录数 */
 	private long total;
+
 	/** 列表数据 */
 	private List<?> data;
 
 	/**
 	 * 表格数据对象
 	 */
-	public TableDataInfo() {
-	}
+	public TableDataInfo() { }
 
 	/**
 	 * 分页
