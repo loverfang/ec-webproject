@@ -3,6 +3,9 @@ package com.goodcub.vci.entity;
 import lombok.Data;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
 
 /**
  * @Author Luo.z.x
@@ -12,10 +15,11 @@ import org.apache.commons.logging.LogFactory;
  **/
 @Data
 public class Advertise {
-    private Integer adid;
-    private String adtitle;
-    private String adurl;
-    private String state;
-    private String Integer;
-    private String addtime;
+    protected Integer adid;
+    protected String adtitle;
+    protected String adurl;
+    protected String status;
+    protected String Integer;
+    protected String coverPath;
+    protected Date addtime;
 }

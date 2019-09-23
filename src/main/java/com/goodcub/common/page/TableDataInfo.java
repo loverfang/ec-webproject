@@ -16,7 +16,7 @@ public class TableDataInfo implements Serializable {
 	private long total;
 
 	/** 列表数据 */
-	private List<?> data;
+	private List<?> items;
 
 	/**
 	 * 表格数据对象
@@ -26,11 +26,11 @@ public class TableDataInfo implements Serializable {
 	/**
 	 * 分页
 	 * 
-	 * @param data  列表数据
+	 * @param items  列表数据
 	 * @param total 总记录数
 	 */
-	public TableDataInfo(List<?> data, int total) {
-		this.data = data;
+	public TableDataInfo(List<?> items, int total) {
+		this.items = items;
 		this.total = total;
 	}
 
@@ -42,11 +42,11 @@ public class TableDataInfo implements Serializable {
 		this.total = total;
 	}
 
-	public List<?> getData() {
-		return data;
+	public List<?> getItems() {
+		return items;
 	}
 
-	public void setData(List<?> data) {
-		this.data = data;
+	public void setItems(List<?> items) {
+		this.items = items;
 	}
 }
