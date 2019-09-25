@@ -2,8 +2,6 @@ package com.goodcub.vci.vo.admin;
 
 import com.goodcub.vci.entity.SysUser;
 import lombok.Data;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * @Author Luo.z.x

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.goodcub.vci.mapper.MemberMapper">
+
+    <!-- 查询用户列表 -->
+    <select id="queryMembersList" resultType="com.goodcub.vci.vo.admin.MembersVO" parameterType="java.util.Map">
+        select * from vci_member
+        <where>
+            <if test="name != null">
+                name like concat('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 是否有指定用户名 -->
+    <select id="usernameIsExist" resultType="java.lang.Integer">
+        select count(1) from vci_member where username = #{username}
+    </select>
+
+    <!-- 是否有指定邮箱地址 -->
+    <select id="emailIsExist" resultType="java.lang.Integer">
+        select count(1) from vci_member where email = #{email}
+    </select>
+
+    <!-- 是否有指定手机号码 -->
+    <select id="phoneIsExist" resultType="java.lang.Integer">
+        select count(1) from vci_member where phone = #{phone}
+    </select>
+
+    <!-- 保存用户信息 -->
+    <insert id="insertMembers" parameterType="com.goodcub.vci.entity.Members">
+        insert into vci_member (
+        memid,
+        username,
+        password,
+        usertype,
+        cardnum,
+        name,
+        phone,
+        email,
+        company,
+        jobtitle,
+        vciguwen,
+        viewcount,
+        totaldays,
+        avldays,
+        state,
+        regtime,
+        txt1,
+        txt2,
+        txt3,
+        txt4,
+        txt5,
+        txt6,
+        txt7,
+        txt8,
+        txt9,
+        txt10,
+        txt11,
+        txt12)
+        values (
+        #{memid:INTEGER},
+        #{username:VARCHAR},
+        #{password:VARCHAR},
+        #{usertype:VARCHAR},
+        #{cardnum:VARCHAR},
+        #{name:VARCHAR},
+        #{phone:VARCHAR},
+        #{email:VARCHAR},
+        #{company:VARCHAR},
+        #{jobtitle:VARCHAR},
+        #{vciguwen:VARCHAR},
+        #{viewcount:INTEGER},
+        #{totaldays:INTEGER},
+        #{avldays:INTEGER},
+        #{state:VARCHAR},
+        #{regtime:TIMESTAMP},
+        #{txt1:VARCHAR},
+        #{txt2:VARCHAR},
+        #{txt3:VARCHAR},
+        #{txt4:VARCHAR},
+        #{txt5:VARCHAR},
+        #{txt6:VARCHAR},
+        #{txt7:VARCHAR},
+        #{txt8:VARCHAR},
+        #{txt9:VARCHAR},
+        #{txt10:VARCHAR},
+        #{txt11:VARCHAR},
+        #{txt12:VARCHAR})
+    </insert>
+
+    <!-- 修改用户信息 -->
+    <update id="updateMembers" parameterType="com.goodcub.vci.entity.Members" >
+        update vci_member
+        <set>
+            <if test="username!=null and username!=''">
+                username = #{username:VARCHAR}
+            </if>
+            <if test="password!=null and password!=''">
+                password = #{password:VARCHAR}
+            </if>
+            <if test="usertype!=null and usertype!=''">
+                usertype = #{usertype:VARCHAR}
+            </if>
+            <if test="cardnum!=null">
+                cardnum = #{cardnum:VARCHAR}
+            </if>
+            <if test="name!=null and name!=''">
+                name = #{name:VARCHAR}
+            </if>
+            <if test="phone!=null and phone!=''">
+                phone = #{phone:VARCHAR}
+            </if>
+            <if test="email!=null and email!=''">
+                email = #{email:VARCHAR}
+            </if>
+            <if test="company!=null">
+                company = #{company:VARCHAR}
+            </if>
+
+            <if test="jobtitle!=null">
+                jobtitle = #{jobtitle:VARCHAR}
+            </if>
+            <if test="vciguwen!=null">
+                vciguwen = #{vciguwen:VARCHAR}
+            </if>
+            <if test="viewcount!=null">
+                viewcount = #{viewcount:INTEGER}
+            </if>
+            <if test="totaldays!=null">
+                totaldays = #{totaldays:INTEGER}
+            </if>
+            <if test="avldays!=null">
+                avldays = #{avldays:INTEGER}
+            </if>
+
+            <if test="state!=null">
+                state = #{state:VARCHAR}
+            </if>
+            <if test="txt1=null">
+                txt1 = #{txt1:VARCHAR}
+            </if>
+            <if test="txt2=null">
+                txt2 = #{txt2:VARCHAR}
+            </if>
+            <if test="txt3!=null">
+                txt3 = #{txt3:VARCHAR}
+            </if>
+            <if test="txt4!=null">
+                txt4 = #{txt4:VARCHAR}
+            </if>
+            <if test="txt5!=null">
+                txt5 = #{txt5:VARCHAR}
+            </if>
+            <if test="txt6!=null">
+                txt6 = #{txt6:VARCHAR}
+            </if>
+            <if test="txt7!=null">
+                txt7 = #{txt7:VARCHAR}
+            </if>
+            <if test="txt8!=null">
+                txt8 = #{txt8:VARCHAR}
+            </if>
+            <if test="txt9!=null">
+                txt9 = #{txt9:VARCHAR}
+            </if>
+            <if test="txt10!=null">
+                txt10 = #{txt10:VARCHAR}
+            </if>
+            <if test="txt11!=null">
+                txt11 = #{txt11:VARCHAR}
+            </if>
+            <if test="txt12!=null">
+                txt12 = #{txt12:VARCHAR}
+            </if>
+        </set>
+        <where>
+            memid = #memid:INTEGER#
+        </where>
+    </update>
+
+    <!-- 根据ID获得用户信息 -->
+    <select id="queryOneByMemid" resultType="com.goodcub.vci.vo.admin.MembersVO">
+        select * from vci_member
+        where memid = #{memid:INTEGER}
+    </select>
+
+    <!-- 根据邮箱获得用户信息 -->
+    <select id="queryOneByEmail" resultType="com.goodcub.vci.vo.admin.MembersVO">
+        select * from vci_member
+        where email = #{email:INTEGER}
+    </select>
+
+    <!-- 删除指定ID的用户信息 -->
+    <delete id="deleteMemberById">
+        delete from vci_member
+        where memid = #{memid:INTEGER}
+    </delete>
+
+    <!-- 根据邮箱更新用户密码 -->
+    <update id="updatePasswordByEmail" parameterType="java.util.Map" >
+        update vci_member set password = #{password:VARCHAR} where email = #{email:VARCHAR}
+    </update>
+</mapper>
