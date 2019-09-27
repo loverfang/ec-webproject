@@ -1,5 +1,6 @@
 package com.goodcub.common.exception;
 
+import com.goodcub.auth.exception.TokenException;
 import com.goodcub.common.utils.JsonResult;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,16 +40,16 @@ public class GlobalExceptionHandler {
         return JsonResult.error(GlobalExceptionCodeEnum.ERROR.getCode(), GlobalExceptionCodeEnum.ERROR.getMessage());
     }
 
-//    /**
-//     * 拦截CMS业务异常
-//     *
-//     * @param request 请求
-//     * @param e       业务异常
-//     * @return 通用返回格式
-//     */
-//    @ExceptionHandler(TokenException.class)
-//    public JsonResult tokenException(HttpServletRequest request, TokenException e) {
-//        logger.error("请求的url为{}出现业务异常,异常信息为:", request.getRequestURI(), e);
-//        return JsonResult.error(e.getExceptionEnum().getCode(),  e.getExceptionEnum().getMessage());
-//    }
+    /**
+     * 拦截TokenException
+     *
+     * @param request 请求
+     * @param e       业务异常
+     * @return 通用返回格式
+     */
+    @ExceptionHandler(TokenException.class)
+    public JsonResult tokenException(HttpServletRequest request, TokenException e) {
+        logger.error("请求的url为{}出现业务异常,异常信息为:", request.getRequestURI(), e);
+        return JsonResult.error(e.getExceptionEnum().getCode(),  e.getExceptionEnum().getMessage());
+    }
 }
