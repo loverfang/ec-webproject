@@ -35,11 +35,16 @@ public class LoginController {
     @ResponseBody
     public JsonResult login(@RequestBody SysUserVO sysUserVO, HttpServletRequest request){
 
+        if(1==1){
+            throw new TokenException(TokenExceptionCodeEnum.TOKEN_NOT_lOGGED);
+        }
+
         Map<String,Object> param = new HashMap<String, Object>();
         param.put("account", sysUserVO.getAccount());
         List<SysUser> userList = sysUserService.queryAccountList(param);
 
         if(userList!=null&&userList.size()>0){
+
             SysUser user = userList.get(0);
             if(user.getStatus().intValue() == -1 || user.getStatus().intValue() == 0){
                 return JsonResult.error("账号已删除无法登陆!");
