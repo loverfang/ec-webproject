@@ -35,10 +35,6 @@ public class LoginController {
     @ResponseBody
     public JsonResult login(@RequestBody SysUserVO sysUserVO, HttpServletRequest request){
 
-        if(1==1){
-            throw new TokenException(TokenExceptionCodeEnum.TOKEN_NOT_lOGGED);
-        }
-
         Map<String,Object> param = new HashMap<String, Object>();
         param.put("account", sysUserVO.getAccount());
         List<SysUser> userList = sysUserService.queryAccountList(param);

@@ -66,5 +66,7 @@ mybatis:
 logging:
   level:
     com:
-      example:
-        mapper : debug
+      goodcub:
+        vic:
+          mapper: debug
+

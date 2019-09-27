@@ -5,9 +5,7 @@ import com.goodcub.vci.entity.News;
 import com.goodcub.vci.service.admin.NewsService;
 import com.goodcub.vci.vo.admin.SingleNewsVO;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -27,12 +25,14 @@ public class NewsController {
 
     // 根据ntype加载单篇新闻
     @GetMapping("/querySignleNews")
+    @ResponseBody
     public JsonResult querySignleNews(String ntype){
-        return JsonResult.success( newsService.querySingleNews(ntype));
+        return JsonResult.success( newsService.querySingleNews(ntype.toUpperCase()));
     }
 
     // 修改ntype对应的新闻内容
-    @GetMapping("/updateSignleNews")
+    @PostMapping("/updateSignleNews")
+    @ResponseBody
     public JsonResult updateSignleNews(@RequestBody SingleNewsVO singleNewsVO){
         News news = new News();
         news.setNid(singleNewsVO.getNid());
