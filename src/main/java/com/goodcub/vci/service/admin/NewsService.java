@@ -1,9 +1,10 @@
 package com.goodcub.vci.service.admin;
 
+import com.goodcub.common.page.TableDataInfo;
 import com.goodcub.vci.entity.News;
 import com.goodcub.vci.vo.admin.SingleNewsVO;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+
+import java.util.Map;
 
 /**
  * @Author Luo.z.x
@@ -26,5 +27,14 @@ public interface NewsService {
      * @return
      */
     Integer updateNews(News news);
+
+    /**
+     * 查询新闻列表
+     * @param params
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    TableDataInfo queryNewsList(Map<String,Object> params, int pageNum, int pageSize);
 
 }

@@ -24,4 +24,7 @@ public class News {
     private String ptitle;
     private String pkeywords;
     private String pdescription;
+
+    private String coverImg;
+    private String authorImg;
 }

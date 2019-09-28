@@ -11,7 +11,7 @@
     </select>
 
     <!-- 更新单篇文章信息的内容字段 -->
-    <select id="updateSingleNews" resultType="java.lang.Integer">
+    <update id="updateSingleNews" parameterType="com.goodcub.vci.entity.News">
         update news
         <set>
             <if test="ptitle!=null">
@@ -30,6 +30,22 @@
         <where>
             nid = #{nid}
         </where>
+    </update>
+
+    <select id="queryNewsList" parameterType="java.util.Map" resultType="com.goodcub.vci.vo.admin.NewsListVO">
+        select
+          nid, ntype, title, author, sindex, ifindex, viewcount, pubtime, cover_img, author_img
+        from news
+          <where>
+              <if test="ntype != null">
+                  ntype = #{ntype}
+              </if>
+              <if test="title != null">
+                  and title like concat('%',#{title},'%')
+              </if>
+          </where>
     </select>
+
+
 
 </mapper>
