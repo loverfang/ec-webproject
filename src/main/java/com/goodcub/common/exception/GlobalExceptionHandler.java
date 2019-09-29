@@ -2,6 +2,7 @@ package com.goodcub.common.exception;
 
 import com.goodcub.auth.exception.TokenException;
 import com.goodcub.common.utils.JsonResult;
+import com.goodcub.vci.exception.UploadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -41,7 +42,7 @@ public class GlobalExceptionHandler {
     }
 
     /**
-     * 拦截TokenException
+     * 拦截UploadException
      *
      * @param request 请求
      * @param e       业务异常
@@ -52,4 +53,18 @@ public class GlobalExceptionHandler {
         logger.error("请求的url为{}出现业务异常,异常信息为:", request.getRequestURI(), e);
         return JsonResult.error(e.getExceptionEnum().getCode(),  e.getExceptionEnum().getMessage());
     }
+
+    /**
+     * 拦截UploadException
+     *
+     * @param request 请求
+     * @param e       业务异常
+     * @return 通用返回格式
+     */
+    @ExceptionHandler(UploadException.class)
+    public JsonResult tokenException(HttpServletRequest request, UploadException e) {
+        logger.error("请求的url为{}出现业务异常,异常信息为:", request.getRequestURI(), e);
+        return JsonResult.error(e.getExceptionEnum().getCode(),  e.getExceptionEnum().getMessage());
+    }
+
 }

@@ -5,6 +5,8 @@ import com.goodcub.common.utils.JsonResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
@@ -21,24 +23,26 @@ public class UploadController {
 
     /**
      * 方法描述：文件上传，图片也可以使用，但是图片不会被压缩.
-     * @param multipart
+     * @param file
      * @return
      * @throws IOException
      */
     @PostMapping("/uploadFile")
-    public JsonResult uploadFile(MultipartFile multipart) throws IOException {
-        return JsonResult.success(FileuploadUtil.saveFile(multipart, FileuploadUtil.ATTACHMENT_GAIN_PATH, FileuploadUtil.FILE_EXTENSION));
+    @ResponseBody
+    public JsonResult uploadFile(@RequestParam("file")MultipartFile file) throws IOException {
+        return JsonResult.success(FileuploadUtil.saveFile(file, FileuploadUtil.ATTACHMENT_GAIN_PATH, FileuploadUtil.FILE_EXTENSION));
     }
 
     /**
      * 方法描述：图片上传，只能给图片使用，其他文件调用会异常.
-     * @param multipart
+     * @param file
      * @return
      * @throws IOException
      */
     @PostMapping("/uploadImage")
-    public JsonResult uploadImage( MultipartFile multipart) throws IOException {
-        return JsonResult.success(FileuploadUtil.saveImage(multipart, FileuploadUtil.ATTACHMENT_GAIN_PATH, FileuploadUtil.IMAGE_EXTENSION));
+    @ResponseBody
+    public JsonResult uploadImage(@RequestParam("file")MultipartFile file) throws IOException {
+        return JsonResult.success(FileuploadUtil.saveImage(file, FileuploadUtil.ATTACHMENT_GAIN_PATH, FileuploadUtil.IMAGE_EXTENSION));
     }
 
 }

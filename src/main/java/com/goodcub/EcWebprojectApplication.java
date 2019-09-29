@@ -4,7 +4,12 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
+import org.springframework.context.annotation.Bean;
+
+import javax.servlet.MultipartConfigElement;
+import java.io.File;
 
 @MapperScan("com.goodcub.vci.mapper")
 @SpringBootApplication
@@ -19,4 +24,15 @@ public class EcWebprojectApplication  extends SpringBootServletInitializer {
         SpringApplication.run(EcWebprojectApplication.class, args);
     }
 
+    @Bean
+    public MultipartConfigElement multipartConfigElement(){
+        MultipartConfigFactory multipartConfigFactory = new MultipartConfigFactory();
+        String location = System.getProperty("user.dir") + "/data/tmp";
+        File file = new File(location);
+        if(!file.exists()){
+            file.mkdirs();
+        }
+        multipartConfigFactory.setLocation(location);
+        return multipartConfigFactory.createMultipartConfig();
+    }
 }

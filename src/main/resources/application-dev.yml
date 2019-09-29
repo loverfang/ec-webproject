@@ -75,10 +75,14 @@ upload:
   isDebug: true
   #附件地址
   attachmentServer: www.baidu.con/static
+
   #服务器静态文件地址
-  attachmentPath: /var/www/html
+  attachmentPath: "D:/files/"
+  #正式环境上传附件路径
+  #attachmentPath = /home/office/seal/uploadFile/
+
   #服务器存储文件的地址
-  attachmentGainPath: /var/www/html/upload
+  attachmentGainPath: static/images/upload
   #允许上传的文件类型
   fileExtension: pdf,zip,rar
   #允许上传的图片类型

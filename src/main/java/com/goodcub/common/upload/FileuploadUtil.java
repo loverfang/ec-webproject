@@ -2,6 +2,8 @@ package com.goodcub.common.upload;
 
 import com.goodcub.common.utils.DateUtil;
 import com.goodcub.common.utils.IdUtil;
+import com.goodcub.vci.exception.UploadException;
+import com.goodcub.vci.exception.UploadExceptionCodeEnum;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -10,6 +12,7 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -24,9 +27,11 @@ import java.util.List;
 /**
  * @Author Luo.z.x
  * @Description: 文件上传工具类
+ * 参考网址: https://www.cnblogs.com/lixingwu/p/9864141.html
  * @Date 2019/9/29
  * @Version V1.0
  **/
+@Component
 public class FileuploadUtil {
     /////////////////////////////////// 注入文件上传控制配置属性 ////////////////////////////////////////////
     //是否是调试
@@ -66,7 +71,7 @@ public class FileuploadUtil {
 
     //允许上传的图片类型
     public static String IMAGE_EXTENSION;
-    @Value("${upload.fileExtension}")
+    @Value("${upload.imageExtension}")
     public void setImageExtension(String imageExtension){
         IMAGE_EXTENSION = imageExtension;
     }
@@ -119,12 +124,12 @@ public class FileuploadUtil {
                 List<String> extList = Arrays.asList(exts);
                 //判断
                 if (!extList.contains(extName)) {
-                    throw new RuntimeException("上传文件的类型只能是：" + extension);
+                    throw new UploadException(UploadExceptionCodeEnum.MULTI_TYPE_ERROR);
                 }
             } else {
                 // 判断文件的后缀名是否为extension
                 if (!extension.equalsIgnoreCase(extName)) {
-                    throw new RuntimeException("上传文件的类型只能是：" + extension);
+                    throw new UploadException(UploadExceptionCodeEnum.MULTI_TYPE_ERROR);
                 }
             }
         }
@@ -166,15 +171,15 @@ public class FileuploadUtil {
         BufferedImage image = ImageIO.read(new File(serverPath));
         if (image.getHeight() > 1080 || image.getWidth() > 1920) {
             if (!"png".equals(extName)) {
-                Thumbnails.of(serverPath).size(1920, 1080).outputQuality(1f).outputFormat("jpg").toFile(toFilePath);
+                Thumbnails.of(serverPath).size(1920, 1080).outputQuality(1f).outputFormat("jpg").toFile(getServerPath(toFilePath));
             } else {
-                Thumbnails.of(serverPath).size(1920, 1080).outputQuality(1f).toFile(toFilePath);
+                Thumbnails.of(serverPath).size(1920, 1080).outputQuality(1f).toFile(getServerPath(toFilePath));
             }
         } else {
             if (!"png".equals(extName)) {
-                Thumbnails.of(serverPath).outputQuality(1f).scale(1f).outputFormat("jpg").toFile(toFilePath);
+                Thumbnails.of(serverPath).outputQuality(1f).scale(1f).outputFormat("jpg").toFile(getServerPath(toFilePath));
             } else {
-                Thumbnails.of(serverPath).outputQuality(1f).scale(1f).toFile(toFilePath);
+                Thumbnails.of(serverPath).outputQuality(1f).scale(1f).toFile(getServerPath(toFilePath));
             }
         }
 
@@ -223,7 +228,7 @@ public class FileuploadUtil {
      */
     private static String getServerPath(String destPath) {
         // 文件分隔符转化为当前系统的格式
-        return FilenameUtils.separatorsToSystem(ATTACHMENT_GAIN_PATH + destPath);
+        return FilenameUtils.separatorsToSystem(ATTACHMENT_PATH + destPath);
     }
 
     /**
@@ -239,21 +244,26 @@ public class FileuploadUtil {
      * @author "lixingwu"
      */
     private static FileResult saveFile(MultipartFile multipartFile, String childFile, String extension, Boolean isImage) throws IOException {
+
         if (null == multipartFile || multipartFile.isEmpty()) {
-            throw new IOException("上传的文件对象不存在...");
+            throw new UploadException( UploadExceptionCodeEnum.MULTI_IS_NULL );
         }
+
         // 文件名
         String fileName = multipartFile.getOriginalFilename();
+
         // 文件后缀名
         String extName = FilenameUtils.getExtension(fileName);
         if (StringUtils.isEmpty(extName)) {
-            throw new RuntimeException("文件类型未定义不能上传...");
+            throw new UploadException( UploadExceptionCodeEnum.MULTI_TYPE_ERROR );
         }
+
         // 判断文件的后缀名是否符合规则
         isContains(extension, extName);
 
         // 创建目标文件的名称,规则请看destPath方法
         String destPath = getDestPath(childFile, extName);
+
         // 文件的实际路径
         String serverPath = getServerPath(destPath);
 
