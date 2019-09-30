@@ -1,6 +1,7 @@
 package com.goodcub.vci.controller.admin;
 
 import com.goodcub.common.upload.FileuploadUtil;
+import com.goodcub.common.upload.PropertiesUtils;
 import com.goodcub.common.utils.DateUtil;
 import com.goodcub.common.utils.JsonResult;
 import org.springframework.stereotype.Controller;
@@ -33,7 +34,7 @@ public class UploadController {
     @PostMapping("/uploadFile")
     @ResponseBody
     public JsonResult uploadFile(@RequestParam("file")MultipartFile file) throws IOException {
-        return JsonResult.success(FileuploadUtil.saveFile(file, DateUtil.parseDateToStr(DateUtil.YYYYMM, new Date()), FileuploadUtil.FILE_EXTENSION));
+        return JsonResult.success(FileuploadUtil.saveFile(file, "upload/files/" + DateUtil.parseDateToStr(DateUtil.YYYYMM, new Date()), PropertiesUtils.getInstance().getFileExtension()));
     }
 
     /**
@@ -45,7 +46,7 @@ public class UploadController {
     @PostMapping("/uploadImage")
     @ResponseBody
     public JsonResult uploadImage(@RequestParam("file")MultipartFile file) throws IOException {
-        return JsonResult.success(FileuploadUtil.saveImage(file, DateUtil.parseDateToStr(DateUtil.YYYYMM, new Date()), FileuploadUtil.IMAGE_EXTENSION));
+        return JsonResult.success(FileuploadUtil.saveImage(file, "upload/images/" + DateUtil.parseDateToStr(DateUtil.YYYYMM, new Date()), PropertiesUtils.getInstance().getImageExtension()));
     }
 
 }
