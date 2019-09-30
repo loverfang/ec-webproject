@@ -70,21 +70,23 @@ logging:
         vic:
           mapper: debug
 
+
 upload:
-  #是否是调试
+  # 是否是调试
   isDebug: true
+
   #附件地址
-  attachmentServer: www.baidu.con/static
+  attachmentServer: http://sso.aliyun.com/
 
-  #服务器静态文件地址
-  attachmentPath: "D:/files/"
-  #正式环境上传附件路径
-  #attachmentPath = /home/office/seal/uploadFile/
+  # 静态请求目录,用于页面请求前缀
+  staticDir: "res"
 
-  #服务器存储文件的地址
-  attachmentGainPath: static/images/upload
+  # 文件存放的目录,用于指定实际存储文件路径
+  uploadPath: "/static/upload/"
+
   #允许上传的文件类型
   fileExtension: pdf,zip,rar
+
   #允许上传的图片类型
   imageExtension: png,jpg,gif
 

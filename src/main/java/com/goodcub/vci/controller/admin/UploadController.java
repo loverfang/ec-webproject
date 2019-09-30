@@ -1,6 +1,7 @@
 package com.goodcub.vci.controller.admin;
 
 import com.goodcub.common.upload.FileuploadUtil;
+import com.goodcub.common.utils.DateUtil;
 import com.goodcub.common.utils.JsonResult;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,8 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Date;
 
 /**
+ * 参考方法 https://blog.csdn.net/chuoerqiao8180/article/details/100979152
  * @Author Luo.z.x
  * @Description: 文件上传公共方法
  * @Date 2019/9/29
@@ -30,7 +33,7 @@ public class UploadController {
     @PostMapping("/uploadFile")
     @ResponseBody
     public JsonResult uploadFile(@RequestParam("file")MultipartFile file) throws IOException {
-        return JsonResult.success(FileuploadUtil.saveFile(file, FileuploadUtil.ATTACHMENT_GAIN_PATH, FileuploadUtil.FILE_EXTENSION));
+        return JsonResult.success(FileuploadUtil.saveFile(file, DateUtil.parseDateToStr(DateUtil.YYYYMM, new Date()), FileuploadUtil.FILE_EXTENSION));
     }
 
     /**
@@ -42,7 +45,7 @@ public class UploadController {
     @PostMapping("/uploadImage")
     @ResponseBody
     public JsonResult uploadImage(@RequestParam("file")MultipartFile file) throws IOException {
-        return JsonResult.success(FileuploadUtil.saveImage(file, FileuploadUtil.ATTACHMENT_GAIN_PATH, FileuploadUtil.IMAGE_EXTENSION));
+        return JsonResult.success(FileuploadUtil.saveImage(file, DateUtil.parseDateToStr(DateUtil.YYYYMM, new Date()), FileuploadUtil.IMAGE_EXTENSION));
     }
 
 }

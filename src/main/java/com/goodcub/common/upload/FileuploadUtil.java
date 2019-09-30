@@ -2,6 +2,7 @@ package com.goodcub.common.upload;
 
 import com.goodcub.common.utils.DateUtil;
 import com.goodcub.common.utils.IdUtil;
+import com.goodcub.common.utils.RequestUtil;
 import com.goodcub.vci.exception.UploadException;
 import com.goodcub.vci.exception.UploadExceptionCodeEnum;
 import net.coobird.thumbnailator.Thumbnails;
@@ -13,12 +14,14 @@ import org.apache.commons.lang3.StringUtils;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -41,25 +44,25 @@ public class FileuploadUtil {
         IS_DEBUG = isDebug;
     }
 
-    //附件地址
+    // 附件服务器地址
     public static String ATTACHMENT_SERVER;
     @Value("${upload.attachmentServer}")
     public void setAttachmentServer(String attachmentServer){
         ATTACHMENT_SERVER = attachmentServer;
     }
 
-    //服务器静态文件地址
-    public static String ATTACHMENT_PATH;
-    @Value("${upload.attachmentPath}")
-    public void setAttachmentPath(String attachmentPath){
-        ATTACHMENT_PATH = attachmentPath;
+    // 静态目录
+    public static String STATIC_DIR;
+    @Value("${upload.staticDir}")
+    public void setStaticDir(String staticDir){
+        STATIC_DIR = staticDir;
     }
 
-    //服务器存储文件的地址
-    public static String ATTACHMENT_GAIN_PATH;
-    @Value("${upload.attachmentGainPath}")
-    public void setAttachmentGainPath(String attachmentGainPath){
-        ATTACHMENT_GAIN_PATH = attachmentGainPath;
+    // 文件存放的目录
+    public static String FILE_DIR;
+    @Value("${upload.uploadPath}")
+    public void setUploadPath(String uploadPath){
+        FILE_DIR = uploadPath;
     }
 
     //允许上传的文件类型
@@ -80,11 +83,9 @@ public class FileuploadUtil {
 
     /**
      * 方法描述：根据文件的绝对路径创建一个文件对象.
-     * 创建时间：2018-10-19 09:32:34
      *
      * @param filePath 文件的绝对路径
      * @return 返回创建的这个文件对象
-     * @author "lixingwu"
      */
     public static File createFile(String filePath) throws IOException {
         // 获取文件的完整目录
@@ -109,11 +110,9 @@ public class FileuploadUtil {
 
     /**
      * 方法描述：判断extension中是否存在extName
-     * 创建时间：2018-10-20 20:46:18
      *
      * @param extension 使用逗号隔开的字符串，精确匹配例如：txt,jpg,png,zip
      * @param extName   文件的后缀名
-     * @author "lixingwu"
      */
     private static void isContains(String extension, String extName) {
         if (StringUtils.isNotEmpty(extension)) {
@@ -137,12 +136,10 @@ public class FileuploadUtil {
 
     /**
      * 方法描述：用google的Thumbnails插件压缩,图片大小,或者图片宽度等信息
-     * 创建时间：2018-10-20 20:46:18
      *
      * @param serverPath 图片的绝对路径
      * @param childFile  子文件夹
      * @param extName    文件的后缀
-     * @author "lixingwu"
      */
     private static String thumbnails(String serverPath, String childFile, String extName)
             throws IOException {
@@ -204,11 +201,9 @@ public class FileuploadUtil {
 
     /**
      * 方法描述：生成文件文件名
-     * 创建时间：2018-10-20 20:46:18
      *
      * @param childFile 子目录
      * @param extName   后缀名
-     * @author "Luo.z.x"
      */
     private static String getDestPath(String childFile, String extName) {
         //规则：  子目录/年月日_随机数.后缀名
@@ -221,19 +216,29 @@ public class FileuploadUtil {
 
     /**
      * 方法描述：生成文件在的实际的路径
-     * 创建时间：2018-10-20 20:46:18
      *
      * @param destPath 文件的相对路径
-     * @author "lixingwu"
      */
     private static String getServerPath(String destPath) {
         // 文件分隔符转化为当前系统的格式
-        return FilenameUtils.separatorsToSystem(ATTACHMENT_PATH + destPath);
+        return FilenameUtils.separatorsToSystem(ATTACHMENT_SERVER +STATIC_DIR + destPath);
+    }
+
+    /**
+     * 方法描述：生成项目部署在到服务器后生成的绝对路径
+     *
+     * @param destPath 文件的相对路径
+     */
+    private static String getServerRealPath(String destPath){
+        return RequestUtil.getPjoPath() + FILE_DIR + destPath;
+    }
+
+    private static String tempPath(){
+        return RequestUtil.getPjoPath() + "upload" + File.separator + "temp";
     }
 
     /**
      * 方法描述：上传文件.
-     * 创建时间：2018-10-19 13:09:19
      *
      * @param multipartFile 上传的文件对象，必传
      * @param childFile     上传的父目录，为空直接上传到指定目录 （会在指定的目录下新建该目录，例如：/user/1023）
@@ -241,7 +246,6 @@ public class FileuploadUtil {
      * @param isImage       上传的是否是图片，如果是就会进行图片压缩；如果不希望图片被压缩，则传false，让其以文件的形式来保存
      * @return the file result
      * @throws IOException 异常信息应返回
-     * @author "lixingwu"
      */
     private static FileResult saveFile(MultipartFile multipartFile, String childFile, String extension, Boolean isImage) throws IOException {
 
@@ -261,14 +265,28 @@ public class FileuploadUtil {
         // 判断文件的后缀名是否符合规则
         isContains(extension, extName);
 
-        // 创建目标文件的名称,规则请看destPath方法
-        String destPath = getDestPath(childFile, extName);
+
+        File path = new File(ResourceUtils.getURL("classpath:").getPath());
+        File upload = new File(path.getAbsolutePath(), "static/upload/temp/");
+        if (!upload.exists()) upload.mkdirs();
+
+        // 创建目标文件的名称,规则请看destPath方法 yyyyMMDD_随机字符串.jpg
+        String newFileName = getDestPath(childFile, extName);
+
+        String uploadPath = upload + "\\";
 
         // 文件的实际路径
-        String serverPath = getServerPath(destPath);
+        String serverPath = uploadPath + newFileName;
+
 
         // 创建文件
         File destFile = createFile(serverPath);
+
+        //如果文件夹不存在则创建
+        if(!destFile.exists()  && !destFile.isDirectory()){
+            destFile.mkdirs();
+        }
+
         // 保存文件
         multipartFile.transferTo(destFile);
 
@@ -293,21 +311,19 @@ public class FileuploadUtil {
             result.setFileSize(multipartFile.getSize());
             result.setFileName(fileName);
             result.setExtName(extName);
-            result.setServerPath(destPath);
+            result.setServerPath(newFileName);
         }
         return result;
     }
 
     /**
      * 方法描述：上传文件.
-     * 创建时间：2018-10-19 13:09:19
      *
      * @param multipartFile 上传的文件对象，必传
      * @param childFile     上传的父目录，为空直接上传到指定目录 （会在指定的目录下新建该目录，例如：/user/1023）
      * @param extension     允许上传的文件后缀名，为空不限定上传的文件类型 （使用逗号隔开的字符串，精确匹配例如：txt,jpg,png,zip）
      * @return the file result
      * @throws IOException 异常信息应返回
-     * @author "lixingwu"
      */
     public static FileResult saveFile(MultipartFile multipartFile, String childFile, String extension) throws IOException {
         return saveFile(multipartFile, childFile, extension, false);
@@ -315,14 +331,12 @@ public class FileuploadUtil {
 
     /**
      * 方法描述：上传图片.
-     * 创建时间：2018-10-19 13:09:19
      *
      * @param multipartFile 上传的文件对象，必传
      * @param childFile     上传的父目录，为空直接上传到指定目录 （会在指定的目录下新建该目录，例如：/user/1023）
      * @param extension     允许上传的文件后缀名，为空不限定上传的文件类型 （使用逗号隔开的字符串，精确匹配例如：txt,jpg,png,zip）
      * @return the file result
      * @throws IOException 异常信息应返回
-     * @author "lixingwu"
      */
     public static FileResult saveImage(MultipartFile multipartFile, String childFile, String extension) throws IOException {
         return saveFile(multipartFile, childFile, extension, true);

@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ *
  * @ClassName NewsController
  * @Description TODO
  * @Author Luo.z.x
@@ -61,6 +62,8 @@ public class NewsController {
 
         return JsonResult.success(newsService.queryNewsList(param, page, limit));
     }
+
+
 
 
 
