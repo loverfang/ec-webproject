@@ -6,7 +6,6 @@ import com.goodcub.vci.entity.Vendor;
 import com.goodcub.vci.mapper.NewsPdfMapper;
 import com.goodcub.vci.mapper.VendorMapper;
 import com.goodcub.vci.service.admin.VendorService;
-import com.goodcub.vci.vo.admin.NewsPhotoVO;
 import com.goodcub.vci.vo.admin.VendorInfoVO;
 import com.goodcub.vci.vo.admin.VendorListVO;
 import org.springframework.stereotype.Service;

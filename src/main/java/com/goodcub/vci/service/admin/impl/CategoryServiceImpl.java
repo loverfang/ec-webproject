@@ -7,7 +7,6 @@ import com.goodcub.vci.mapper.CategoryMapper;
 import com.goodcub.vci.service.admin.CategoryService;
 import com.goodcub.vci.vo.admin.CategoryOptionsVO;
 import com.goodcub.vci.vo.admin.CategoryVO;
-import com.goodcub.vci.vo.admin.NewsPhotoVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;

@@ -6,7 +6,6 @@ import com.goodcub.vci.entity.NewsPdf;
 import com.goodcub.vci.mapper.NewsPdfMapper;
 import com.goodcub.vci.service.admin.NewsPdfService;
 import com.goodcub.vci.vo.admin.NewsPdfVO;
-import com.goodcub.vci.vo.admin.NewsPhotoVO;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
