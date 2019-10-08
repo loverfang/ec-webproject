@@ -1,8 +1,10 @@
 package com.goodcub.vci.mapper;
 
 import com.goodcub.vci.entity.News;
-import com.goodcub.vci.vo.admin.NewsListVO;
-import com.goodcub.vci.vo.admin.SingleNewsVO;
+import com.goodcub.vci.entity.NewsExt;
+import com.goodcub.vci.entity.NewsPdf;
+import com.goodcub.vci.entity.NewsPhoto;
+import com.goodcub.vci.vo.admin.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -37,5 +39,68 @@ public interface NewsMapper {
      * @return
      */
     List<NewsListVO> queryNewsList(Map<String,Object> params);
+
+    /**
+     * 保存新闻基础信息
+     * @param news
+     * @return
+     */
+    Integer insertNews(News news);
+
+    /**
+     * 保存新闻扩展信息
+     * @param newsExt
+     * @return
+     */
+    Integer insertNewsExt(NewsExt newsExt);
+
+    /**
+     * 根据新闻ID查询新闻信息
+     * @param nid
+     * @return
+     */
+    NewsInfoVO queryNewsInfoByNid(Long nid);
+
+    /**
+     * 更新新闻信息
+     * @param news
+     * @return
+     */
+    Integer updateNews(News news);
+
+    /**
+     * 更新新闻附加信息
+     * @param newsExt
+     * @return
+     */
+    Integer updateNewsExt(NewsExt newsExt);
+
+    /**
+     * 查询新闻图片列表
+     * @param nid
+     * @return
+     */
+    List<NewsPhotoListVO> queryPhotosByNid(Long nid);
+
+    /**
+     * 查询新闻Pdf列表
+     * @param nid
+     * @return
+     */
+    List<NewsPdfVO> queryPdfByNid(Long nid);
+
+    /**
+     * 保存新闻图片信息
+     * @param photoList
+     * @return
+     */
+    Integer batchInsertPhotoList(List<NewsPhoto> photoList);
+
+    /**
+     * 保存新闻Pdf信息
+     * @param photoList
+     * @return
+     */
+    Integer batchInsertPdfList(List<NewsPdf> photoList);
 
 }

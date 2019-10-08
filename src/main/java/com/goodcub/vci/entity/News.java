@@ -1,7 +1,11 @@
 package com.goodcub.vci.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.goodcub.common.enums.NewsTypeEnum;
 import lombok.Data;
+
+import java.io.Serializable;
 
 /**
  * @ClassName News
@@ -11,20 +15,20 @@ import lombok.Data;
  * @Version 1.0
  */
 @Data
-public class News {
-    private Integer nid;
+public class News implements Serializable {
+    @JsonSerialize(using = ToStringSerializer.class)
+    private Long nid;
     private NewsTypeEnum ntype;
-    private String ifindex;
-    private String title;
-    private Integer sindex;
-    private Integer viewcount;
-    private String pubtime;
-    private String content;
     private String author;
+    private String title;
+    private String content;
+    private Integer sindex;
+    private Integer ifindex;
+    private Integer viewcount;
+    private String coverImg;
+    private String authorImg;
     private String ptitle;
     private String pkeywords;
     private String pdescription;
-
-    private String coverImg;
-    private String authorImg;
+    private String pubtime;
 }

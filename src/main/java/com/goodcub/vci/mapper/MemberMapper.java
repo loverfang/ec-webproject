@@ -1,6 +1,7 @@
 package com.goodcub.vci.mapper;
 
 import com.goodcub.vci.entity.Members;
+import com.goodcub.vci.vo.admin.MembersVO;
 
 import java.util.List;
 import java.util.Map;
@@ -34,4 +35,10 @@ public interface MemberMapper {
 
     Integer updatePasswordByEmail(String email);
 
+    /**
+     * 判断是否存在username或email或phone的用户记录
+     * @param params
+     * @return
+     */
+    List<Members> queryValidateMember(Map<String,Object> params);
 }

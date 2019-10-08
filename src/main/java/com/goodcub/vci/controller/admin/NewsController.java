@@ -1,14 +1,18 @@
 package com.goodcub.vci.controller.admin;
 
+import com.goodcub.common.utils.IdWorker;
 import com.goodcub.common.utils.JsonResult;
 import com.goodcub.vci.entity.News;
+import com.goodcub.vci.entity.NewsExt;
 import com.goodcub.vci.service.admin.NewsService;
-import com.goodcub.vci.vo.admin.SingleNewsVO;
+import com.goodcub.vci.vo.admin.NewsInfoVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,27 +30,6 @@ public class NewsController {
     @Resource
     NewsService newsService;
 
-    // 根据ntype加载单篇新闻
-    @GetMapping("/querySignleNews")
-    @ResponseBody
-    public JsonResult querySignleNews(String ntype){
-        return JsonResult.success( newsService.querySingleNews(ntype.toUpperCase()));
-    }
-
-    // 修改ntype对应的新闻内容
-    @PostMapping("/updateSignleNews")
-    @ResponseBody
-    public JsonResult updateSignleNews(@RequestBody SingleNewsVO singleNewsVO){
-        News news = new News();
-        news.setNid(singleNewsVO.getNid());
-        news.setNtype(singleNewsVO.getNtype());
-        news.setPtitle(singleNewsVO.getPtitle());
-        news.setPkeywords(singleNewsVO.getPkeywords());
-        news.setPdescription(singleNewsVO.getPdescription());
-        news.setContent(singleNewsVO.getContent());
-        return JsonResult.success( newsService.updateNews(news));
-    }
-
     // 根据ntype加载新闻列表
     @GetMapping("/newsList")
     @ResponseBody
@@ -56,18 +39,137 @@ public class NewsController {
         @RequestParam(value = "page", required = false)Integer page,
         @RequestParam(value = "limit", required = false)Integer limit){
 
-        Map<String,Object> param = new HashMap<>();
-        param.put("ntype",ntype);
-        param.put("title",title);
+        if(ntype==null || "".equals(ntype)){
+            return JsonResult.error("未指定新闻类别无法获取数据");
+        }
 
+        Map<String,Object> param = new HashMap<>();
+        param.put("ntype",ntype.toUpperCase());
+        param.put("title",title);
         return JsonResult.success(newsService.queryNewsList(param, page, limit));
     }
 
+    // 根据新闻ID加载图片列表
+    @GetMapping("/newsImgList")
+    @ResponseBody
+    public JsonResult queryNewsImgList(
+            @RequestParam(value = "nid", required = false)Long nid,
+            @RequestParam(value = "page", required = false)Integer page,
+            @RequestParam(value = "limit", required = false)Integer limit){
+
+        return JsonResult.success(newsService.queryNewsImgList(nid, page, limit));
+    }
+
+    // 根据新闻ID加载PDF文件列表
+    @GetMapping("/newsPdfList")
+    @ResponseBody
+    public JsonResult queryNewsPdfList(
+            @RequestParam(value = "nid", required = false)Long nid,
+            @RequestParam(value = "page", required = false)Integer page,
+            @RequestParam(value = "limit", required = false)Integer limit){
+
+        return JsonResult.success(newsService.queryNewsPdfList(nid, page, limit));
+    }
+
+    // 通用的修改新闻排序索引
+    @PostMapping("/updateNewsSindex")
+    @ResponseBody
+    public JsonResult updateNewsSindex(@RequestBody NewsInfoVO newsInfoVO){
+        News news = new News();
+        news.setNid(newsInfoVO.getNid());
+        news.setSindex(newsInfoVO.getSindex());
+
+        newsService.updateNews(news);
+        return JsonResult.success();
+    }
+
+    // 删除新闻信息：删除新闻基本信息,扩展信息,图片信息,pdf信息
+    @PostMapping("/deleteAllNews")
+    @ResponseBody
+    public JsonResult delete(@RequestBody Map<String,Object> data){
+        // 获取传回来的id字符串
+        String ids_str = data.get("nids").toString();
+        if(ids_str == null || "".equals(ids_str)){
+            return JsonResult.error("请选中需要删除的记录");
+        }
+
+        // 通过逗号分割字符串，获得所有的id，在mapper中通过mybatis提供的动态循环遍历并删除数组中对应id的值就行
+        String[] idsArr = ids_str.split(",");
+        // 根据自己的后台逻辑，调用service的方法，我就不写了
+
+        List<Integer> idList = new ArrayList<>();
+        if(idsArr != null && idsArr.length>0){
+            for (String id: idsArr){
+                if(id!=null) {
+                    idList.add(Integer.valueOf(id));
+                }
+            }
+        }
+        newsService.deleteNews(idList);
+
+        return JsonResult.success();
+    }
 
 
+    // 查询新闻详情信息
+    @GetMapping("/newsInfo")
+    @ResponseBody
+    public JsonResult queryNewsInfo(Long nid){
+        return JsonResult.success(newsService.queryNewsInfoByNid(nid));
+    }
 
 
-    // 根据id加载新闻
+    // 添加Insights
+    @PostMapping("/createInsights")
+    @ResponseBody
+    public JsonResult createInsights(@RequestBody NewsInfoVO newsInfoVO){
+        News news = new News();
+        Long newId = new IdWorker().nextId();
+        news.setNid(newId);
+        news.setNtype(newsInfoVO.getNtype());
+        news.setAuthor(newsInfoVO.getAuthor());
+        news.setTitle(newsInfoVO.getTitle());
+        news.setContent(newsInfoVO.getContent());
+        news.setCoverImg(newsInfoVO.getCoverImg());
+        news.setAuthorImg(newsInfoVO.getAuthorImg());
+        news.setPtitle(newsInfoVO.getPtitle());
+        news.setPkeywords(newsInfoVO.getPkeywords());
+        news.setPdescription(newsInfoVO.getPdescription());
 
-    // 修改新闻装
+        NewsExt newsExt = new NewsExt();
+        newsExt.setNid(newId);
+        newsExt.setNdigest(newsInfoVO.getNdigest());
+        newsExt.setNlable(newsInfoVO.getNlable());
+        newsExt.setEndate(newsInfoVO.getEndate());
+
+        newsService.insertNews(news, newsExt);
+        return JsonResult.success();
+    }
+
+    // 修改Insights
+    @PostMapping("/updateInsights")
+    @ResponseBody
+    public JsonResult updateInsights(@RequestBody NewsInfoVO newsInfoVO){
+        News news = new News();
+        news.setNid(newsInfoVO.getNid());
+        news.setNtype(newsInfoVO.getNtype());
+        news.setAuthor(newsInfoVO.getAuthor());
+        news.setTitle(newsInfoVO.getTitle());
+        news.setContent(newsInfoVO.getContent());
+        news.setCoverImg(newsInfoVO.getCoverImg());
+        news.setAuthorImg(newsInfoVO.getAuthorImg());
+        news.setPtitle(newsInfoVO.getPtitle());
+        news.setPkeywords(newsInfoVO.getPkeywords());
+        news.setPdescription(newsInfoVO.getPdescription());
+
+        NewsExt newsExt = new NewsExt();
+        newsExt.setNid(newsInfoVO.getNid());
+        newsExt.setNdigest(newsInfoVO.getNdigest());
+        newsExt.setNlable(newsInfoVO.getNlable());
+        newsExt.setEndate(newsInfoVO.getEndate());
+
+        newsService.updateNews(news, newsExt);
+        return JsonResult.success();
+    }
+
 }

@@ -2,6 +2,7 @@ package com.goodcub.common.upload;
 
 import com.goodcub.common.utils.DateUtil;
 import com.goodcub.common.utils.IdUtil;
+import com.goodcub.common.utils.RequestUtil;
 import com.goodcub.vci.exception.UploadException;
 import com.goodcub.vci.exception.UploadExceptionCodeEnum;
 import org.apache.commons.io.FilenameUtils;
@@ -13,9 +14,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.ResourceUtils;
 
+import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -118,4 +121,32 @@ public class UploadHelper {
         return file;
     }
 
+    /**
+     * 获取服务部署根路径 http:// + ip + port
+     *
+     * @return
+     */
+    public static String getServerIPPort() {
+        HttpServletRequest request = RequestUtil.getRequest();
+        return request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
+    }
+
+    /**
+     * 根据文件的大小(单位为btye)，得到字符串的表示形式
+     * @param upfileSize
+     */
+    public String setFileSize(Long upfileSize) {
+        DecimalFormat format = new DecimalFormat("0.00");
+        if(upfileSize>=1024*1024){
+            float fs1=(((float)upfileSize)/1024f/1024f);
+            return format.format(fs1)+"M";
+        }else if(upfileSize>11 && upfileSize<=1024*1024){
+            float  fs2=((float)upfileSize)/1024;
+            return format.format(fs2)+"KB";
+        }else if(upfileSize>0&&upfileSize<11){
+            return String.valueOf(upfileSize)+"Byte";
+        }else{
+            return 0+"Byte";
+        }
+    }
 }

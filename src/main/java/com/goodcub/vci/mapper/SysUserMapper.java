@@ -29,4 +29,5 @@ public interface SysUserMapper {
      */
     SysUserVO queryAccountInfo(Integer userId);
 
+    Integer updateSysuser(SysUser sysUser);
 }

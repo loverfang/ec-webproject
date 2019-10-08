@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.goodcub.vci.mapper.NewsPdfMapper">
+
+    <!-- 查询单篇文章类型信息 -->
+    <select id="queryNewsPdfList" resultType="com.goodcub.vci.vo.admin.NewsPdfVO" parameterType="java.util.Map">
+        select * from news_pdf
+        <where>
+            <if test="nid != null">
+                and nid = #{nid}
+            </if>
+            <if test="source != null">
+                and source = #{source}
+            </if>
+        </where>
+    </select>
+
+    <insert id="saveNewsPdf" parameterType="com.goodcub.vci.entity.NewsPdf">
+    	insert into news_pdf(pid, nid, name, source, cover_img, pdf_path, psize, isdisplay, isupfile,state,pdfname, intor, sindex, downcount, addtime)
+	    values(
+	    #{pid:INTEGER},
+	    #{nid:INTEGER},
+	    #{name:VARCHAR},
+	    #{source:VARCHAR},
+	    #{coverImg:VARCHAR},
+	    #{pdfPath:VARCHAR},
+	    #{psize:VARCHAR},
+	    #{isdisplay:VARCHAR},
+	    #{isupfile:VARCHAR},
+	    #{state:VARCHAR},
+	    #{pdfname:VARCHAR},
+	    #{intor:VARCHAR},
+	    #{sindex:INTEGER},
+	    #{downcount:INTEGER},
+	    #{addtime:TIMESTAMP})
+    </insert>
+
+    <update id="updateNewsPdf" parameterType="com.goodcub.vci.entity.NewsPdf">
+        update news_pdf
+        <set>
+            <if test="name">
+                name = #{name:VARCHAR},
+            </if>
+            <if test="source" >
+                source = #{source:VARCHAR},
+            </if>
+            <if test="coverImg" >
+                cover_img = #{coverImg:VARCHAR},
+            </if>
+            <if test="pdfPath" >
+                pdf_path = #{pdfPath:VARCHAR},
+            </if>
+            <if test="state" >
+                state = #{state:VARCHAR},
+            </if>
+            <if test="psize" >
+                psize = #{psize:VARCHAR},
+            </if>
+            <if test="intor" >
+                intor = #{intor:VARCHAR},
+            </if>
+            <if test="pdfname" >
+                pdfname = #{pdfname:VARCHAR},
+            </if>
+            <if test="sindex" >
+                sindex = #{sindex:VARCHAR},
+            </if>
+            <if test="isdisplay" >
+                isdisplay = #{isdisplay:VARCHAR},
+            </if>
+            <if test="isupfile" >
+                isupfile = #{isupfile:VARCHAR},
+            </if>
+            <if test="downcount" >
+                downcount = #{downcount:VARCHAR},
+            </if>
+        </set>
+        where pid = #{pid:INTEGER}
+    </update>
+
+    <!-- 根据nid和source删除某篇文章下的所有pdf信息 -->
+    <delete id="deleteNewsPdf" parameterType="java.util.Map">
+        delete from news_pdf
+        <where>
+            <if test="source != null">
+                source = #{source}
+            </if>
+            <if test="idList != null">
+                and nid in
+            <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+            </if>
+        </where>
+    </delete>
+
+    <delete id="deleteNewsPdfByPid" parameterType="java.util.List">
+        delete from news_pdf
+        <where>
+            pid in
+            <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </delete>
+
+</mapper>

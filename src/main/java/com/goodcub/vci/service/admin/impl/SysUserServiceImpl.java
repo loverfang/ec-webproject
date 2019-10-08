@@ -34,4 +34,18 @@ public class SysUserServiceImpl implements SysUserService {
     public SysUserVO queryAccountInfo(Integer userId) {
         return sysUserMapper.queryAccountInfo(userId);
     }
+
+    @Override
+    public Integer resetPassword(Integer userId, String oldPassword, String newPassword) {
+        SysUserVO sysUserVO = sysUserMapper.queryAccountInfo(userId);
+        if(sysUserVO.getPassword().equals(oldPassword)){
+            // 设置新密码
+            SysUser sysUser = new SysUser();
+            sysUser.setUserId(userId);
+            sysUser.setPassword(newPassword);
+            return sysUserMapper.updateSysuser(sysUser);
+        }else{
+            return -1;
+        }
+    }
 }

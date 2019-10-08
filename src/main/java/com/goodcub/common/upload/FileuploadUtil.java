@@ -2,6 +2,8 @@ package com.goodcub.common.upload;
 
 import com.goodcub.common.utils.DateUtil;
 import com.goodcub.common.utils.IdUtil;
+import com.goodcub.vci.exception.UploadException;
+import com.goodcub.vci.exception.UploadExceptionCodeEnum;
 import net.coobird.thumbnailator.Thumbnails;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
@@ -76,12 +78,12 @@ public class FileuploadUtil {
                 List<String> extList = Arrays.asList(exts);
                 //判断
                 if (!extList.contains(extName)) {
-                    throw new RuntimeException("上传文件的类型只能是：" + extension);
+                    throw new UploadException(UploadExceptionCodeEnum.MULTI_TYPE_ERROR);
                 }
             } else {
                 // 判断文件的后缀名是否为extension
                 if (!extension.equalsIgnoreCase(extName)) {
-                    throw new RuntimeException("上传文件的类型只能是：" + extension);
+                    throw new UploadException(UploadExceptionCodeEnum.MULTI_TYPE_ERROR);
                 }
             }
         }
@@ -152,7 +154,7 @@ public class FileuploadUtil {
      */
     private static String getServerPath(String destPath) {
         // 文件分隔符转化为当前系统的格式
-        return FilenameUtils.separatorsToSystem(pro.getAttachmentGainPpath() + destPath);
+        return FilenameUtils.separatorsToSystem(pro.getUploadFolder() + destPath);
     }
 
     /**
@@ -170,7 +172,7 @@ public class FileuploadUtil {
     private static FileResult saveFile(MultipartFile multipartFile, String childFile, String extension, Boolean isImage) throws IOException {
 
         if (null == multipartFile || multipartFile.isEmpty()) {
-            throw new IOException("上传的文件对象不存在...");
+            throw new UploadException(UploadExceptionCodeEnum.MULTI_IS_NULL);
         }
 
         // 文件名
@@ -178,7 +180,7 @@ public class FileuploadUtil {
         // 文件后缀名
         String extName = FilenameUtils.getExtension(fileName);
         if (StringUtils.isEmpty(extName)) {
-            throw new RuntimeException("文件类型未定义不能上传...");
+            throw new UploadException(UploadExceptionCodeEnum.MULTI_TYPE_ERROR);
         }
 
         // 判断文件的后缀名是否符合规则
@@ -209,14 +211,14 @@ public class FileuploadUtil {
             // 源文件=源文件名.压缩后的后缀名
             String extFileName = FilenameUtils.getBaseName(fileName) + "." + FilenameUtils.getExtension(toFilePath);
             result.setFileSize(file.length());
-            result.setServerPath(toFilePath);
             result.setFileName(extFileName);
             result.setExtName(extExtName);
+            result.setServerPath( UploadHelper.getServerIPPort() + toFilePath);
         } else {
             result.setFileSize(multipartFile.getSize());
             result.setFileName(fileName);
             result.setExtName(extName);
-            result.setServerPath(destPath);
+            result.setServerPath(UploadHelper.getServerIPPort() + destPath);
         }
         return result;
     }

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.goodcub.vci.mapper.VideosMapper">
+
+    <select id="queryVideosList" resultType="com.goodcub.vci.vo.admin.VideosListVO" parameterType="java.util.Map">
+        select * from videos
+        <where>
+            <if test="title!=null">
+                title like concat('%',#{title},'%')
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertVideos" parameterType="com.goodcub.vci.entity.Videos" >
+        insert into videos(vid, title, vurl, cover_img, needcount, memo, sindex, viewcount, addtime)
+        values(
+        #{vid:INTEGER},
+        #{title:VARCHAR},
+        #{vurl:VARCHAR},
+        #{coverImg:VARCHAR},
+        #{needcount:INTEGER},
+        #{memo:VARCHAR},
+        #{sindex:INTEGER},
+        #{viewcount:INTEGER},
+        #{addtime:VARCHAR})
+    </insert>
+
+    <update id="updateVideos" parameterType="com.goodcub.vci.entity.Videos" >
+        update videos
+        <set>
+            <if test="title != null">
+                title = #{title:VARCHAR},
+            </if>
+            <if test="vurl != null">
+                vurl = #{vurl:VARCHAR},
+            </if>
+            <if test="coverImg != null">
+                cover_img = #{coverImg:VARCHAR},
+            </if>
+            <if test="needcount != null">
+                needcount = #{needcount:INTEGER},
+            </if>
+            <if test="title != null">
+                memo = #{memo:VARCHAR},
+            </if>
+            <if test="sindex != null">
+                sindex = #{sindex:INTEGER},
+            </if>
+            <if test="viewcount != null">
+                viewcount = #{viewcount:INTEGER},
+            </if>
+            <if test="addtime != null">
+                addtime = #{addtime:VARCHAR},
+            </if>
+        </set>
+        where vid = #{vid:INTEGER}
+    </update>
+
+    <!-- 批量删除 -->
+    <delete id="deleteVideos" parameterType="java.util.List">
+        delete from videos where vid in
+        <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
+
+</mapper>

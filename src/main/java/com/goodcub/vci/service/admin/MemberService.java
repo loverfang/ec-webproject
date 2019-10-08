@@ -1,7 +1,11 @@
 package com.goodcub.vci.service.admin;
 
 import com.goodcub.common.page.TableDataInfo;
+import com.goodcub.common.utils.JsonResult;
+import com.goodcub.vci.entity.Members;
+import com.goodcub.vci.vo.admin.MembersVO;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -20,4 +24,17 @@ public interface MemberService {
      */
     TableDataInfo queryMembersList(Map<String,Object> params, int pageNum, int pageSize);
 
+    /**
+     * 添加会员信息
+     * @param members
+     * @return
+     */
+    JsonResult insertMember(Members members);
+
+    /**
+     * 添加会员信息
+     * @param members
+     * @return
+     */
+    JsonResult updateMember(Members members);
 }

@@ -72,12 +72,12 @@ public class PropertiesUtils {
         return properties.getProperty("attachmentServer");
     }
 
-    public String getAttachmentPath() {
-        return properties.getProperty("attachmentPath");
+    public String getStaticAccessPath() {
+        return properties.getProperty("staticAccessPath");
     }
 
-    public String getAttachmentGainPpath() {
-        return properties.getProperty("attachmentGainPath");
+    public String getUploadFolder() {
+        return properties.getProperty("uploadFolder");
     }
 
     public String getFileExtension() {

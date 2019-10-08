@@ -5,7 +5,7 @@
 
 <mapper namespace="com.goodcub.vci.mapper.AdvertiseMapper">
 
-    <select id="queryAdvertiseList" resultType="com.goodcub.vci.entity.Advertise" parameterType="java.util.Map">
+    <select id="queryAdvertiseVoList" resultType="com.goodcub.vci.vo.admin.AdvertiseVO" parameterType="java.util.Map">
         select * from advertise
         <where>
             <if test="adtitle!=null">
@@ -13,5 +13,48 @@
             </if>
         </where>
     </select>
+
+    <insert id="insertAdvertise" parameterType="com.goodcub.vci.entity.Advertise" >
+        insert into advertise (adid, adtitle, adurl, cover_img, status, sindex, addtime)
+        values (
+        #{adid:INTEGER},
+        #{adtitle:VARCHAR},
+        #{adurl:VARCHAR},
+        #{coverImg:VARCHAR},
+        #{status:VARCHAR},
+        #{sindex:INTEGER},
+        #{addtime:TIMESTAMP}
+        )
+    </insert>
+
+    <update id="updateAdvertise" parameterType="com.goodcub.vci.entity.Advertise" >
+        update advertise
+        <set>
+            <if test="adtitle!=null">
+                adtitle = #{adtitle:VARCHAR},
+            </if>
+            <if test="adurl" >
+                adurl = #{adurl:VARCHAR},
+            </if>
+            <if test="coverImg" >
+                cover_img = #{coverImg:VARCHAR},
+            </if>
+            <if test="sindex" >
+                sindex = #{sindex:VARCHAR},
+            </if>
+            <if test="status" >
+                status = #{status:VARCHAR},
+            </if>
+        </set>
+        where adid = #{adid:INTEGER}
+    </update>
+
+    <!-- 批量删除 -->
+    <delete id="deleteAdvertise" parameterType="java.util.List">
+        delete from advertise where adid in
+        <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
 
 </mapper>

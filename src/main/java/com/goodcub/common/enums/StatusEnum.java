@@ -9,9 +9,10 @@ package com.goodcub.common.enums;
  */
 
 public enum StatusEnum {
-    WAITCHECK(0,"待审核"),
     FAILER(-1,"失败"),
-    NORMAL(1,"正常");
+    WAITCHECK(0,"待审核"),
+    NORMAL(1,"正常"),
+    LOCKED(2,"已删除");
 
     private Integer code;
     private String msg;

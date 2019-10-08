@@ -11,7 +11,7 @@
 
     <select id="queryAccountInfo" resultType="com.goodcub.vci.vo.admin.SysUserVO">
         SELECT
-          u.user_id,u.account,u.status,u.create_time,u.last_login_time,u.skin,e.emp_name,e.tel,e.dept_id
+          u.user_id,u.account,u.password,u.status,u.create_time,u.last_login_time,u.skin,e.emp_name,e.tel,e.dept_id
         FROM
           sys_user as u
           inner join sys_employee as e on e.user_id = u.user_id
@@ -19,4 +19,27 @@
         u.user_id=#{userId}
     </select>
 
+    <update id="updateSysuser" parameterType="com.goodcub.vci.entity.SysUser">
+        update sys_user
+        <set>
+           <if test="password != null">
+               password = #{password}
+           </if>
+            <if test="status != null">
+                status = #{status}
+            </if>
+            <if test="lastLoginTime != null">
+                last_login_time = #{lastLoginTime}
+            </if>
+            <if test="remark != null">
+                remark = #{remark}
+            </if>
+            <if test="skin != null">
+                skin = #{skin}
+            </if>
+        </set>
+        <where>
+            user_id = #{userId}
+        </where>
+    </update>
 </mapper>

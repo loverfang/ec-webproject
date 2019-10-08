@@ -29,4 +29,12 @@ public interface SysUserService {
      */
     SysUserVO queryAccountInfo(Integer userId);
 
+    /**
+     * 重置登录密码
+     * @param userId
+     * @param oldPassword
+     * @param newPassword
+     * @return
+     */
+    Integer resetPassword(Integer userId, String oldPassword, String newPassword);
 }

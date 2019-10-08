@@ -34,7 +34,7 @@ public class UploadController {
     @PostMapping("/uploadFile")
     @ResponseBody
     public JsonResult uploadFile(@RequestParam("file")MultipartFile file) throws IOException {
-        return JsonResult.success(FileuploadUtil.saveFile(file, "upload/files/" + DateUtil.parseDateToStr(DateUtil.YYYYMM, new Date()), PropertiesUtils.getInstance().getFileExtension()));
+        return JsonResult.success(FileuploadUtil.saveFile(file, "/upload/files/" + DateUtil.parseDateToStr(DateUtil.YYYYMM, new Date()), PropertiesUtils.getInstance().getFileExtension()));
     }
 
     /**
@@ -46,7 +46,18 @@ public class UploadController {
     @PostMapping("/uploadImage")
     @ResponseBody
     public JsonResult uploadImage(@RequestParam("file")MultipartFile file) throws IOException {
-        return JsonResult.success(FileuploadUtil.saveImage(file, "upload/images/" + DateUtil.parseDateToStr(DateUtil.YYYYMM, new Date()), PropertiesUtils.getInstance().getImageExtension()));
+        return JsonResult.success(FileuploadUtil.saveImage(file, "/upload/images/" + DateUtil.parseDateToStr(DateUtil.YYYYMM, new Date()), PropertiesUtils.getInstance().getImageExtension()));
     }
 
+    /**
+     * 方法描述：图片上传，只能给图片使用，其他文件调用会异常.
+     * @param file
+     * @return
+     * @throws IOException
+     */
+    @PostMapping("/uploadEditorImage")
+    @ResponseBody
+    public JsonResult uploadEditorImage(@RequestParam("file")MultipartFile file) throws IOException {
+        return JsonResult.success(FileuploadUtil.saveImage(file, "/upload/editor/" + DateUtil.parseDateToStr(DateUtil.YYYYMM, new Date()), PropertiesUtils.getInstance().getImageExtension()));
+    }
 }

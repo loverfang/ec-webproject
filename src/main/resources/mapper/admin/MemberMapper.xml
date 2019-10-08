@@ -47,7 +47,7 @@
         viewcount,
         totaldays,
         avldays,
-        state,
+        status,
         regtime,
         txt1,
         txt2,
@@ -76,7 +76,7 @@
         #{viewcount:INTEGER},
         #{totaldays:INTEGER},
         #{avldays:INTEGER},
-        #{state:VARCHAR},
+        #{status:VARCHAR},
         #{regtime:TIMESTAMP},
         #{txt1:VARCHAR},
         #{txt2:VARCHAR},
@@ -97,88 +97,88 @@
         update vci_member
         <set>
             <if test="username!=null and username!=''">
-                username = #{username:VARCHAR}
+                username = #{username:VARCHAR},
             </if>
             <if test="password!=null and password!=''">
-                password = #{password:VARCHAR}
+                password = #{password:VARCHAR},
             </if>
             <if test="usertype!=null and usertype!=''">
-                usertype = #{usertype:VARCHAR}
+                usertype = #{usertype:VARCHAR},
             </if>
             <if test="cardnum!=null">
-                cardnum = #{cardnum:VARCHAR}
+                cardnum = #{cardnum:VARCHAR},
             </if>
             <if test="name!=null and name!=''">
-                name = #{name:VARCHAR}
+                name = #{name:VARCHAR},
             </if>
             <if test="phone!=null and phone!=''">
-                phone = #{phone:VARCHAR}
+                phone = #{phone:VARCHAR},
             </if>
             <if test="email!=null and email!=''">
-                email = #{email:VARCHAR}
+                email = #{email:VARCHAR},
             </if>
             <if test="company!=null">
-                company = #{company:VARCHAR}
+                company = #{company:VARCHAR},
             </if>
 
             <if test="jobtitle!=null">
-                jobtitle = #{jobtitle:VARCHAR}
+                jobtitle = #{jobtitle:VARCHAR},
             </if>
             <if test="vciguwen!=null">
-                vciguwen = #{vciguwen:VARCHAR}
+                vciguwen = #{vciguwen:VARCHAR},
             </if>
             <if test="viewcount!=null">
-                viewcount = #{viewcount:INTEGER}
+                viewcount = #{viewcount:INTEGER},
             </if>
             <if test="totaldays!=null">
-                totaldays = #{totaldays:INTEGER}
+                totaldays = #{totaldays:INTEGER},
             </if>
             <if test="avldays!=null">
-                avldays = #{avldays:INTEGER}
+                avldays = #{avldays:INTEGER},
             </if>
 
-            <if test="state!=null">
-                state = #{state:VARCHAR}
+            <if test="status!=null">
+                status = #{status:VARCHAR},
             </if>
             <if test="txt1=null">
-                txt1 = #{txt1:VARCHAR}
+                txt1 = #{txt1:VARCHAR},
             </if>
             <if test="txt2=null">
-                txt2 = #{txt2:VARCHAR}
+                txt2 = #{txt2:VARCHAR},
             </if>
             <if test="txt3!=null">
-                txt3 = #{txt3:VARCHAR}
+                txt3 = #{txt3:VARCHAR},
             </if>
             <if test="txt4!=null">
-                txt4 = #{txt4:VARCHAR}
+                txt4 = #{txt4:VARCHAR},
             </if>
             <if test="txt5!=null">
-                txt5 = #{txt5:VARCHAR}
+                txt5 = #{txt5:VARCHAR},
             </if>
             <if test="txt6!=null">
-                txt6 = #{txt6:VARCHAR}
+                txt6 = #{txt6:VARCHAR},
             </if>
             <if test="txt7!=null">
-                txt7 = #{txt7:VARCHAR}
+                txt7 = #{txt7:VARCHAR},
             </if>
             <if test="txt8!=null">
-                txt8 = #{txt8:VARCHAR}
+                txt8 = #{txt8:VARCHAR},
             </if>
             <if test="txt9!=null">
-                txt9 = #{txt9:VARCHAR}
+                txt9 = #{txt9:VARCHAR},
             </if>
             <if test="txt10!=null">
-                txt10 = #{txt10:VARCHAR}
+                txt10 = #{txt10:VARCHAR},
             </if>
             <if test="txt11!=null">
-                txt11 = #{txt11:VARCHAR}
+                txt11 = #{txt11:VARCHAR},
             </if>
             <if test="txt12!=null">
-                txt12 = #{txt12:VARCHAR}
+                txt12 = #{txt12:VARCHAR},
             </if>
         </set>
         <where>
-            memid = #memid:INTEGER#
+            memid = #{memid:INTEGER}
         </where>
     </update>
 
@@ -194,6 +194,22 @@
         where email = #{email:INTEGER}
     </select>
 
+    <!-- 判断是否存在username或email或phone的用户记录 -->
+    <select id="queryValidateMember" parameterType="java.util.Map" resultType="com.goodcub.vci.entity.Members">
+        select * from vci_member
+        <where>
+            <if test="username != null">
+                or username = #{username}
+            </if>
+            <if test="phone != null">
+                or phone = #{phone}
+            </if>
+            <if test="email != null">
+                or email = #{email}
+            </if>
+        </where>
+    </select>
+
     <!-- 删除指定ID的用户信息 -->
     <delete id="deleteMemberById">
         delete from vci_member
@@ -204,4 +220,5 @@
     <update id="updatePasswordByEmail" parameterType="java.util.Map" >
         update vci_member set password = #{password:VARCHAR} where email = #{email:VARCHAR}
     </update>
+
 </mapper>

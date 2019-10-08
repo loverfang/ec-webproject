@@ -1,7 +1,9 @@
 package com.goodcub.config;
 
 import com.goodcub.auth.interceptor.AuthenticationInterceptor;
+import com.goodcub.common.upload.PropertiesUtils;
 import com.goodcub.interceptor.BasePathInterceptor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.*;
@@ -37,7 +39,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // 设置文件上传的文件不拦截
-        // registry.addResourceHandler("/upload/**").addResourceLocations("file:"+ TaleUtils.getUplodFilePath()+"upload/");
+        registry.addResourceHandler(PropertiesUtils.getInstance().getStaticAccessPath()).addResourceLocations("file:/"+ PropertiesUtils.getInstance().getUploadFolder() + "upload/");
 
         // addResourceHandler表示页面中使用的路径，addResourceLocations实际存在的文件夹路径/注意区分window与linux
         //指定了静态资源文件的位置

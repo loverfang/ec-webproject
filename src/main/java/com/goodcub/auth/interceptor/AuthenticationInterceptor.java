@@ -3,6 +3,7 @@ package com.goodcub.auth.interceptor;
 import com.alibaba.fastjson.JSONObject;
 import com.goodcub.auth.exception.TokenException;
 import com.goodcub.auth.exception.TokenExceptionCodeEnum;
+import com.goodcub.common.GlobalConstant;
 import com.goodcub.common.annotation.PassToken;
 import com.goodcub.common.annotation.UserLoginToken;
 import com.goodcub.common.jwt.JwtHelper;
@@ -80,6 +81,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
 
                         // 将客户编号设置到session中
                         // httpServletRequest.getSession().setAttribute(GlobalConstant.SESSION_CUSTOMER_NO_KEY, jsonObject.getString("userId"));
+                        httpServletRequest.setAttribute(GlobalConstant.LOGINED_USER_KEY,jsonObject.getString("userId"));
                         return true;
                     }else{
                         logger.warn("[登录校验拦截器]-客户端浏览器信息与JWT中存的浏览器信息不一致，重新登录。当前浏览器信息:{}", userAgent);

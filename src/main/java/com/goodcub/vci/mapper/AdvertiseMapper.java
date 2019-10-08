@@ -1,6 +1,8 @@
 package com.goodcub.vci.mapper;
 
 import com.goodcub.vci.entity.Advertise;
+import com.goodcub.vci.vo.admin.AdvertiseVO;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -18,6 +20,11 @@ public interface AdvertiseMapper {
      * @param params
      * @return
      */
-    List<Advertise> queryAdvertiseList(Map<String,Object> params);
+    List<AdvertiseVO> queryAdvertiseVoList(Map<String,Object> params);
 
+    Integer insertAdvertise(Advertise advertise);
+
+    Integer updateAdvertise(Advertise advertise);
+
+    Integer deleteAdvertise(@Param("idList") List<Integer> idList);
 }

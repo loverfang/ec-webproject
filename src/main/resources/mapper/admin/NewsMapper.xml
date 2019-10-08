@@ -32,20 +32,176 @@
         </where>
     </update>
 
+    <!-- 通用的新闻列表查询 -->
     <select id="queryNewsList" parameterType="java.util.Map" resultType="com.goodcub.vci.vo.admin.NewsListVO">
         select
-          nid, ntype, title, author, sindex, ifindex, viewcount, pubtime, cover_img, author_img
+        nid, ntype, title, author, sindex, ifindex, viewcount, pubtime, cover_img, author_img
         from news
-          <where>
-              <if test="ntype != null">
-                  ntype = #{ntype}
-              </if>
-              <if test="title != null">
-                  and title like concat('%',#{title},'%')
-              </if>
-          </where>
+        <where>
+            <if test="ntype != null">
+                ntype = #{ntype}
+            </if>
+            <if test="title != null">
+                and title like concat('%',#{title},'%')
+            </if>
+        </where>
     </select>
 
+    <!-- 添加新闻信息 -->
+    <insert id="insertNews" parameterType="com.goodcub.vci.entity.News" >
+        insert into news (nid, ntype, title, sindex, author, viewcount, pubtime, content, ifindex, ptitle, pdescription, pkeywords, cover_img, author_img)
+        values (#{nid:BIGINT}, #{ntype:VARCHAR}, #{title:VARCHAR}, #{sindex:INTEGER}, #{author:VARCHAR}, #{viewcount:INTEGER},
+        #{pubtime:TIMESTAMP}, #{content:LONGVARCHAR}, #{ifindex:VARCHAR}, #{ptitle:VARCHAR}, #{pdescription:VARCHAR}, #{pkeywords:VARCHAR}, #{coverImg:VARCHAR}, #{authorImg:VARCHAR})
+    </insert>
 
+    <!-- 添加新闻附加信息 -->
+    <insert id="insertNewsExt" parameterType="com.goodcub.vci.entity.NewsExt" >
+      insert into news_ext (nid,nlable,ndigest,endate,province,city,video,txt1,txt2,txt3,txt4,txt5,txt6)
+      values (#{nid:BIGINT}, #{nlable:VARCHAR}, #{ndigest:VARCHAR}, #{endate:VARCHAR}, #{province:VARCHAR}, #{city:VARCHAR},
+      #{video:VARCHAR},#{txt1:VARCHAR}, #{txt2:VARCHAR}, #{txt3:VARCHAR}, #{txt4:VARCHAR}, #{txt5:VARCHAR}, #{txt6:VARCHAR})
+    </insert>
+
+    <select id="queryNewsInfoByNid" resultType="com.goodcub.vci.vo.admin.NewsInfoVO">
+        select
+            n.nid,
+            n.ntype,
+            n.title,
+            n.author,
+            n.content,
+            n.sindex,
+            n.ifindex,
+            n.viewcount,
+            n.cover_img,
+            n.author_img,
+            n.ptitle,
+            n.pdescription,
+            n.pkeywords,
+            n.pubtime,
+            e.nlable,
+            e.ndigest,
+            e.endate,
+            e.province,
+            e.city,
+            e.video,
+            e.txt1,
+            e.txt2,
+            e.txt3,
+            e.txt4,
+            e.txt5,
+            e.txt6
+        from
+          news as n
+          inner join news_ext as e on n.nid = e.nid
+        <where>
+            n.nid = #{nid}
+        </where>
+    </select>
+
+    <!-- 更新新闻信息 -->
+    <update id="updateNews" parameterType="com.goodcub.vci.entity.News" >
+        update news
+        <set>
+            <if test="ptitle != null">
+                ptitle = #{ptitle:VARCHAR},
+            </if>
+            <if test="pdescription != null">
+                pdescription = #{pdescription:VARCHAR},
+            </if>
+            <if test="pkeywords != null">
+                pkeywords = #{pkeywords:VARCHAR},
+            </if>
+            <if test="title != null">
+                title = #{title:VARCHAR},
+            </if>
+            <if test="sindex != null">
+                sindex = #{sindex:INTEGER},
+            </if>
+            <if test="author != null">
+                author = #{author:VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content:LONGVARCHAR},
+            </if>
+            <if test="viewcount != null">
+                viewcount = #{viewcount:INTEGER},
+            </if>
+            <if test="coverImg != null">
+                cover_img = #{coverImg:INTEGER},
+            </if>
+            <if test="authorImg != null">
+                author_img = #{authorImg:INTEGER},
+            </if>
+        </set>
+        where nid = #{nid:BIGINT}
+    </update>
+
+    <!-- 更新新闻附加信息 -->
+    <update id="updateNewsExt" parameterType="com.goodcub.vci.entity.NewsExt">
+        update news_ext
+        <set>
+            <if test="nlable != null">
+                nlable = #{nlable:VARCHAR},
+            </if>
+            <if test="video != null">
+                video = #{video:VARCHAR},
+            </if>
+            <if test="ndigest != null">
+                ndigest = #{ndigest:VARCHAR},
+            </if>
+            <if test="endate != null">
+                endate = #{endate:VARCHAR},
+            </if>
+            <if test="province != null">
+                province = #{province:VARCHAR},
+            </if>
+            <if test="city != null">
+                city = #{city:VARCHAR},
+            </if>
+            <if test="txt1 != null">
+                txt1 = #{txt1:VARCHAR},
+            </if>
+            <if test="txt2 != null">
+                txt2 = #{txt2:VARCHAR},
+            </if>
+            <if test="txt3 != null">
+                txt3 = #{txt3:VARCHAR},
+            </if>
+            <if test="txt4 != null">
+                txt4 = #{txt4:VARCHAR},
+            </if>
+            <if test="txt5 != null">
+                txt5 = #{txt5:VARCHAR},
+            </if>
+            <if test="txt6 != null">
+                txt6 = #{txt6:VARCHAR},
+            </if>
+        </set>
+        where nid = #{nid:BIGINT}
+    </update>
+
+
+    <!-- 根据新闻ID加载Photo列表-->
+    <select id="queryPhotosByNid" resultType="com.goodcub.vci.vo.admin.NewsPhotoListVO">
+        select * from news_photos where nid = #{nid}
+    </select>
+
+    <!-- 根据新闻ID加载Pdf列表-->
+    <select id="queryPdfByNid" resultType="com.goodcub.vci.vo.admin.NewsPdfVO">
+        select * from news_pdf where nid = #{nid}
+    </select>
+
+    <!-- 批量插入Photo信息-->
+    <insert id="batchInsertPhotoList" parameterType="java.util.List">
+        insert into news_photos(pid, nid, sindex, ptitle, img_path, psize, downcount, uptime)
+        values(#{pid:BIGINT}, #{nid:BIGINT}, #{sindex:INTEGER}, #{ptitle:VARCHAR},#{imgPath:VARCHAR},#{psize:VARCHAR},#{downcount:INTEGER},#{uptime:TIMESTAMP})
+    </insert>
+
+    <!-- 批量插入PDF信息-->
+    <insert id="batchInsertPdfList" parameterType="java.util.List">
+        insert into news_pdf(pid, nid, name,pdf_path,source, psize,isdisplay,isupfile,state,pdfname, intor, sindex, downcount, addtime)
+	    values(#{pid:INTEGER}, #{nid:INTEGER},#{name:VARCHAR},#{pdfPath:VARCHAR},#{source:VARCHAR},#{psize:VARCHAR},
+	    #{isdisplay:VARCHAR},#{isupfile:VARCHAR},#{state:VARCHAR},#{pdfname:VARCHAR},#{intor:VARCHAR},#{sindex:INTEGER},
+	    #{downcount:INTEGER},#{addtime:TIMESTAMP})
+    </insert>
 
 </mapper>

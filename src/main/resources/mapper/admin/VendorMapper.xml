@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.goodcub.vci.mapper.VendorMapper">
+
+    <!-- 查询类别列表 -->
+    <select id="queryVendorList" resultType="com.goodcub.vci.vo.admin.VendorListVO" parameterType="java.util.Map">
+        select * from products
+        <where>
+            <if test="name != null">
+                and name like concat('%',#{name},'%')
+            </if>
+            <if test="cstate != null">
+                and cstate = #{cstate}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryVendorInfoByPid" resultType="com.goodcub.vci.vo.admin.VendorInfoVO">
+        select * from products where pid= #{pid}
+    </select>
+
+    <insert id="insertVendor" parameterType="com.goodcub.vci.entity.Vendor">
+        insert into products(
+        pid,
+        cid,
+        name,
+        content,
+        cover_img,
+        viewcount,
+        ifindex,
+        sindex,
+        intro,
+        doman,
+        info,
+        introduction,
+        solutions,
+        highlights,
+        pubtime,
+        ptitle,
+        pdescription,
+        pkeywords)
+        values (
+        #{pid:INTEGER},
+        #{cid:INTEGER},
+        #{name:VARCHAR},
+        #{content:LONGVARCHAR},
+        #{coverImg:VARCHAR},
+        #{viewcount:INTEGER},
+        #{ifindex:VARCHAR},
+        #{sindex:INTEGER},
+        #{intro:LONGVARCHAR},
+        #{doman:VARCHAR},
+        #{info:LONGVARCHAR},
+        #{introduction:LONGVARCHAR},
+        #{solutions:LONGVARCHAR},
+        #{highlights:LONGVARCHAR},
+        #{pubtime:TIMESTAMP},
+        #{pkeywords:VARCHAR},
+        #{ptitle:VARCHAR},
+        #{pdescription:VARCHAR})
+    </insert>
+
+    <update id="updateVendor" parameterType="com.goodcub.vci.entity.Vendor">
+        update products
+        <set>
+            <if test="name != null" >
+                name = #{name:VARCHAR},
+            </if>
+            <if test="viewcount" >
+                viewcount = #{viewcount:INTEGER},
+            </if>
+            <if test="sindex" >
+                sindex = #{sindex:INTEGER},
+            </if>
+
+            <if test="ifindex" >
+                ifindex = #{ifindex:VARCHAR},
+            </if>
+
+            <if test="content" >
+                content = #{content:LONGVARCHAR},
+            </if>
+            <if test="coverImg" >
+                cover_img = #{coverImg:LONGVARCHAR},
+            </if>
+            <if test="ptitle" >
+                ptitle = #{ptitle:VARCHAR},
+            </if>
+            <if test="pdescription" >
+                pdescription = #{pdescription:VARCHAR},
+            </if>
+            <if test="pkeywords" >
+                pkeywords = #{pkeywords:VARCHAR},
+            </if>
+
+            <if test="intro" >
+                intro = #{intro:LONGVARCHAR},
+            </if>
+            <if test="doman" >
+                doman = #{doman:VARCHAR},
+            </if>
+            <if test="info" >
+                info = #{info:LONGVARCHAR},
+            </if>
+            <if test="introduction" >
+                introduction = #{introduction:LONGVARCHAR},
+            </if>
+            <if test="solutions" >
+                solutions = #{solutions:LONGVARCHAR},
+            </if>
+            <if test="highlights" >
+                highlights = #{highlights:LONGVARCHAR},
+            </if>
+        </set>
+        where pid = #{pid:INTEGER}
+    </update>
+
+    <!-- 批量删除 -->
+    <delete id="deleteVendor" parameterType="java.util.List">
+        delete from products
+        <where>
+            pid in
+            <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </delete>
+
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.goodcub.vci.mapper.CategoryMapper">
+
+    <!-- 查询类别列表 -->
+    <select id="queryCategoryList" resultType="com.goodcub.vci.vo.admin.CategoryVO" parameterType="java.util.Map">
+        select * from category
+        <where>
+            pid = 1
+            <if test="cname != null">
+                and cname like concat('%',#{cname},'%')
+            </if>
+            <if test="cstate != null">
+                and cstate = #{cstate}
+            </if>
+        </where>
+    </select>
+
+    <insert id="insertCategory" parameterType="com.goodcub.vci.entity.Category">
+        insert into category (cid, pid, cname, sindex, cstate, pubtime, memo)
+        values (#{cid:INTEGER},#{pid:INTEGER},#{cname:VARCHAR}, #{sindex:INTEGER},#{cstate:VARCHAR},#{pubtime:TIMESTAMP},#{memo:VARCHAR})
+    </insert>
+
+    <update id="updateCategory" parameterType="com.goodcub.vci.entity.Category" >
+        update category
+        <set>
+            <if test="cname != null">
+                cname = #{cname:VARCHAR},
+            </if>
+            <if test="sindex != null">
+                sindex = #{sindex:INTEGER},
+            </if>
+            <if test="cstate != null">
+                cstate = #{cstate:VARCHAR},
+            </if>
+            <if test="memo != null">
+                memo = #{memo:VARCHAR},
+            </if>
+        </set>
+        where cid = #{cid:INTEGER}
+    </update>
+
+    <select id="queryCategoryOptions" resultType="com.goodcub.vci.vo.admin.CategoryOptionsVO">
+        select cid, cname from category where cstate = 'NORMAL' and pid= 1 order by sindex asc
+    </select>
+
+</mapper>

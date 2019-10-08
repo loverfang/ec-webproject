@@ -12,4 +12,5 @@ import lombok.Data;
  */
 @Data
 public class SingleNewsVO extends News {
+    //TODO
 }
