@@ -22,7 +22,7 @@
     	insert into news_pdf(pid, nid, name, source, cover_img, pdf_path, psize, isdisplay, isupfile,state,pdfname, intor, sindex, downcount, addtime)
 	    values(
 	    #{pid:INTEGER},
-	    #{nid:INTEGER},
+	    #{nid:BIGINT},
 	    #{name:VARCHAR},
 	    #{source:VARCHAR},
 	    #{coverImg:VARCHAR},

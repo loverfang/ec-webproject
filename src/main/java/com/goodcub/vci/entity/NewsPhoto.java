@@ -13,7 +13,7 @@ import java.io.Serializable;
  */
 @Data
 public class NewsPhoto implements Serializable {
-    private Long pid; // 图片ID
+    private Integer pid; // 图片ID
     private Long nid; // 新闻ID
     private String ptitle; //图片名称
     private String imgPath;

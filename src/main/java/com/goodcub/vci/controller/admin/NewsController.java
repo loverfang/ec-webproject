@@ -48,28 +48,28 @@ public class NewsController {
         param.put("title",title);
         return JsonResult.success(newsService.queryNewsList(param, page, limit));
     }
-
-    // 根据新闻ID加载图片列表
-    @GetMapping("/newsImgList")
-    @ResponseBody
-    public JsonResult queryNewsImgList(
-            @RequestParam(value = "nid", required = false)Long nid,
-            @RequestParam(value = "page", required = false)Integer page,
-            @RequestParam(value = "limit", required = false)Integer limit){
-
-        return JsonResult.success(newsService.queryNewsImgList(nid, page, limit));
-    }
-
-    // 根据新闻ID加载PDF文件列表
-    @GetMapping("/newsPdfList")
-    @ResponseBody
-    public JsonResult queryNewsPdfList(
-            @RequestParam(value = "nid", required = false)Long nid,
-            @RequestParam(value = "page", required = false)Integer page,
-            @RequestParam(value = "limit", required = false)Integer limit){
-
-        return JsonResult.success(newsService.queryNewsPdfList(nid, page, limit));
-    }
+//
+//    // 根据新闻ID加载图片列表
+//    @GetMapping("/newsImgList")
+//    @ResponseBody
+//    public JsonResult queryNewsImgList(
+//            @RequestParam(value = "nid", required = false)Long nid,
+//            @RequestParam(value = "page", required = false)Integer page,
+//            @RequestParam(value = "limit", required = false)Integer limit){
+//
+//        return JsonResult.success(newsService.queryNewsImgList(nid, page, limit));
+//    }
+//
+//    // 根据新闻ID加载PDF文件列表
+//    @GetMapping("/newsPdfList")
+//    @ResponseBody
+//    public JsonResult queryNewsPdfList(
+//            @RequestParam(value = "nid", required = false)Long nid,
+//            @RequestParam(value = "page", required = false)Integer page,
+//            @RequestParam(value = "limit", required = false)Integer limit){
+//
+//        return JsonResult.success(newsService.queryNewsPdfList(nid, page, limit));
+//    }
 
     // 通用的修改新闻排序索引
     @PostMapping("/updateNewsSindex")

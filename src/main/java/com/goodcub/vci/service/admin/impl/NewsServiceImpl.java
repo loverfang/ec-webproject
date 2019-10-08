@@ -62,6 +62,9 @@ public class NewsServiceImpl implements NewsService {
         PageHelper.startPage(pageNum,pageSize,"sindex asc");
         List<NewsPhotoListVO> newsImgList = newsMapper.queryPhotosByNid(nid);
 
+        // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
+        PageInfo<NewsPhotoListVO> pageInfo = new PageInfo<>(newsImgList, pageSize);
+
         TableDataInfo TableDataInfo = new TableDataInfo();
         TableDataInfo.setTotal(((List) newsImgList).size());
         TableDataInfo.setItems(newsImgList);

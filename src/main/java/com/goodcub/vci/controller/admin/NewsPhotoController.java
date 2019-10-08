@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.goodcub.common.enums.StatusEnum;
 import com.goodcub.common.upload.FileResult;
 import com.goodcub.common.utils.DateUtil;
+import com.goodcub.common.utils.IdWorker;
 import com.goodcub.common.utils.JsonResult;
 import com.goodcub.vci.entity.NewsPdf;
 import com.goodcub.vci.entity.NewsPhoto;
@@ -11,6 +12,7 @@ import com.goodcub.vci.service.admin.NewsPdfService;
 import com.goodcub.vci.service.admin.NewsPhotoService;
 import com.goodcub.vci.vo.admin.NewsPdfVO;
 import com.goodcub.vci.vo.admin.NewsPhotoSaveVO;
+import com.goodcub.vci.vo.admin.NewsPhotoVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +36,7 @@ public class NewsPhotoController {
     // 加载nid下的所有图片信息
     @GetMapping("/photoList")
     @ResponseBody
-    public JsonResult queryPdfList(
+    public JsonResult photoList(
             @RequestParam(value = "nid", required = false)String nid,
             @RequestParam(value = "ptitle", required = false)String ptitle,
             @RequestParam(value = "page", required = false)Integer page,
@@ -60,12 +62,13 @@ public class NewsPhotoController {
 
         for (FileResult result: newsPhotoSaveVO.getPhotoList()){
             NewsPhoto photo = new NewsPhoto();
+            // photo.setPid(new IdWorker().nextId());
+            photo.setNid(newsPhotoSaveVO.getNid());
             photo.setImgPath(result.getServerPath());
             photo.setDowncount(0);
             photo.setPsize(result.getFileSize());
             photo.setSindex(1);
             photo.setUptime(DateUtil.parseDateToStr("yyyy-MM-dd HH:mm:ss",new Date()));
-            photo.setNid(newsPhotoSaveVO.getNid());
             photo.setPtitle(result.getFileName());
 
             photoList.add(photo);
@@ -75,42 +78,40 @@ public class NewsPhotoController {
         return JsonResult.success();
     }
 
-//    @PostMapping("/updatePdfSindex")
-//    @ResponseBody
-//    public JsonResult updatePdfSindex(@RequestBody NewsPdfVO newsPdfVO){
-//        NewsPdf newsPdf = new NewsPdf();
-//        newsPdf.setPid(newsPdfVO.getPid());
-//        newsPdf.setSindex(newsPdfVO.getSindex());
-//        newsPdfService.updateNewsPdf(newsPdf);
-//
-//        return JsonResult.success();
-//    }
-//
-//
-//    @PostMapping("/deletePdf")
-//    @ResponseBody
-//    public JsonResult deleteVendor(@RequestBody Map<String,Object> data){
-//        // 获取传回来的id字符串
-//        String ids_str = data.get("pids").toString();
-//        if(ids_str == null || "".equals(ids_str)){
-//            return JsonResult.error("请选中需要删除的记录");
-//        }
-//
-//        // 通过逗号分割字符串，获得所有的id，在mapper中通过mybatis提供的动态循环遍历并删除数组中对应id的值就行
-//        String[] idsArr = ids_str.split(",");
-//        // 根据自己的后台逻辑，调用service的方法，我就不写了
-//
-//        List<Integer> idList = new ArrayList<>();
-//        if(idsArr != null && idsArr.length>0){
-//            for (String id: idsArr){
-//                if(id!=null) {
-//                    idList.add(Integer.valueOf(id));
-//                }
-//            }
-//        }
-//
-//        newsPdfService.deleteNewsPdfByPid(idList);
-//        return JsonResult.success();
-//    }
+    @PostMapping("/updatePhotoSindex")
+    @ResponseBody
+    public JsonResult resultCount(@RequestBody NewsPhotoVO newsPdfVO){
+        NewsPhoto newsPhoto = new NewsPhoto();
+        newsPhoto.setPid(newsPdfVO.getPid());
+        newsPhoto.setSindex(newsPdfVO.getSindex());
+        newsPhotoService.updateNewsPhoto(newsPhoto);
+        return JsonResult.success();
+    }
+
+    @PostMapping("/deletePhotosByPid")
+    @ResponseBody
+    public JsonResult deletePhotosByPid(@RequestBody Map<String,Object> data){
+        // 获取传回来的id字符串
+        String ids_str = data.get("pids").toString();
+        if(ids_str == null || "".equals(ids_str)){
+            return JsonResult.error("请选中需要删除的记录");
+        }
+
+        // 通过逗号分割字符串，获得所有的id，在mapper中通过mybatis提供的动态循环遍历并删除数组中对应id的值就行
+        String[] idsArr = ids_str.split(",");
+        // 根据自己的后台逻辑，调用service的方法，我就不写了
+
+        List<Integer> idList = new ArrayList<>();
+        if(idsArr != null && idsArr.length>0){
+            for (String id: idsArr){
+                if(id!=null) {
+                    idList.add(Integer.valueOf(id));
+                }
+            }
+        }
+
+        newsPhotoService.deleteNewsPhotoByPid(idList);
+        return JsonResult.success();
+    }
 
 }

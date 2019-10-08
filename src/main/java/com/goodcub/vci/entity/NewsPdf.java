@@ -14,7 +14,7 @@ import java.io.Serializable;
  */
 @Data
 public class NewsPdf implements Serializable {
-    private Long pid;
+    private Integer pid;
     private Long nid;
     private String name;
     private String pdfPath;

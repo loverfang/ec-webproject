@@ -19,10 +19,9 @@
     </select>
 
     <insert id="saveNewsPhoto" parameterType="com.goodcub.vci.entity.NewsPhoto">
-    	insert into news_photos(pid, nid, ptitle, path, psize, sindex, downcount, uptime)
+    	insert into news_photos(nid, ptitle, path, psize, sindex, downcount, uptime)
 	    values(
-	    #{pid:INTEGER},
-	    #{nid:INTEGER},
+	    #{nid:BIGINT},
 	    #{ptitle:VARCHAR},
 	    #{path:VARCHAR},
 	    #{psize:VARCHAR},
@@ -31,22 +30,37 @@
 	    #{uptime:TIMESTAMP})
     </insert>
 
+    <!-- 批量插入 -->
+    <insert id="saveNewsPhotoBatch" parameterType="java.util.List">
+        insert into news_photos(nid, ptitle, img_path, psize, sindex, downcount, uptime)
+        value
+        <foreach collection="photosList" index="index" item="item" separator=",">
+            (#{item.nid},
+            #{item.ptitle},
+            #{item.imgPath},
+            #{item.psize},
+            #{item.sindex},
+            #{item.downcount},
+            #{item.uptime})
+        </foreach>
+    </insert>
+
     <update id="updateNewsPhoto" parameterType="com.goodcub.vci.entity.NewsPhoto">
         update news_photos
         <set>
             <if test="ptitle">
                 ptitle = #{ptitle:VARCHAR},
             </if>
-            <if test="path" >
-                path = #{path:VARCHAR},
+            <if test="imgPath">
+                img_path = #{imgPath:VARCHAR},
             </if>
-            <if test="psize" >
+            <if test="psize">
                 psize = #{psize:VARCHAR},
             </if>
-            <if test="sindex" >
+            <if test="sindex">
                 sindex = #{sindex:VARCHAR},
             </if>
-            <if test="downcount" >
+            <if test="downcount">
                 downcount = #{downcount:VARCHAR},
             </if>
         </set>

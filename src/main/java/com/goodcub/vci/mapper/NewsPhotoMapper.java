@@ -23,6 +23,8 @@ public interface NewsPhotoMapper {
 
     Integer saveNewsPhoto(NewsPhoto newsPhoto);
 
+    Integer saveNewsPhotoBatch(@Param("photosList") List<NewsPhoto> photosList);
+
     Integer updateNewsPhoto(NewsPhoto newsPhoto);
 
     Integer deleteNewsPhoto(@Param("idList") List<Integer> idList);
