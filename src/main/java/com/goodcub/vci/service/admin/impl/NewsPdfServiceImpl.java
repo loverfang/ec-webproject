@@ -1,7 +1,9 @@
 package com.goodcub.vci.service.admin.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.goodcub.common.page.TableDataInfo;
+import com.goodcub.vci.entity.Members;
 import com.goodcub.vci.entity.NewsPdf;
 import com.goodcub.vci.mapper.NewsPdfMapper;
 import com.goodcub.vci.service.admin.NewsPdfService;
@@ -30,10 +32,13 @@ public class NewsPdfServiceImpl implements NewsPdfService {
         PageHelper.startPage(pageNum,pageSize,"sindex asc ,addtime desc");
         List<NewsPdfVO> newsPdfList = newsPdfMapper.queryNewsPdfList(params);
 
-        TableDataInfo TableDataInfo = new TableDataInfo();
-        TableDataInfo.setTotal(((List) newsPdfList).size());
-        TableDataInfo.setItems(newsPdfList);
-        return TableDataInfo;
+        // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
+        PageInfo<NewsPdfVO> pageInfo = new PageInfo<>(newsPdfList, pageSize);
+
+        TableDataInfo tableDataInfo = new TableDataInfo();
+        tableDataInfo.setItems(pageInfo.getList());
+        tableDataInfo.setTotal(pageInfo.getTotal());
+        return tableDataInfo;
     }
 
     @Override

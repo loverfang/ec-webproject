@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.goodcub.vci.mapper.NewsPhotoMapper">
+
+    <!-- 查询谋篇文章下的所有图片信息 -->
+    <select id="queryNewsPhotoList" resultType="com.goodcub.vci.vo.admin.NewsPhotoListVO" parameterType="java.util.Map">
+        select * from news_photos
+        <where>
+            <if test="nid != null">
+                and nid = #{nid}
+            </if>
+            <if test="ptitle != null">
+                and ptitle = #{ptitle}
+            </if>
+        </where>
+    </select>
+
+    <insert id="saveNewsPhoto" parameterType="com.goodcub.vci.entity.NewsPhoto">
+    	insert into news_photos(pid, nid, ptitle, path, psize, sindex, downcount, uptime)
+	    values(
+	    #{pid:INTEGER},
+	    #{nid:INTEGER},
+	    #{ptitle:VARCHAR},
+	    #{path:VARCHAR},
+	    #{psize:VARCHAR},
+	    #{sindex:INTEGER},
+	    #{downcount:INTEGER},
+	    #{uptime:TIMESTAMP})
+    </insert>
+
+    <update id="updateNewsPhoto" parameterType="com.goodcub.vci.entity.NewsPhoto">
+        update news_photos
+        <set>
+            <if test="ptitle">
+                ptitle = #{ptitle:VARCHAR},
+            </if>
+            <if test="path" >
+                path = #{path:VARCHAR},
+            </if>
+            <if test="psize" >
+                psize = #{psize:VARCHAR},
+            </if>
+            <if test="sindex" >
+                sindex = #{sindex:VARCHAR},
+            </if>
+            <if test="downcount" >
+                downcount = #{downcount:VARCHAR},
+            </if>
+        </set>
+        where pid = #{pid:INTEGER}
+    </update>
+
+    <!-- 根据nid删除某篇文章下的所有图片信息 -->
+    <delete id="deleteNewsPhoto" parameterType="java.util.List">
+        delete from news_photos
+        <where>
+            nid in
+            <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </delete>
+
+    <delete id="deleteNewsPhotoByPid" parameterType="java.util.List">
+        delete from news_photos
+        <where>
+            pid in
+            <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </delete>
+
+</mapper>

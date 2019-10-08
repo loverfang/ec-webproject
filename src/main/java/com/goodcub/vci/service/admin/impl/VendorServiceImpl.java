@@ -1,11 +1,13 @@
 package com.goodcub.vci.service.admin.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.goodcub.common.page.TableDataInfo;
 import com.goodcub.vci.entity.Vendor;
 import com.goodcub.vci.mapper.NewsPdfMapper;
 import com.goodcub.vci.mapper.VendorMapper;
 import com.goodcub.vci.service.admin.VendorService;
+import com.goodcub.vci.vo.admin.NewsListVO;
 import com.goodcub.vci.vo.admin.VendorInfoVO;
 import com.goodcub.vci.vo.admin.VendorListVO;
 import org.springframework.stereotype.Service;
@@ -35,10 +37,13 @@ public class VendorServiceImpl implements VendorService {
         PageHelper.startPage(pageNum,pageSize,"sindex asc, pubtime desc");
         List<VendorListVO> vendorList = vendorMapper.queryVendorList(params);
 
-        TableDataInfo TableDataInfo = new TableDataInfo();
-        TableDataInfo.setTotal(((List) vendorList).size());
-        TableDataInfo.setItems(vendorList);
-        return TableDataInfo;
+        // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
+        PageInfo<VendorListVO> pageInfo = new PageInfo<>(vendorList, pageSize);
+
+        TableDataInfo tableDataInfo = new TableDataInfo();
+        tableDataInfo.setTotal(pageInfo.getTotal());
+        tableDataInfo.setItems(pageInfo.getList());
+        return tableDataInfo;
     }
 
     @Override

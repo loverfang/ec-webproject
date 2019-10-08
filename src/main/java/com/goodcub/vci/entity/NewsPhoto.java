@@ -17,8 +17,8 @@ public class NewsPhoto implements Serializable {
     private Long nid; // 新闻ID
     private String ptitle; //图片名称
     private String imgPath;
-    private String psize;
-    private String sindex;
-    private String downcount;
+    private Long psize;
+    private Integer sindex;
+    private Integer downcount;
     private String uptime;
 }

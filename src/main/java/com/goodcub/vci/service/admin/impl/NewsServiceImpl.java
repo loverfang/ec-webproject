@@ -51,10 +51,10 @@ public class NewsServiceImpl implements NewsService {
         // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
         PageInfo<NewsListVO> pageInfo = new PageInfo<>(newsList, pageSize);
 
-        TableDataInfo TableDataInfo = new TableDataInfo();
-        TableDataInfo.setTotal(pageInfo.getTotal());
-        TableDataInfo.setItems(pageInfo.getList());
-        return TableDataInfo;
+        TableDataInfo tableDataInfo = new TableDataInfo();
+        tableDataInfo.setTotal(pageInfo.getTotal());
+        tableDataInfo.setItems(pageInfo.getList());
+        return tableDataInfo;
     }
 
     @Override

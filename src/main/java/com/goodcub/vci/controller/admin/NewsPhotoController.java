@@ -2,10 +2,13 @@ package com.goodcub.vci.controller.admin;
 
 import com.alibaba.fastjson.JSONObject;
 import com.goodcub.common.enums.StatusEnum;
+import com.goodcub.common.upload.FileResult;
 import com.goodcub.common.utils.DateUtil;
 import com.goodcub.common.utils.JsonResult;
 import com.goodcub.vci.entity.NewsPdf;
+import com.goodcub.vci.entity.NewsPhoto;
 import com.goodcub.vci.service.admin.NewsPdfService;
+import com.goodcub.vci.service.admin.NewsPhotoService;
 import com.goodcub.vci.vo.admin.NewsPdfVO;
 import com.goodcub.vci.vo.admin.NewsPhotoSaveVO;
 import org.springframework.stereotype.Controller;
@@ -26,7 +29,7 @@ import java.util.*;
 public class NewsPhotoController {
 
     @Resource
-    NewsPdfService newsPdfService;
+    NewsPhotoService newsPhotoService;
 
     // 加载nid下的所有图片信息
     @GetMapping("/photoList")
@@ -40,13 +43,35 @@ public class NewsPhotoController {
         Map<String,Object> param = new HashMap<>();
         param.put("nid",nid);
         param.put("ptitle",ptitle);
-        return JsonResult.success(newsPdfService.queryNewsPdfList(param, page, limit));
+        return JsonResult.success(newsPhotoService.queryNewsPhotoList(param, page, limit));
     }
 
     @PostMapping("/savePhotos")
     @ResponseBody
     public JsonResult savePhotoList(@RequestBody NewsPhotoSaveVO newsPhotoSaveVO){
 
+        List<NewsPhoto> photoList = new ArrayList<>();
+        if(newsPhotoSaveVO==null){
+            return JsonResult.error("请选择图片文件再上传");
+        }
+        if(newsPhotoSaveVO.getPhotoList() == null || newsPhotoSaveVO.getPhotoList().size() <= 0){
+            return JsonResult.error("请选择图片文件再上传");
+        }
+
+        for (FileResult result: newsPhotoSaveVO.getPhotoList()){
+            NewsPhoto photo = new NewsPhoto();
+            photo.setImgPath(result.getServerPath());
+            photo.setDowncount(0);
+            photo.setPsize(result.getFileSize());
+            photo.setSindex(1);
+            photo.setUptime(DateUtil.parseDateToStr("yyyy-MM-dd HH:mm:ss",new Date()));
+            photo.setNid(newsPhotoSaveVO.getNid());
+            photo.setPtitle(result.getFileName());
+
+            photoList.add(photo);
+        }
+
+        newsPhotoService.saveBatchNewsPhoto( photoList );
         return JsonResult.success();
     }
 
