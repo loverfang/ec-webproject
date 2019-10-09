@@ -30,7 +30,7 @@ public class WebMvcConfig implements WebMvcConfigurer {
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
         resolver.setCache(false);  //开发完成后将其设置为true
         resolver.setPrefix("/WEB-INF/views/");
-        resolver.setSuffix(".ftl");
+        resolver.setSuffix(".html");
         resolver.setContentType("text/html; charset=UTF-8");
         registry.viewResolver(resolver);
     }

@@ -1,0 +1,77 @@
+@charset "utf-8";
+/* CSS Document */
+
+/*--------------------------------------------------- 全局公共样式设置----------------------------------------------- */
+body { margin: 0; padding: 0; background: #fff; font-family: Arial, Helvetica, sans-serif, Microsoft YaHei; font-size: 12px; color: #666666; }
+body { width:100%; height: 100%; position:absolute }
+html { width:100%; height: 100%;   }
+div, form, img, h1, h2, h3, h4, h5, h6, ul, li { list-style-type: none; text-decoration: none; margin: 0px; padding: 0px; }
+article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary { display: block }
+p, form { margin: 0px; padding: 0px; }
+input { outline: none; border: none }
+ul, ol, li, dl, dt, dd { margin: 0; padding: 0; list-style: none; vertical-align: bottom; }
+table, td, tr, th { font-size: 12px; }
+.show { display: block; }
+.hide { display: none; }
+img { border: 0px; }
+em { font-style: normal; }
+a { text-decoration: none; cursor: pointer; color: #666666; -moz-transition: all 0.3s ease-in; -webkit-transition: all 0.3s ease-in; -o-transition: all 0.3s ease-in; transition: all 0.3s ease-in; }
+.underline { text-decoration: underline; }
+/* 自动换行 */
+.ww { word-wrap: break-word; }
+/*段落前空格*/
+.space { text-indent: 2em; }
+/* 浮动 */
+.fl { float: left; display: inline; }
+.fr { float: right; display: inline; }
+.center { text-align: center }
+.top { vertical-align: top }
+.bottom { vertical-align: bottom }
+.xd { /*相对定位*/ position: relative; }
+.jd { /*绝对定位*/ position: absolute; }
+/* 字体属性 [定义规则，小写f加属性名称] */
+.fb { font-weight: bold; }
+.fI { font-style: italic; }
+.imp{font-family: Impact, Arial, Helvetica, sans-serif;}
+.yahei{font-family: Microsoft YaHei;}
+/* 字体大小 */
+.f12px { font-size: 12px; }
+.f14px { font-size: 14px; }
+.f15px{ font-size: 15px;}
+.f16px { font-size: 16px; }
+.f18px { font-size: 18px; }
+.f20px { font-size:20px; }
+.f24px { font-size: 24px; }
+.lh16 { line-height: 16px; }
+.lh24 { line-height: 24px; }
+.lh30 { line-height: 30px; }
+/*字体颜色*/
+.chengse, .chengse a { color: #ff6600 }
+.lanse, .lanse a { color: #0f75bc }
+.huise { color: #999999 }
+.huise2 { color: #333333 }
+.baise,.baise a{ color:#FFF}
+.red, .red a { color: #ad1717 }
+.red2, .red2 a{color:#f01717}
+.lanse2, .lanse2 a {color:#10cadb;}
+/* 间距*/
+.ml60 { margin-left: 60px }
+.pt10 { padding-top: 10px; }
+.mr50 { margin-right: 50px }
+.mr15 { margin-right: 15px; }
+.pt70 { padding-top: 70px; }
+.pb50 { padding-bottom: 50px; }
+.pb20 { padding-bottom: 20px; }
+.pl20 { padding-left: 20px; }
+.p20{padding:20px;}
+.pt30{ padding-top:30px;}
+.pt45{ padding-top:45px;}
+.ml10{ margin-left:10px;}
+.pr15{ padding-right:15px;}
+/* 其他属性 */
+.centerdiv { margin-left: auto; margin-right: auto; }
+.clear { clear: both; }
+.maincontent { width: 100%; overflow: hidden; margin-left: auto; margin-right: auto; }
+.wrap { width: 1100px; margin-left: auto; margin-right: auto; overflow: hidden; }
+/*虚线或实线*/
+.xxline1 { border-bottom: 1px dotted #d7d7d7; }
