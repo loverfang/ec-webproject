@@ -62,6 +62,7 @@ public class IndexController {
         }else {
             request.setAttribute("adList", null);
         }
+
         return "site/index";
     }
 

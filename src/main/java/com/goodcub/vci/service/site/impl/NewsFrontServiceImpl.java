@@ -11,7 +11,9 @@ import com.goodcub.vci.mapper.NewsMapper;
 import com.goodcub.vci.service.admin.NewsService;
 import com.goodcub.vci.service.site.NewsFrontService;
 import com.goodcub.vci.vo.admin.*;
+import com.goodcub.vci.vo.site.ArticleFrontVO;
 import com.goodcub.vci.vo.site.NewsListFrontVO;
+import com.goodcub.vci.vo.site.PartnerFrontVO;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,8 +35,23 @@ public class NewsFrontServiceImpl implements NewsFrontService {
     NewsMapper newsMapper;
 
     @Override
-    public SingleNewsVO querySingleNews(String ntype) {
-        return newsMapper.querySingleNews(ntype);
+    public ArticleFrontVO queryArticleInfo(String ntype) {
+        return newsMapper.queryArticleFrontInfo(ntype);
+    }
+
+    @Override
+    public TableDataInfo queryPartenerFrontList(Map<String, Object> params, int pageNum, int pageSize) {
+        PageHelper.startPage(pageNum, pageSize,"ifindex desc, sindex asc, pubtime desc");
+
+        List<PartnerFrontVO> newsList = newsMapper.queryPartnerFrontList(params);
+
+        // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
+        PageInfo<PartnerFrontVO> pageInfo = new PageInfo<>(newsList, pageSize);
+
+        TableDataInfo tableDataInfo = new TableDataInfo();
+        tableDataInfo.setTotal(pageInfo.getTotal());
+        tableDataInfo.setItems(pageInfo.getList());
+        return tableDataInfo;
     }
 
     @Override
@@ -81,10 +98,4 @@ public class NewsFrontServiceImpl implements NewsFrontService {
         return newsMapper.queryNewsInfoByNid(nid);
     }
 
-    public void updateNews(News news, NewsExt newsExt) {
-        newsMapper.updateNews(news);
-
-        // 测试事务问题
-        newsMapper.updateNewsExt(newsExt);
-    }
 }

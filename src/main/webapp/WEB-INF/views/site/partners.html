@@ -1,0 +1,39 @@
+<!DOCTYpE HTML>
+<html>
+<head>
+    <title>partners</title>
+    <link href="${base}/res/site/style/default.css" rel="stylesheet" type="text/css">
+    <link href="${base}/res/site/style/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<#include "/site/components/title.html"/>
+<#include "/site/components/navbar.html"/>
+<div class="maincontent"  >
+    <div class="banner_b">
+        <div class="i_adbanner_2">
+            <div id="KinSlideshow_2">
+                <div id="banner_2"> <img src="${base}/res/site/images/1920-4.jpg" title=" "/> </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrap pb20"><img src="${base}/res/site/images/partners-tit.jpg"></div>
+
+    <div class="partners-list"><#if data??><#if data.items??> <#list data.items as item>
+        <dl>
+            <a href="${item.author}" target="_blank">
+                <dt><img src="/upload/news/PIC_${item.nid}.jpg" width="335" height="196"></dt>
+                <dd  class="f16px lh24 con">${item.content}</dd>
+            </a>
+        </dl></#list></#if></#if>
+    </div>
+
+    <div class="wrap">
+        1 2 3 4 5 6
+    </div>
+</div>
+
+<#include "/site/components/footer.html"/>
+</body>
+</html>

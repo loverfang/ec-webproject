@@ -1,0 +1,28 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>ABout US</title>
+    <link href="${base}/res/site/style/default.css" rel="stylesheet" type="text/css">
+    <link href="${base}/res/site/style/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<#include "/site/components/title.html"/>
+<#include "/site/components/navbar.html"/>
+<div class="maincontent">
+    <div class="banner_b">
+        <div class="i_adbanner_2">
+            <div id="KinSlideshow_2">
+                <div id="banner_2"><img src="${base}/res/site/images/aboutus.jpg" title=""/></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="wrap">
+        <div class="aboutus-tit"><img src="${base}/res/site/images/aboutus_tit.jpg" height="38" width="146" /><span class="b-aboutus"></span>  </div>
+        <#if article??>${article.content}</#if>
+    </div>
+</div>
+<#include "/site/components/footer.html"/>
+</body>
+</html>

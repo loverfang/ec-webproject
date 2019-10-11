@@ -1,0 +1,88 @@
+<div class="footer">
+    <div class="f-1">
+        <div class="wrap">
+            <dl class="mr50">
+                <dt><a href="/marketingwithus/"> VCI Marketing with Us ®</a></dt>
+                <dd><a href="/marketingwithus/">Based on powerful member network, consistent innovation, and unparalleled understanding of B2B marketing needs, VCI launched VCI Marketing with Us ® Program to help professional service providers to be more effective in targeting specific prospects, generating leads &amp; concrete demand, and achieving ambitious growth objectives. </a></dd>
+                <p><a href="/marketingwithus/">Learn more about VCI Marketing with Us ®.</a></p>
+            </dl>
+            <dl class="mr50">
+                <dt><a href="/vendors/"> VCI Vendors Directory</a></dt>
+                <dd><a href="/vendors/">VCI Supply Chain &amp; Logistics Vendors Directory is an essential tool for manufacturers, distributors, retailers and end-users shippers to find the best logistics providers, experts/consultants, IT/software solutions, real estate services and related equipment in Asia.</a></dd>
+                <p><a href="/vendors/">Find the best solution for your supply chain.</a></p>
+            </dl>
+            <dl>
+                <dt><a href="/stories/"> VCI Success Stories</a></dt>
+                <dd>
+                    <ul>
+                        <li><img src="${base}/res/site/images/images_004.jpg" width="103" height="117"></li>
+                        <li><img src="${base}/res/site/images/images_005.jpg" width="103" height="117"></li>
+                        <li><img src="${base}/res/site/images/images_006.jpg" width="103" height="117"></li>
+                    </ul>
+                </dd>
+                <p><a href="/stories/">Visit VCI success stories. </a></p>
+            </dl>
+        </div>
+    </div>
+    <div class="f-2">
+        <div class="wrap">
+            <div class="fl chengse"><span class="huise">©</span>2016 VCIntegration Co.,Ltd.</div>
+            <div class="fr r-list chengse">
+                <ul>
+                    <li>Report an issue</li>
+                    <li>Privacy Policy</li>
+                    <li>Terms of  Service</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- @忘记密码第一步 -->
+<div class="window1" id="forget_window" style="margin-top:0px;display:none;">
+    <div class="win-kuang">
+        <p><img src="${base}/res/site/images/images_019.jpg" width="591" height="53"></p>
+        <article  class="f16px lh24 baise pt30 ">Please type in the email you used to register for our site. You will soon be sent a new password to this registered address. Once your password is rest, your current password will no longer be accepted.  If the email hasn't arrived within 10 minutes, please check your spam box or contact us directly at <a href="Mailto:registration@vcintegration.com" class="baise underline">registration@vcintegration.com.</a> </article>
+        <div class="win-list2 pt45">
+            <dl>
+                <dt>E-mail address</dt>
+                <dd>
+                    <div class="fl"	>
+                        <input name="email" id="email" type="text" class="inp">
+                    </div>
+                    <div class="fl login-bnt ml10"><a href="javascript:void(0)" id="Forget_Send" onclick="validateEmail();"> SEND </a> </div>
+                </dd>
+            </dl>
+            <dl>
+                <dt>&nbsp;</dt>
+                <dd> <a href="javascript:void(0);" onclick="openLoginLayer()" class="baise underline">Return to <span class="lanse2">login</span> page.</a> </dd>
+            </dl>
+        </div>
+    </div>
+</div>
+
+<!-- @忘记密码短信发送成功 -->
+<div class="window4" id="ForgetEmailConfirm" style="margin-top:0px;display:none;">
+    <div class="tit">
+        <span class="fl f18px imp">Complete Your ForgetEmail</span>
+        <span class="fr f18px"><a href="javascript:void(0);" onclick="closeAllLayer();" class="baise">Close ×</a></span>
+    </div>
+    <div class="con f16px  lh24">
+        You have been sent an e-mail, please follow e-mail instruction to reset your password.  If the email hasn't arrived within 10 minutes, please check your spam box or contact us directly at  <a href="Mailto:registration@vcintegration.com" class=" underline">registration@vcintegration.com.</a> <br><br>Return to <span class="lanse2 underline"><a href="javascript:void(0);" onclick="closeAllLayer();">Request new password. .</a> </span>
+    </div>
+</div>
+
+<script type="text/javascript" src="${base}/res/site/js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="${base}/res/site/layer/layer.js"></script>
+<script type="text/javascript" src="${base}/res/site/js/toplogin.js"></script>
+<script type="text/javascript" src="${base}/res/site/js/forgetpwd.js"></script>
+<script type="text/javascript" src="${base}/res/site/js/common_login.js"></script>
+
+<script type="text/javascript">
+    var from = '${ntype}';
+    if(from!=null&&from!=''){
+        $("[id='"+from+"_1']").addClass("on");
+    }else{
+        //$("[id='index_1']").addClass("on");
+    }
+</script>

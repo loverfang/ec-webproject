@@ -1,0 +1,33 @@
+<div class="topbj">
+    <div class="wrap">
+        <div class="logo"><img src="${base}/res/site/images/logo.png" width="248" height="83"></div>
+        <div class="r-list">
+            <#if member??>
+            <!-- @ login -->
+            <div class="two-t" align="right">
+                <a href="/members/" style="color:#FFFFFF;"><img src="${base}/res/site/images/images_021.jpg" width="24" height="26" align="absmiddle" class="pr15"></a>
+            </div>
+            <div class="two-t" align="right">
+                <input class="btn" type="button" value="LOGIN OUT" onclick="window.location.href='/logout'">
+            </div>
+            <#else>
+            <div class="two-t pt10">
+                <form action="/login/dologin/" id="Top_Login_From">
+                    <ul>
+                        <li>
+                            <input class="inp" type="text" name="username" autocomplete="off" placeholder="Username">
+                        </li>
+                        <li>
+                            <input class="inp" type="password" name="password" autocomplete="off" placeholder="Password">
+                        </li>
+                        <li>
+                            <input id="Top_Login_From_Submit" class="btn" name="" onclick="login();" type="button" value="LOGIN">
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="thr-t"><span><a href="javascript:void(0)" onclick="openStep1Layer();">Forget Password </a></span><span><a href="/regist/">Register</a> </span></div>
+            </#if>
+        </div>
+    </div>
+</div>

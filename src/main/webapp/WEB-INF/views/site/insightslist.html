@@ -1,0 +1,41 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>VCI Insights</title>
+    <link href="/style/default.css" rel="stylesheet" type="text/css">
+    <link href="/style/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<jsp:include page="/title.jsp" />
+<jsp:include page="/navbar.jsp" />
+
+<div class="maincontent pt70"  >
+    <div class="wrap pb50"><img src="/images/insights-tit.jpg"></div>
+
+    <div class="insights-list">
+        <ul><c:forEach items="${page.items}" var="item" varStatus="count">
+            <li>
+                <a href="/insights/id_${item.nid}" target="_blank">
+                    <article class="leftcon">
+                        <p class="tit">${item.nlable}</p>
+                        <p class="tit-2">${item.title}</p>
+                        <article class="maincon">
+                            ${item.ndigest}
+                        </article>
+                    </article>
+                    <span class="img"><img src="/upload/news/PIC_${item.nid}.jpg" width="329" height="264"></span>
+                </a>
+            </li></c:forEach>
+        </ul>
+    </div>
+
+
+    <div class="wrap"><c:if test="${!empty page.items}">
+        <page:page page="${page}" currentPage="p" url="" divClass="pages"  nextPage="next page" prevPage="previous page" currentClass="current"  fixedViewNum="2"/></c:if>
+    </div>
+</div>
+
+<jsp:include page="/footer.jsp" />
+</body>
+</html>

@@ -5,6 +5,8 @@ import com.goodcub.vci.entity.News;
 import com.goodcub.vci.entity.NewsExt;
 import com.goodcub.vci.vo.admin.NewsInfoVO;
 import com.goodcub.vci.vo.admin.SingleNewsVO;
+import com.goodcub.vci.vo.site.ArticleFrontVO;
+import com.goodcub.vci.vo.site.PartnerFrontVO;
 
 import java.util.List;
 import java.util.Map;
@@ -22,7 +24,16 @@ public interface NewsFrontService {
      * @param ntype
      * @return
      */
-    SingleNewsVO querySingleNews(String ntype);
+    ArticleFrontVO queryArticleInfo(String ntype);
+
+    /**
+     * 查询合作伙伴列表
+     * @param params
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    TableDataInfo queryPartenerFrontList(Map<String, Object> params, int pageNum, int pageSize);
 
     /**
      * 查询新闻列表
@@ -57,4 +68,5 @@ public interface NewsFrontService {
      * @return
      */
     NewsInfoVO queryNewsInfoByNid(Long nid);
+
 }
