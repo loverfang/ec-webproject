@@ -4,7 +4,6 @@ import com.goodcub.common.page.TableDataInfo;
 import com.goodcub.vci.entity.News;
 import com.goodcub.vci.entity.NewsExt;
 import com.goodcub.vci.vo.admin.NewsInfoVO;
-import com.goodcub.vci.vo.admin.NewsListVO;
 import com.goodcub.vci.vo.admin.SingleNewsVO;
 
 import java.util.List;

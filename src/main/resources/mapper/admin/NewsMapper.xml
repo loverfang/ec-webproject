@@ -47,6 +47,19 @@
         </where>
     </select>
 
+    <!-- 前台的新闻列表查询 -->
+    <select id="queryNewsFrontList" parameterType="java.util.Map" resultType="com.goodcub.vci.vo.site.NewsListFrontVO">
+        select
+        n.nid, e.nlable, e.endate, e.city, e.province, n.title, n.pubtime
+        from news as n
+        inner join news_ext as e on e.nid = n.nid
+        <where>
+            <if test="ntype != null">
+                n.ntype = #{ntype}
+            </if>
+        </where>
+    </select>
+
     <!-- 添加新闻信息 -->
     <insert id="insertNews" parameterType="com.goodcub.vci.entity.News" >
         insert into news (nid, ntype, title, sindex, author, viewcount, pubtime, content, ifindex, ptitle, pdescription, pkeywords, cover_img, author_img)

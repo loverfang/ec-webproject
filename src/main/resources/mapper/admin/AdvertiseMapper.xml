@@ -57,4 +57,12 @@
         </foreach>
     </delete>
 
+    <!-- 网页端查询 -->
+    <select id="queryAdvertiseFrontVoList" resultType="com.goodcub.vci.vo.site.AdvertiseFrontVO" parameterType="java.util.Map">
+        select adurl,cover_img from advertise
+        <where>
+            status = 'NORMAL'
+        </where>
+    </select>
+
 </mapper>

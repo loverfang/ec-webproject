@@ -2,13 +2,139 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>VCIntegration - Home</title>
     <link href="${base}/res/site/style/default.css" rel="stylesheet" type="text/css">
     <link href="${base}/res/site/style/style.css" rel="stylesheet" type="text/css">
 </head>
+
 <body>
 <#include "/site/header.html"/>
+<div class="maincontent">
+    <div class="banner_in">
+        <!--banner-->
+        <div class="top_slide_wrap">
+            <div id="slidebody">
+                <div class="bx-wrapper" style="max-width: 100%;">
+                    <class="slide_box bxslider" >
+                        <#if adList??><#list adList as ad>
+                        <li <#if ad_index == 0>class="bx-clone"</#if>>
+                          <a href="${ad.adurl}" target="_blank"><#if ad.coverImg??><img src="${ad.coverImg}" width="1920" height="653"><#else><p align="center">图片准备中...</p></#if></a>
+                        </li></#list></#if>
+                    </ul>
+                </div>
+                <div class="bx-controls bx-has-pager">
+                    <div class="bx-pager bx-default-pager">
+                        <a href="" data-slide-index="0" class="bx-pager-link"></a>
+                        <a href="" data-slide-index="1" class="bx-pager-link active"></a>
+                        <a href="" data-slide-index="2" class="bx-pager-link active"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="wrap">
+    <div class="nav">
+        <ul>
+            <li class="li-1"><a href="/" class="on">HOME</a></li>
+            <li class="li-2"><a href="/aboutus/">About Us</a></li>
+            <li class="li-3"><a href="/ourservices/">Our Services</a></li>
+            <li class="li-4"><a href="/ourcilents/">Our Clients</a></li>
+            <li class="li-5"><a href="/marketingwithus/">Marketing With Us</a></li>
+            <li class="li-6"><a href="/insights/">VCI Insights</a></li>
+            <li class="li-7"><a href="/partners/">Partners</a></li>
+            <li class="li-8"><a href="/videos/">Membership</a></li>
+            <li class="li-9"><a href="/contactus/">Contact Us </a></li>
+        </ul>
+    </div>
+</div>
+<div class="wrap">
+    <div class="pic-home">
+        <dl class="dl-1">
+            <dt><a href="/ourservices/"> VCI Executive Networking </a></dt>
+            <dd><a href="/ourservices/"><img src="${base}/res/site/images/images_001.jpg" width="330" height="220"></a>
+                <p>VCI executive networking events focus on specific industries or areas of expertise to help you gain understanding of key trends and fundamental forces disrupting your supply chain.</p>
+            </dd>
+        </dl>
+        <dl class="dl-1">
+            <dt><a href="/insights/"> VCI Knowledge Transfer</a></dt>
+            <dd><a href="/insights/"><img src="${base}/res/site/images/images_002.jpg" width="330" height="220"></a>
+                <p>VCI thought-provoking information resources provide you with powerful strategic insights and analysis of disruption trends in your industry.</p>
+            </dd>
+        </dl>
+        <dl>
+            <dt><a href="/marketingwithus/"> VCI Marketing with Us ®</a></dt>
+            <dd><a href="/marketingwithus/"><img src="${base}/res/site/images/images_003.jpg" width="330" height="220"></a>
+                <p>VCI Marketing with Us ® helps you to optimize quality of self-organized events and allows you to target specific clients at top management level based on your wish list. </p>
+            </dd>
+        </dl>
+    </div>
+    <div class="wz-home">
+        <dl>
+            <dt><a href="/events/"> VCI Upcoming Events </a></dt>
+            <dd>
+                <ul><#if eventsList??><#list eventsList as item>
+                    <li>
+                        <div class="clear">
+                            <div class="left-tit f16px">${item.nlable}</div>
+                            <div class="left-time f16px"> [${item.endate}] ${item.city}, ${item.province}</div>
+                        </div>
+                        <p><a href="/events/id_${item.nid}">${item.title}</a> </p>
+                    </li></#list></#if>
+                </ul>
+            </dd>
+        </dl>
+
+        <dl>
+            <dt><a href="/insights/"> VCI Insights </a></dt>
+            <dd>
+                <ul><#if insightsList??><#list insightsList as item>
+                    <li>
+                        <div class="clear">
+                            <div class="right-tit f16px">${item.nlable}</div>
+                        </div>
+                        <p><a href="/insights/id_${item.nid}">${item.title}</a></p>
+                    </li></#list></#if>
+                </ul>
+            </dd>
+        </dl>
+    </div>
+
+    <div class="morelist">
+        <ul>
+            <li><a href="/events/">
+                <input class="inp f16px" name="" type="button" value="Read More">
+            </a></li>
+            <li class="ml60"><a href="/insights/">
+                <input class="inp f16px" name="" type="button" value="Read More">
+            </a></li>
+        </ul>
+    </div>
+</div>
 
 <#include "/site/footer.html"/>
+<script type="text/javascript" src="${base}/res/site/js/jquery.bxslider.js"></script>
+<!--控制banner特效-->
+<script type="text/javascript">
+    $(window).load(function(){
+        $(".bxslider").bxSlider({
+            auto:true,
+            prevSelector:$(".top_slide_wrap .op_prev")[0],nextSelector:$(".top_slide_wrap .op_next")[0]
+        });
+        //显示
+        $(".r-list").on("mouseenter","span.weixin",function(e){
+            $(".ewm").show();
+            $(".ewm").animate({opacity:'1'},500);
+            e.stopPropagation();
+        });
+        $(".r-list").on("mouseleave",function(e){
+            $(".ewm").animate({opacity:'0'},500,function(){
+                $(this).hide();
+            });
+            e.stopPropagation();
+        });
+    });
+</script>
 </body>
 </html>

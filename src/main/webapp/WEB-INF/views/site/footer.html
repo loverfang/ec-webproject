@@ -41,7 +41,7 @@
 <!-- @忘记密码第一步 -->
 <div class="window1" id="forget_window" style="margin-top:0px;display:none;">
     <div class="win-kuang">
-        <p><img src="/images/images_019.jpg" width="591" height="53"></p>
+        <p><img src="${base}/res/site/images/images_019.jpg" width="591" height="53"></p>
         <article  class="f16px lh24 baise pt30 ">Please type in the email you used to register for our site. You will soon be sent a new password to this registered address. Once your password is rest, your current password will no longer be accepted.  If the email hasn't arrived within 10 minutes, please check your spam box or contact us directly at <a href="Mailto:registration@vcintegration.com" class="baise underline">registration@vcintegration.com.</a> </article>
         <div class="win-list2 pt45">
             <dl>
@@ -73,16 +73,11 @@
 </div>
 
 <script type="text/javascript" src="${base}/res/site/js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="/layer/layer.js"></script>
+<script type="text/javascript" src="${base}/res/site/layer/layer.js"></script>
 <script type="text/javascript" src="${base}/res/site/js/toplogin.js"></script>
-<script type="text/javascript" src="${base}/res/site/js/jquery.main.js"></script>
 <script type="text/javascript" src="${base}/res/site/js/forgetpwd.js"></script>
 <script type="text/javascript" src="${base}/res/site/js/common_login.js"></script>
+
 <script type="text/javascript">
-    var from = '${ntype}';
-    if(from!=null&&from!=''){
-        $("[id='"+from+"_1']").addClass("on");
-    }else{
-        //$("[id='index_1']").addClass("on");
-    }
+
 </script>
