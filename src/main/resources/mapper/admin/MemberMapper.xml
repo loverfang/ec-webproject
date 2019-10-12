@@ -221,7 +221,6 @@
         update vci_member set password = #{password:VARCHAR} where email = #{email:VARCHAR}
     </update>
 
-
     <!-- 前端登录页面 -->
     <select id="mlogin" resultType="com.goodcub.vci.vo.site.MemberFrontVO" parameterType="java.util.Map">
         select * from vci_member
@@ -238,12 +237,12 @@
 
     <!-- 自动登录方法 -->
     <select id="mAutoLogin" resultType="com.goodcub.vci.vo.site.MemberFrontVO" parameterType="java.lang.String">
-     select * from vci_member where phone = #phone#
+        select * from vci_member where phone = #{phone}
    </select>
 
     <!-- 查询会员的可用观看次数 -->
     <select id="queryMemberViewCount" resultType="com.goodcub.vci.vo.site.MemberFrontVO" parameterType="java.lang.Integer">
-        select memid, viewcount from vci_member where memid=${memid}
+        select memid, viewcount from vci_member where memid = #{memid}
     </select>
 
     <!-- 查询会员的可用观看次数 -->
