@@ -20,28 +20,23 @@ function login(){
     
     //提交表单
 	$.ajax({
-      	url:'/login/dologin/',
+      	url:'/member/dologin/',
        type:"POST",
        data:$("#Top_Login_From").serialize(),
     success:function(data){
-	        var results = eval("("+data+")");
-	        if(results.code == 1){
-	            layer.msg(results.message,{time: 2000,icon: 1},function(){
-	            
+	        // var results = eval("("+data+")");
+	        if(data.flag == 1){
+	            layer.msg(data.message,{time: 2000,icon: 1},function(){
 	                window.location.reload();
-	                
 	            });
 			}else{
-			   
-			    layer.msg(results.message, {icon: 2}); 
+			    layer.msg(data.message, {icon: 2});
 			    $("#Top_Login_From_Submit").val("LOGIN");
     			$("#Top_Login_From_Submit").attr("onclick","login()");
     			 
 			    return false;
 			}
         },
-        error: function (XMLHttpRequest, textStatus, errorThrown) {
-	    
-	    }
+        error: function (XMLHttpRequest, textStatus, errorThrown) { }
   	});	
 }
