@@ -1,5 +1,6 @@
 package com.goodcub.vci.service.site;
 
+import com.goodcub.vci.entity.Members;
 import com.goodcub.vci.vo.site.MemberFrontVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -13,5 +14,11 @@ import java.util.Map;
  * @Version V1.0
  **/
 public interface MemberFrontService {
+
     MemberFrontVO mlogin(Map<String,Object> param);
+
+    MemberFrontVO queryMemberViewCount(Integer memid);
+
+    Integer updateMemberViewCount(Members members);
+
 }

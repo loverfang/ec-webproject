@@ -58,4 +58,18 @@ public interface MemberMapper {
      */
     MemberFrontVO mAutoLogin(String phone);
 
+    /**
+     * 前台会员可用次数查询
+     * @param memid
+     * @return
+     */
+    MemberFrontVO queryMemberViewCount(Integer memid);
+
+    /**
+     * 更新会员可用次数
+     * @param members
+     * @return
+     */
+    Integer updateMemberViewCount(Members members);
+
 }

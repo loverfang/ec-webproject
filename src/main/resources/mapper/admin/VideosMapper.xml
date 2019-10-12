@@ -67,4 +67,49 @@
         </foreach>
     </delete>
 
+    <!-- 前台视频列表 -->
+    <select id="queryFrontVideosList" resultType="com.goodcub.vci.vo.site.VideosListFrontVO" parameterType="java.util.Map" >
+        select * from videos
+        <where>
+            <if test="vid!=null">
+               and vid = #{vid}
+            </if>
+            <if test="title!=null">
+               and title like CONCAT('%', #{title}, '%')
+            </if>
+        </where>
+        order by sindex DESC, addtime desc
+    </select>
+
+    <!-- 前台视频详情 -->
+    <select id="queryFrontVideoInfo" resultType="com.goodcub.vci.vo.site.VideosListFrontVO" parameterType="java.util.Map" >
+        select * from videos where vid = #{vid}
+    </select>
+
+    <!-- 前台查看某一视频被某一会员查看次数 -->
+    <select id="queryViewCountByMemid" resultType="java.lang.Integer" parameterType="java.util.Map">
+        select count(1) from videos_viewlogs where vid = #{vid} and memid=#{memid}
+    </select>
+
+    <!-- 前台插入观看记录 -->
+    <insert id="insertViewLogs" parameterType="com.goodcub.vci.entity.VideosViewLog" >
+        insert into videos_viewlogs(vid, memid, title, usecount, vtime)
+        values(
+            #{vid:INTEGER},
+            #{memid:INTEGER},
+            #{title:VARCHAR},
+            #{usecount:INTEGER},
+            #{vtime:VARCHAR})
+    </insert>
+
+    <update id="updateViewCount" parameterType="com.goodcub.vci.entity.Videos" >
+        update videos
+        <set>
+            <if test="viewcount != null">
+                viewcount = #{viewcount:INTEGER},
+            </if>
+        </set>
+        where vid = #{vid:INTEGER}
+    </update>
+
 </mapper>

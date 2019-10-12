@@ -1,0 +1,126 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>member register</title>
+    <link href="${base}/res/site/style/default.css" rel="stylesheet" type="text/css">
+    <link href="${base}/res/site/style/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body onload="openLoginLayer();">
+<#include "/site/components/title.html"/>
+<#include "/site/components/navbar.html"/>
+<div class="maincontent pt45">
+    <div class="wrap">
+        <p><img src="${base}/res/site/images/images_015.jpg" width="230" height="41"></p>
+        <p class="f16px pt10 lh24 pb20">Please register for our site. Your subscription includes: free downloads of VCI Insights, full access to VCI Vendors Directory, and VCI Success Stories. For existing members please<span class="lanse2 underline"> <a href="javascript:void(0);" onclick="openLoginLayer();">login here.</a></span><br>
+        </p>
+    </div>
+</div>
+<#include "/site/components/footer.html"/>
+<script type="text/javascript" src="${base}/res/site/js/validate.utils.js"></script>
+<script type="text/javascript" src="${base}/res/site/layer/layer.js"></script>
+<script type="text/javascript">
+    //弹出第一步框框
+    var loginLayer;
+
+    var  loginDiv = "<div class=\"window1\" id=\"login_window\" style=\"margin:0px;display:none;\">";
+    loginDiv += 	"<div class=\"win-kuang\">";
+    loginDiv +=		"<p><img src=\"/images/images_018.jpg\" width=\"590\" height=\"56\"></p>";
+    loginDiv +=		"<div class=\"win-list pt45\">";
+    loginDiv +=	    "<form id=\"commonLoginForm\">"
+
+    loginDiv +=			"<dl>";
+    loginDiv +=				"<dt>Corporate User name</dt>";
+    loginDiv +=				"<dd>";
+    loginDiv +=					"<input name=\"username\" type=\"text\" class=\"inp\">";
+    loginDiv +=				"</dd>";
+    loginDiv +=			"</dl>";
+    loginDiv +=			"<dl>";
+    loginDiv +=				"<dt>Password</dt>";
+    loginDiv +=				"<dd>";
+    loginDiv +=					"<input name=\"password\" type=\"password\" class=\"inp\">";
+    loginDiv +=				"</dd>";
+    loginDiv +=			"</dl>";
+    loginDiv +=			"<dl>";
+    loginDiv +=				"<dt>";
+    loginDiv +=					"<input type=\"checkbox\" name=\"ifchecked\" id=\"checkbox\" value=\"autologin\">";
+    loginDiv +=				"</dt>";
+    loginDiv +=				"<dd> Remember me for 2 weeks </dd>";
+    loginDiv +=			"</dl>";
+    loginDiv +=			"<dl>";
+    loginDiv +=				"<dt>&nbsp;</dt>";
+    loginDiv +=				"<dd>";
+    loginDiv +=					"<div class=\"fl login-bnt\"><a href=\"javascript:void(0)\" onclick=\"loginSubmit()\">Login</a> </div>";
+    loginDiv +=					"<div class=\"underline fl baise\"><a href=\"javascript:void(0)\" onclick=\"javascript:layer.msg('Please contact VCI to consult the Membership! <br/>Phone: +86 21 6252 5366')\">Recover your password</a></div>";
+    loginDiv +=				"</dd>";
+    loginDiv +=			"</dl>";
+    loginDiv +=			"<dl>";
+    loginDiv +=				"<dt>&nbsp;</dt>";
+    loginDiv +=				"<dd><a href='/' class='baise underline' style='margin-right:3px;'>Go Website Home!</a></dd>";
+    loginDiv +=			"</dl>";
+    loginDiv +=			"</form>";
+
+    loginDiv +=		"</div>";
+    loginDiv +=	"</div>";
+    loginDiv +="</div>";
+
+    function openLoginLayer(){
+        $("body").append(loginDiv);
+        layer.closeAll();
+
+        //页面层-自定义
+        step1Layer = layer.open({
+            type: 1,
+            title: false,
+            fix:false,
+            closeBtn: 0,
+            shade:0.8,
+            area: ['820px', '585px'],
+            shadeClose: false,
+            content: $("#login_window")
+        });
+    }
+
+    function closeLoginLayer(){
+        //$("#registForm")[0].reset();
+        layer.close(loginLayer);
+    }
+
+    function loginSubmit(){
+
+        var username = $("#commonLoginForm input[name=username]").val();
+        if(username=null||username==""){
+            layer.msg("please fill your username",{time: 2000,icon: 2});
+            return false;
+        }
+
+        var password = $("#commonLoginForm input[name=password]").val();
+        if(password=null||password==""){
+            layer.msg("please fill your password",{time: 2000,icon: 2});
+            return false;
+        }
+
+        //提交表单
+        $.ajax({
+            url:'/member/dologin/',
+            type:"POST",
+            data:$("#commonLoginForm").serialize(),
+            success:function(data){
+                var results = eval("("+data+")");
+                if(results.code == 1){
+                    //发送成功后弹出提示框
+                    layer.msg(results.message, {time: 2000,icon: 1}, function(){
+                        window.location.href='/videos/'
+                    });
+                }else{
+                    layer.msg(results.message, {time: 2000,icon: 2}, function(){ });
+                    return false;
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) { }
+        });
+    }
+</script>
+
+</body>
+</html>

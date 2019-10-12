@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Membership</title>
+    <link href="${base}/res/site/style/default.css" rel="stylesheet" type="text/css">
+    <link href="${base}/res/site/style/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<#include "/site/components/title.html"/>
+<#include "/site/components/navbar.html"/>
+
+<div class="maincontent"  >
+    <div class="banner_b">
+        <div class="i_adbanner_2">
+            <div id="KinSlideshow_2">
+                <div id="banner_2"><img src="${base}/res/site/upload/advertise/PIC_8.jpg" title=" "/></div>
+            </div>
+        </div>
+    </div>
+    <div class="wrap pb20"><img src="${base}/res/site/images/mem-tit.jpg"  ></div>
+    <div class="partners-list"><#if data??><#if data.items??> <#list data.items as item>
+        <dl>
+            <!-- <a href="javascript:;" onclick="openVideo('${item.vurl}',${item.vid})"> -->
+            <a href="/videos/${item.vid}.html" target="_blank">
+                <dt> <img src="/upload/videos/PIC_${item.vid}.jpg" width="335" height="196"></dt>
+                <dd  class="f16px lh24 con">
+                    <i>${item.title}</i>
+                    <div>${item.memo}</div></dd>
+            </a>
+        </dl></#list></#if></#if>
+    </div>
+    <div class="wrap">
+        11 22 33 44 55 66
+    </div>
+</div>
+
+<#include "/site/components/footer.html"/>
+<script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="/js/validate.utils.js"></script>
+<script type="text/javascript">
+    function openVideo(vrul,vid){
+        var url = "/front/detailVideos.action";
+        var data = {"ntype":"videos","from":"videos","id":vid};
+
+        $.post(url, data);
+        window.open(vrul);
+    }
+</script>
+</body>
+</html>

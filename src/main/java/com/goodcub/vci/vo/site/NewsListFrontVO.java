@@ -13,6 +13,7 @@ import lombok.Data;
 public class NewsListFrontVO {
     private Long nid;
     private String nlable;
+    private String ndigest;
     private String endate;
     private String city;
     private String province;

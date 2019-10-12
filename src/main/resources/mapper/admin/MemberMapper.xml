@@ -241,4 +241,14 @@
      select * from vci_member where phone = #phone#
    </select>
 
+    <!-- 查询会员的可用观看次数 -->
+    <select id="queryMemberViewCount" resultType="com.goodcub.vci.vo.site.MemberFrontVO" parameterType="java.lang.Integer">
+        select memid, viewcount from vci_member where memid=${memid}
+    </select>
+
+    <!-- 查询会员的可用观看次数 -->
+    <update id="updateMemberViewCount" parameterType="com.goodcub.vci.entity.Members">
+        update vci_member set viewcount = #{viewcount} where memid = #{memid}
+    </update>
+
 </mapper>

@@ -23,7 +23,7 @@ import java.util.Map;
 
 /**
  * @Author Luo.z.x
- * @Description: TODO
+ * @Description: 会员前台操作方法
  * @Date 2019/10/12
  * @Version V1.0
  **/
@@ -35,6 +35,11 @@ public class MemberFrontController {
     MemberFrontService memberFrontService;
     @Resource
     AutoLoginFrontService autoLoginFrontService;
+
+    @GetMapping("/tologin")
+    public String toLogin(){
+         return "site/mlogin";
+    }
 
     /**
      * 顶部登录操作
@@ -137,7 +142,6 @@ public class MemberFrontController {
         }
 
     }
-
 
 
 }

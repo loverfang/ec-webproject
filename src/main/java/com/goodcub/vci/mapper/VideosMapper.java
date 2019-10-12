@@ -1,8 +1,10 @@
 package com.goodcub.vci.mapper;
 
 import com.goodcub.vci.entity.Videos;
+import com.goodcub.vci.entity.VideosViewLog;
 import com.goodcub.vci.vo.admin.AdvertiseVO;
 import com.goodcub.vci.vo.admin.VideosListVO;
+import com.goodcub.vci.vo.site.VideosListFrontVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -29,4 +31,15 @@ public interface VideosMapper {
 
     Integer deleteVideos(@Param("idList") List<Integer> idList);
 
+
+
+    List<VideosListFrontVO> queryFrontVideosList(Map<String, Object> params);
+
+    VideosListFrontVO queryFrontVideoInfo(Integer vid);
+
+    Integer queryViewCountByMemid(Map<String, Object> params);
+
+    Integer insertViewLogs(VideosViewLog videosViewLog);
+
+    Integer updateViewCount(Videos videos);
 }

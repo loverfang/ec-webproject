@@ -116,9 +116,54 @@ public class NewsFrontController {
      * Insights 列表
      * @return
      */
-    public String insights(){
+    @RequestMapping("/insights")
+    public String insights(HttpServletRequest request,
+            @RequestParam(value = "page", required = false)Integer page,
+            @RequestParam(value = "limit", required = false)Integer limit){
+        // 初始化分页默认数据
+        if(page == null || "".equals(page)){
+            page = 1;
+        }
+
+        if(limit == null || "".equals(limit)){
+            limit = 10;
+        }
+
+        Map<String,Object> params = new HashMap<>();
+        params.put("ntype", "INSIGHTS");
+        TableDataInfo tableDataInfo = newsFrontService.queryNewsFrontList(params, page, limit);
+
+        request.setAttribute("data", tableDataInfo);
+        request.setAttribute("ntype", "insights");
         return "site/insightslist";
     }
+
+    /**
+     * Events 列表
+     * @return
+     */
+    public String events(HttpServletRequest request,
+       @RequestParam(value = "page", required = false)Integer page,
+       @RequestParam(value = "limit", required = false)Integer limit){
+
+        // 初始化分页默认数据
+        if(page == null || "".equals(page)){
+            page = 1;
+        }
+
+        if(limit == null || "".equals(limit)){
+            limit = 10;
+        }
+
+        Map<String,Object> params = new HashMap<>();
+        params.put("ntype", "EVENTS");
+        TableDataInfo tableDataInfo = newsFrontService.queryNewsFrontList(params, page, limit);
+
+        request.setAttribute("data", tableDataInfo);
+        request.setAttribute("ntype", "insights");
+        return "site/eventslist";
+    }
+
 
     /**
      * Insights 详情
@@ -126,14 +171,6 @@ public class NewsFrontController {
      */
     public String insightsDetail(){
         return "site/insights_content";
-    }
-
-    /**
-     * Events 列表
-     * @return
-     */
-    public String events(){
-        return null;
     }
 
     /**

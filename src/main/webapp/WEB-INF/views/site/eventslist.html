@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>VCI Insights</title>
+    <title>Event</title>
     <link href="${base}/res/site/style/default.css" rel="stylesheet" type="text/css">
     <link href="${base}/res/site/style/style.css" rel="stylesheet" type="text/css">
 </head>
@@ -10,28 +10,29 @@
 <#include "/site/components/title.html"/>
 <#include "/site/components/navbar.html"/>
 
-<div class="maincontent pt70">
-    <div class="wrap pb50"><img src="${base}/res/site/images/insights-tit.jpg"></div>
-
-    <div class="insights-list">
+<div class="maincontent pt70"  >
+    <div class="wrap pb50"> <img src="/images/event-tit.jpg"  ></div>
+    <div class="event-list">
         <ul><#if data??><#if data.items??> <#list data.items as item>
             <li>
-                <a href="/insights/id_${item.nid}" target="_blank">
+                <a href="/events/id_${item.nid}" target="_blank">
                     <article class="leftcon">
-                        <p class="tit">${item.nlable}</p>
-                        <p class="tit-2">${item.title}</p>
+                        <span class="tit">${item.nlable}</span>
+                        <span class="tit-2">${item.title}</span>
                         <article class="maincon">
                             ${item.ndigest}
                         </article>
                     </article>
-                    <span class="img"><img src="/upload/news/PIC_${item.nid}.jpg" width="329" height="264"></span>
+                    <article class="fr"> <span class="date-tit">Date + Location</span>
+                        <p class="date-con"> <span>${item.endate}</span> <span>${item.city},${item.province}</span> </p>
+                        <span class="img"> <img src="/upload/news/PIC_${item.nid}.jpg" width="329" height="264"></span>
+                    </article>
                 </a>
             </li></#list></#if></#if>
         </ul>
     </div>
-
     <div class="wrap">
-        123 456 789
+        11 22 33 44 55
     </div>
 </div>
 <#include "/site/components/footer.html"/>
