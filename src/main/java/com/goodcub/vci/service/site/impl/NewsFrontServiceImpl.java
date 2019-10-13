@@ -51,6 +51,9 @@ public class NewsFrontServiceImpl implements NewsFrontService {
         TableDataInfo tableDataInfo = new TableDataInfo();
         tableDataInfo.setTotal(pageInfo.getTotal());
         tableDataInfo.setItems(pageInfo.getList());
+        tableDataInfo.setPageNum(pageInfo.getPageNum());
+        tableDataInfo.setPageSize(pageInfo.getPageSize());
+        tableDataInfo.setPages(pageInfo.getPages());
         return tableDataInfo;
     }
 
@@ -65,6 +68,9 @@ public class NewsFrontServiceImpl implements NewsFrontService {
         TableDataInfo tableDataInfo = new TableDataInfo();
         tableDataInfo.setTotal(pageInfo.getTotal());
         tableDataInfo.setItems(pageInfo.getList());
+        tableDataInfo.setPageNum(pageInfo.getPageNum());
+        tableDataInfo.setPageSize(pageInfo.getPageSize());
+        tableDataInfo.setPages(pageInfo.getPages());
         return tableDataInfo;
     }
 
@@ -76,10 +82,13 @@ public class NewsFrontServiceImpl implements NewsFrontService {
         // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
         PageInfo<NewsPhotoListVO> pageInfo = new PageInfo<>(newsImgList, pageSize);
 
-        TableDataInfo TableDataInfo = new TableDataInfo();
-        TableDataInfo.setTotal(((List) newsImgList).size());
-        TableDataInfo.setItems(newsImgList);
-        return TableDataInfo;
+        TableDataInfo tableDataInfo = new TableDataInfo();
+        tableDataInfo.setTotal(pageInfo.getTotal());
+        tableDataInfo.setItems(pageInfo.getList());
+        tableDataInfo.setPageNum(pageInfo.getPageNum());
+        tableDataInfo.setPageSize(pageInfo.getPageSize());
+        tableDataInfo.setPages(pageInfo.getPages());
+        return tableDataInfo;
     }
 
     @Override
@@ -87,10 +96,16 @@ public class NewsFrontServiceImpl implements NewsFrontService {
         PageHelper.startPage(pageNum,pageSize,"sindex asc");
         List<NewsPdfVO> newsPdfList = newsMapper.queryPdfByNid(nid);
 
-        TableDataInfo TableDataInfo = new TableDataInfo();
-        TableDataInfo.setTotal(((List) newsPdfList).size());
-        TableDataInfo.setItems(newsPdfList);
-        return TableDataInfo;
+        // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
+        PageInfo<NewsPdfVO> pageInfo = new PageInfo<>(newsPdfList, pageSize);
+
+        TableDataInfo tableDataInfo = new TableDataInfo();
+        tableDataInfo.setTotal(pageInfo.getTotal());
+        tableDataInfo.setItems(pageInfo.getList());
+        tableDataInfo.setPageNum(pageInfo.getPageNum());
+        tableDataInfo.setPageSize(pageInfo.getPageSize());
+        tableDataInfo.setPages(pageInfo.getPages());
+        return tableDataInfo;
     }
 
     @Override

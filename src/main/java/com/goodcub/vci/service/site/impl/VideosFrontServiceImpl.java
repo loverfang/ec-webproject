@@ -38,6 +38,9 @@ public class VideosFrontServiceImpl implements VideosFrontService {
         TableDataInfo tableDataInfo = new TableDataInfo();
         tableDataInfo.setTotal(pageInfo.getTotal());
         tableDataInfo.setItems(pageInfo.getList());
+        tableDataInfo.setPageNum(pageInfo.getPageNum());
+        tableDataInfo.setPageSize(pageInfo.getPageSize());
+        tableDataInfo.setPages(pageInfo.getPages());
         return tableDataInfo;
     }
 

@@ -18,6 +18,10 @@
         </where>
     </select>
 
+
+
+
+
     <select id="queryVendorInfoByPid" resultType="com.goodcub.vci.vo.admin.VendorInfoVO">
         select * from products where pid= #{pid}
     </select>
@@ -128,5 +132,23 @@
             </foreach>
         </where>
     </delete>
+
+    <!-- 前台根据Category类别ID和Vendor名称进行列表查询 -->
+    <select id="queryVendorFrontList" resultType="com.goodcub.vci.vo.site.VendorListFrontVO" parameterType="java.util.Map">
+        select * from products
+        <where>
+            <if test="cid != null">
+                and cid = #{cid}
+            </if>
+            <if test="name != null">
+                and name like concat('%',#{name},'%')
+            </if>
+        </where>
+    </select>
+
+    <!-- 前台根据Pid查询产品(Vender)详情 -->
+    <select id="queryVendorFrontInfo" resultType="com.goodcub.vci.vo.site.VendorFrontVO" parameterType="java.lang.Integer" >
+		select * from products where pid =  #pid#
+	</select>
 
 </mapper>

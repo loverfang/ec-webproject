@@ -28,10 +28,10 @@ public class EcWebprojectApplication  extends SpringBootServletInitializer {
     public MultipartConfigElement multipartConfigElement(){
         MultipartConfigFactory multipartConfigFactory = new MultipartConfigFactory();
         // 开发Windows环境
-        String location = System.getProperty("user.dir") + "/data/tmp";
+        // String location = System.getProperty("user.dir") + "/data/tmp";
 
         // 发布环境
-        // String location = System.getProperty("user.dir") + "/home/gelanding1gdeqlia4nddbi4nbg/data/tmp";
+        String location = System.getProperty("user.dir") + "/home/quting7qnuntrienmg/wwwroot/data/tmp";
         File file = new File(location);
         if(!file.exists()){
             file.mkdirs();

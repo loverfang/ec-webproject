@@ -1,5 +1,7 @@
 package com.goodcub.vci.vo.site;
 
+import lombok.Data;
+
 /**
  * @ClassName NewsInfoFrontVO
  * @Description TODO
@@ -7,5 +9,6 @@ package com.goodcub.vci.vo.site;
  * @Date 2019/10/117:29
  * @Version 1.0
  */
-public class NewsInfoFrontVO {
+@Data
+public class NewsFrontVO {
 }

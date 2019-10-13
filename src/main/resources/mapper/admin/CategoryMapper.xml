@@ -47,4 +47,22 @@
         select cid, cname from category where cstate = 'NORMAL' and pid= 1 order by sindex asc
     </select>
 
+
+    <!-- 前台查询类别列表 -->
+    <select id="queryCategoryFrontList" resultType="com.goodcub.vci.vo.site.CategoryListFrontVO" parameterType="java.util.Map">
+        select cid, cname from category
+        <where>
+            <if test="pid != null">
+                and pid = #{pid}
+            </if>
+            <if test="cstate != null">
+                and cstate = #{cstate}
+            </if>
+        </where>
+    </select>
+
+    <select id="queryCategoryFrontInfo" resultType="com.goodcub.vci.vo.site.CategoryFrontVO" parameterType="java.lang.Integer">
+        select * from category where cid = #{cid}
+    </select>
+
 </mapper>

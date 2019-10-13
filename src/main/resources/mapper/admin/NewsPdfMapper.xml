@@ -107,4 +107,18 @@
         </where>
     </delete>
 
+
+    <!-- 前台 查询单篇文章类型信息 -->
+    <select id="queryNewsPdfFrontList" resultType="com.goodcub.vci.vo.site.NewsPdfListFrontVO" parameterType="java.util.Map">
+        select * from news_pdf
+        <where>
+            <if test="nid != null">
+                and nid = #{nid}
+            </if>
+            <if test="source != null">
+                and source = #{source}
+            </if>
+        </where>
+    </select>
+
 </mapper>

@@ -79,7 +79,10 @@
 <script type="text/javascript" src="${base}/res/site/js/common_login.js"></script>
 
 <script type="text/javascript">
-    var from = '${ntype}';
+    var from = '';
+    <#if ntype??>
+    from = '${ntype}';
+    </#if>
     if(from != null && from!=''){
         $("[id='"+from+"_1']").addClass("on");
     }else{

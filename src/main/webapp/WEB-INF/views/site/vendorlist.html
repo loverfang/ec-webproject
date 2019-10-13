@@ -1,0 +1,84 @@
+<!DOCTYpE HTML>
+<html>
+<head>
+    <title>Vendors Directory</title>
+    <link href="${base}/res/site/style/default.css" rel="stylesheet" type="text/css">
+    <link href="${base}/res/site/style/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<#include "/site/components/title.html"/>
+<#include "/site/components/navbar.html"/>
+<div class="maincontent pt70"  >
+    <div class="wrap pb20"> <img src="${base}/res/site/images/ven-tit.jpg"  ></div>
+    <div class="wrap f16px lh24 " >
+        <p >We believes in the value of upstream & downstream collaboration in delivering end-to-end supply chain productivity. We help companies improve supply chain performance by connecting them with the most competitive technologies and best partners. In this directory, we look for companies with integrated logistics, transportation, warehousing and distribution capabilities. </p>
+        <br>
+        <p>VCI Vendors Directory listing and advertising is a low cost, simple way to place your company in front of this high quality B2B audience searching for your services, solutions, expertise or equipment.</p>
+        <p class="lanse">Contact <span class="underline"><a href="Mailto:demand@vcintegration.com">demand@vcintegration.com</a></span> to Add Listing</p>
+    </div>
+
+    <div class="seach-area">
+        <div class="fl" >
+            <div class="vendors-all" style="display:none;opacity:0;cursor: pointer;">
+                <ul><#if categoryList??><#list categoryList as item>
+                    <li <#if cid??><#if "cid == item.cid">class="on"</#if></#if> ><a href="/vendors/c${item.cid}/">${item.cname}</a></li></#list></#if>
+                </ul>
+            </div>
+            <div class="xiala-tit"><a href="/vendors/"><img src="${base}/res/site/images/flei.jpg" width="142" height="50" ></a></div>
+        </div>
+
+        <form action="/vendors/" method="post">
+            <input type="hidden" name="cid" value="<#if cid??>${cid}</#if>"/>
+
+            <div class="inp-con">
+                <input type="text" name="name" placeholder="Enter vendor name" class="inp" <#if cname??>value="${cname}"</#if> />
+            </div>
+
+            <div class="btn-con">
+                <input type="submit" value=" "  class="btn" />
+            </div>
+        </form>
+    </div>
+
+    <div class="vendors-list"><#if data??><#if data.items??> <#list data.items as item>
+        <dl>
+            <dt><a href="${item.doman}" target="_blank"><img src="/upload/products/PIC_${item.cid}_${item.pid}.jpg" width="330" height="255"></a></dt>
+            <dd>
+                <article class="f16px lh24 pb50 con">
+                    ${item.intro}
+                </article>
+                <p class="more f16px"><a href="/vendors/id_${item.pid}/" target="_blank"> Read more</a></p>
+            </dd>
+        </dl></#list></#if></#if>
+    </div>
+
+    <div class="wrap">
+      <#if data??><#if data.items??>
+        <@page.pager data.items "vendors" {} 3/>
+      </#if></#if>
+    </div>
+
+</div>
+
+<#include "/site/components/footer.html"/>
+<script type="text/javascript">
+    $(window).load(function(){
+        //显示
+        $(".fl").on("mouseenter",".xiala-tit",function(e){
+            //$(".vendors-all").show();
+            $(".vendors-all").fadeIn(1);
+            $(".vendors-all").animate({opacity:'1'},500);
+            e.stopPropagation();
+        });
+
+        $(".fl").on("mouseleave",function(e){
+            $(".vendors-all").animate({opacity:'0'},500,function(){
+                $(this).hide();
+            });
+            e.stopPropagation();
+        });
+    });
+</script>
+</body>
+</html>

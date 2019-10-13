@@ -5,6 +5,7 @@ import com.goodcub.vci.entity.NewsExt;
 import com.goodcub.vci.entity.NewsPdf;
 import com.goodcub.vci.entity.NewsPhoto;
 import com.goodcub.vci.vo.admin.*;
+import com.goodcub.vci.vo.site.NewsPdfListFrontVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -32,4 +33,7 @@ public interface NewsPdfMapper {
     Integer deleteNewsPdf(Map<String,Object> param);
 
     Integer deleteNewsPdfByPid(@Param("idList") List<Integer> idList);
+
+    List<NewsPdfListFrontVO> queryNewsPdfFrontList(Map<String,Object> params);
+
 }

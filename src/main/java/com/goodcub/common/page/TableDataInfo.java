@@ -12,6 +12,15 @@ public class TableDataInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
+	//当前页
+	private int pageNum;
+
+	//每页的数量
+	private int pageSize;
+
+	//总页数
+	private int pages;
+
 	/** 总记录数 */
 	private long total;
 
@@ -48,5 +57,29 @@ public class TableDataInfo implements Serializable {
 
 	public void setItems(List<?> items) {
 		this.items = items;
+	}
+
+	public int getPageNum() {
+		return pageNum;
+	}
+
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+
+	public int getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public int getPages() {
+		return pages;
+	}
+
+	public void setPages(int pages) {
+		this.pages = pages;
 	}
 }

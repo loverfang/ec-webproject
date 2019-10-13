@@ -6,7 +6,7 @@
     <link href="${base}/res/site/style/style.css" rel="stylesheet" type="text/css">
 </head>
 
-<body>
+<div>
 <#include "/site/components/title.html"/>
 <#include "/site/components/navbar.html"/>
 
@@ -31,7 +31,14 @@
     </div>
 
     <div class="wrap">
-        123 456 789
+      <div class="pages">
+        <#if data??><#if data.items??>
+            <!-- 导入自定义ftl -->
+            <#import "/ftl/page.ftl" as p/>
+            <!-- 使用该标签 -->
+            <@p.pager data "/insights" {} 3/>
+        </#if></#if>
+      </div>
     </div>
 </div>
 <#include "/site/components/footer.html"/>

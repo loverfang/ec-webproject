@@ -10,5 +10,5 @@ import lombok.Data;
  * @Version V1.0
  **/
 @Data
-public class VideosInfoFrontVO extends Videos {
+public class VideosFrontVO extends Videos {
 }

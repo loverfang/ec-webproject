@@ -3,6 +3,8 @@ package com.goodcub.vci.mapper;
 import com.goodcub.vci.entity.Vendor;
 import com.goodcub.vci.vo.admin.VendorInfoVO;
 import com.goodcub.vci.vo.admin.VendorListVO;
+import com.goodcub.vci.vo.site.VendorFrontVO;
+import com.goodcub.vci.vo.site.VendorListFrontVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -26,4 +28,8 @@ public interface VendorMapper {
     VendorInfoVO queryVendorInfoByPid(Integer pid);
 
     Integer deleteVendor(@Param("idList") List<Integer> idList);
+
+    List<VendorListFrontVO> queryVendorFrontList(Map<String,Object> params);
+
+    VendorFrontVO queryVendorFrontInfo(Integer pid);
 }

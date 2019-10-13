@@ -4,8 +4,6 @@ import com.goodcub.common.enums.NewsTypeEnum;
 import com.goodcub.common.page.TableDataInfo;
 import com.goodcub.vci.service.site.AdvertiseFrontService;
 import com.goodcub.vci.service.site.NewsFrontService;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -16,7 +14,7 @@ import java.util.Map;
 
 /**
  * @Author Luo.z.x
- * @Description: TODO
+ * @Description: 网站首页信息
  * @Date 2019/10/9
  * @Version V1.0
  **/
@@ -36,6 +34,7 @@ public class IndexController {
     @RequestMapping({"/","/index"})
     public String home(HttpServletRequest request){
         Map<String, Object> newsParams= new HashMap<String, Object>();
+
         //Insights
         newsParams.put("ntype",  NewsTypeEnum.INSIGHTS);
         TableDataInfo insightsData = newsFrontService.queryNewsFrontList(newsParams,1,3);

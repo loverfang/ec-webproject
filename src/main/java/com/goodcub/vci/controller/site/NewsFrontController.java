@@ -99,7 +99,7 @@ public class NewsFrontController {
         }
 
         if(limit == null || "".equals(limit)){
-            limit = 10;
+            limit = 6;
         }
 
         Map<String,Object> params = new HashMap<>();
@@ -126,7 +126,7 @@ public class NewsFrontController {
         }
 
         if(limit == null || "".equals(limit)){
-            limit = 10;
+            limit = 6;
         }
 
         Map<String,Object> params = new HashMap<>();
@@ -153,7 +153,7 @@ public class NewsFrontController {
         }
 
         if(limit == null || "".equals(limit)){
-            limit = 10;
+            limit = 6;
         }
 
         Map<String,Object> params = new HashMap<>();
@@ -180,7 +180,7 @@ public class NewsFrontController {
         }
 
         if(limit == null || "".equals(limit)){
-            limit = 10;
+            limit = 6;
         }
 
         Map<String,Object> params = new HashMap<>();
@@ -209,7 +209,6 @@ public class NewsFrontController {
         return null;
     }
 
-
     /**
      * Stories 详情
      * @return
@@ -217,6 +216,5 @@ public class NewsFrontController {
     public String storiesDetail(){
         return null;
     }
-
 
 }

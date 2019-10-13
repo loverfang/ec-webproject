@@ -30,7 +30,14 @@
     </div>
 
     <div class="wrap">
-        1 2 3 4 5 6
+        <div class="pages">
+            <#if data??><#if data.items??>
+            <!-- 导入自定义ftl -->
+            <#import "/ftl/page.ftl" as p/>
+            <!-- 使用该标签 -->
+            <@p.pager data "/partners" {} 3/>
+            </#if></#if>
+        </div>
     </div>
 </div>
 

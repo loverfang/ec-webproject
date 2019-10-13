@@ -39,7 +39,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // 设置文件上传的文件不拦截
-        registry.addResourceHandler(PropertiesUtils.getInstance().getStaticAccessPath()).addResourceLocations("file:/"+ PropertiesUtils.getInstance().getUploadFolder() + "upload/");
+        registry.addResourceHandler(PropertiesUtils.getInstance().getStaticAccessPath())
+                .addResourceLocations("file:/home/quting7qnuntrienmg/wwwroot/upload/**");
 
         // addResourceHandler表示页面中使用的路径，addResourceLocations实际存在的文件夹路径/注意区分window与linux
         //指定了静态资源文件的位置

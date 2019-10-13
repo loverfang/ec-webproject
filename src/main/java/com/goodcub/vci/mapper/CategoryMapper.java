@@ -3,6 +3,8 @@ package com.goodcub.vci.mapper;
 import com.goodcub.vci.entity.Category;
 import com.goodcub.vci.vo.admin.CategoryOptionsVO;
 import com.goodcub.vci.vo.admin.CategoryVO;
+import com.goodcub.vci.vo.site.CategoryFrontVO;
+import com.goodcub.vci.vo.site.CategoryListFrontVO;
 
 import java.util.List;
 import java.util.Map;
@@ -42,4 +44,19 @@ public interface CategoryMapper {
      * @return
      */
     List<CategoryOptionsVO> queryCategoryOptions();
+
+    /**
+     * 前台 -- 查询类别列表信息
+     * @param params
+     * @return
+     */
+    List<CategoryListFrontVO> queryCategoryFrontList(Map<String,Object> params);
+
+    /**
+     * 前台 -- 查询类别详情信息
+     * @param cid
+     * @return
+     */
+    CategoryFrontVO queryCategoryFrontInfo(Integer cid);
+
 }

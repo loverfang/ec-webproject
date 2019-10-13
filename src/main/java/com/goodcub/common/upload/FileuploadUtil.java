@@ -213,12 +213,14 @@ public class FileuploadUtil {
             result.setFileSize(file.length());
             result.setFileName(extFileName);
             result.setExtName(extExtName);
-            result.setServerPath( UploadHelper.getServerIPPort() + toFilePath);
+            //result.setServerPath( UploadHelper.getServerIPPort() + toFilePath);
+            result.setServerPath( toFilePath );
         } else {
             result.setFileSize(multipartFile.getSize());
             result.setFileName(fileName);
             result.setExtName(extName);
-            result.setServerPath(UploadHelper.getServerIPPort() + destPath);
+            //result.setServerPath(UploadHelper.getServerIPPort() + destPath);
+            result.setServerPath( destPath );
         }
         return result;
     }
