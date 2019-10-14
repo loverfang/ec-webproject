@@ -12,6 +12,8 @@ import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
@@ -27,6 +29,9 @@ import java.util.List;
  * @Version V1.0
  **/
 public class FileuploadUtil {
+
+    private static final Logger logger = LoggerFactory.getLogger(FileuploadUtil.class);
+
     /**
      * 属性配置
      */
@@ -103,6 +108,7 @@ public class FileuploadUtil {
         // 压缩后的相对路径文件名
         String toFilePath = getDestPath(childFile, extName);
 
+        logger.info("压缩后的相对路径文件名" + toFilePath);
         // scale：图片缩放比例
         // outputQuality：图片压缩比例
         // toFile：图片位置
@@ -113,12 +119,12 @@ public class FileuploadUtil {
             // 由于outputFormat会自动在路径后加上后缀名，所以移除以前的后缀名
             String removeExtensionFilePath = FilenameUtils.removeExtension(toFilePath);
             Thumbnails.of(serverPath).scale(1f)
-                    .outputQuality(0.5f)
+                    .outputQuality(1f)
                     .outputFormat("jpg")
                     .toFile(getServerPath(removeExtensionFilePath));
             toFilePath = removeExtensionFilePath + ".jpg";
         } else {
-            Thumbnails.of(serverPath).scale(1f).outputQuality(0.5f)
+            Thumbnails.of(serverPath).scale(1f).outputQuality(1f)
                     .toFile(getServerPath(toFilePath));
         }
 
@@ -191,6 +197,7 @@ public class FileuploadUtil {
 
         // 文件的实际路径
         String serverPath = getServerPath(destPath);
+        logger.info("文件的实际路径" + serverPath);
 
         // 创建文件
         File destFile = createFile(serverPath);
@@ -205,6 +212,7 @@ public class FileuploadUtil {
             // 图片处理
             String toFilePath = thumbnails(serverPath, childFile, extName);
             // 得到处理后的图片文件对象
+            logger.info("得到处理后的图片文件对象:" + getServerPath(toFilePath));
             File file = new File(getServerPath(toFilePath));
             // 压缩后的文件后缀名
             String extExtName = FilenameUtils.getExtension(toFilePath);
@@ -214,13 +222,13 @@ public class FileuploadUtil {
             result.setFileName(extFileName);
             result.setExtName(extExtName);
             //result.setServerPath( UploadHelper.getServerIPPort() + toFilePath);
-            result.setServerPath( toFilePath );
+            result.setServerPath( "/" + toFilePath );
         } else {
             result.setFileSize(multipartFile.getSize());
             result.setFileName(fileName);
             result.setExtName(extName);
             //result.setServerPath(UploadHelper.getServerIPPort() + destPath);
-            result.setServerPath( destPath );
+            result.setServerPath( "/" + destPath );
         }
         return result;
     }
