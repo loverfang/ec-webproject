@@ -1,14 +1,10 @@
 package com.goodcub.vci.service.site;
 
 import com.goodcub.common.page.TableDataInfo;
-import com.goodcub.vci.entity.News;
-import com.goodcub.vci.entity.NewsExt;
-import com.goodcub.vci.vo.admin.NewsInfoVO;
-import com.goodcub.vci.vo.admin.SingleNewsVO;
-import com.goodcub.vci.vo.site.ArticleFrontVO;
-import com.goodcub.vci.vo.site.PartnerFrontVO;
 
-import java.util.List;
+import com.goodcub.vci.vo.site.ArticleFrontVO;
+import com.goodcub.vci.vo.site.NewsFrontVO;
+
 import java.util.Map;
 
 /**
@@ -45,6 +41,13 @@ public interface NewsFrontService {
     TableDataInfo queryNewsFrontList(Map<String, Object> params, int pageNum, int pageSize);
 
     /**
+     * 根据nid查询信息问信息
+     * @param nid
+     * @return
+     */
+    NewsFrontVO queryNewsFrontInfo(Long nid);
+
+    /**
      * 查询新闻图片列表
      * @param nid
      * @param pageNum
@@ -63,10 +66,10 @@ public interface NewsFrontService {
     TableDataInfo queryNewsPdfList(Long nid, int pageNum, int pageSize);
 
     /**
-     * 根据nid查询信息问信息
+     * 更新新闻被查看次数
      * @param nid
      * @return
      */
-    NewsInfoVO queryNewsInfoByNid(Long nid);
+    Integer updateViewCount(Long nid);
 
 }

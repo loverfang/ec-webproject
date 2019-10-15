@@ -34,9 +34,9 @@ public class VendorFrontController {
     @Resource
     NewsPdfFrontService newsPdfFrontService;
 
-    @GetMapping("/vendors")
-    public String vendorList(HttpServletRequest request,
-        @RequestParam(value = "cid", required = false)Integer cid,
+    @GetMapping({"/vendors","/vendors_search/{cid}/"})
+    public String vendorAllList(HttpServletRequest request,
+        @PathVariable("cid") Integer cid,
         @RequestParam(value = "name", required = false)String name,
         @RequestParam(value = "page", required = false)Integer page,
         @RequestParam(value = "limit", required = false)Integer limit){
@@ -47,12 +47,12 @@ public class VendorFrontController {
 
         // 供应商列表类别,用于页面下拉
         List<CategoryListFrontVO> categoryList = categoryFrontService.queryCategoryFrontList(catoryParam);
-        request.setAttribute("cid", cid);
+        request.setAttribute("cid", null);
         request.setAttribute("categoryList", categoryList);
 
         Map<String,Object> param = new HashMap<String, Object>();
-        param.put("cid", cid);
-        param.put("name", name);
+        param.put("cid", null);
+        param.put("name", null);
 
         // 初始化分页默认数据
         if(page == null || "".equals(page)){
@@ -69,6 +69,42 @@ public class VendorFrontController {
         request.setAttribute("data", tableDataInfo);
         return "site/vendorlist";
     }
+
+//    @GetMapping("/vendors/{cid}/")
+//    public String vendorQueryList(HttpServletRequest request,
+//        @PathVariable("cid") Integer cid,
+//        @RequestParam(value = "name", required = false)String name,
+//        @RequestParam(value = "page", required = false)Integer page,
+//        @RequestParam(value = "limit", required = false)Integer limit){
+//
+//        Map<String,Object> catoryParam = new HashMap<String, Object>();
+//        catoryParam.put("pid", 1);
+//        catoryParam.put("cstate", "NORMAL");
+//
+//        // 供应商列表类别,用于页面下拉
+//        List<CategoryListFrontVO> categoryList = categoryFrontService.queryCategoryFrontList(catoryParam);
+//        request.setAttribute("cid", cid);
+//        request.setAttribute("categoryList", categoryList);
+//
+//        Map<String,Object> param = new HashMap<String, Object>();
+//        param.put("cid", cid);
+//        param.put("name", name);
+//
+//        // 初始化分页默认数据
+//        if(page == null || "".equals(page)){
+//            page = 1;
+//        }
+//
+//        if(limit == null || "".equals(limit)){
+//            limit = 10;
+//        }
+//
+//        // 分页查询出指定类别下的
+//        TableDataInfo tableDataInfo = vendorFrontService.queryVendorFrontList(param, page, limit);
+//
+//        request.setAttribute("data", tableDataInfo);
+//        return "site/vendorlist";
+//    }
 
 
     @GetMapping("/vendors/{pid}.html")

@@ -12,6 +12,7 @@ import com.goodcub.vci.service.admin.NewsService;
 import com.goodcub.vci.service.site.NewsFrontService;
 import com.goodcub.vci.vo.admin.*;
 import com.goodcub.vci.vo.site.ArticleFrontVO;
+import com.goodcub.vci.vo.site.NewsFrontVO;
 import com.goodcub.vci.vo.site.NewsListFrontVO;
 import com.goodcub.vci.vo.site.PartnerFrontVO;
 import org.springframework.stereotype.Service;
@@ -109,8 +110,12 @@ public class NewsFrontServiceImpl implements NewsFrontService {
     }
 
     @Override
-    public NewsInfoVO queryNewsInfoByNid(Long nid) {
-        return newsMapper.queryNewsInfoByNid(nid);
+    public NewsFrontVO queryNewsFrontInfo(Long nid) {
+        return newsMapper.queryNewsFrontInfo(nid);
     }
 
+    @Override
+    public Integer updateViewCount(Long nid) {
+        return newsMapper.updateViewCount(nid);
+    }
 }

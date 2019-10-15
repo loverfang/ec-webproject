@@ -22,7 +22,12 @@
     </div>
     <div style="clear:both;"/>
     <div class=" wrap">
-        11 2223 333
+        <#if data??><#if data.items??>
+        <!-- 导入自定义ftl -->
+        <#import "/ftl/page.ftl" as p/>
+        <!-- 使用该标签 -->
+        <@p.pager data "/insights" {} 3/>
+    </#if></#if>
     </div>
 </div>
 

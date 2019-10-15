@@ -6,6 +6,7 @@ import com.goodcub.vci.entity.NewsPdf;
 import com.goodcub.vci.entity.NewsPhoto;
 import com.goodcub.vci.vo.admin.*;
 import com.goodcub.vci.vo.site.ArticleFrontVO;
+import com.goodcub.vci.vo.site.NewsFrontVO;
 import com.goodcub.vci.vo.site.NewsListFrontVO;
 import com.goodcub.vci.vo.site.PartnerFrontVO;
 import org.apache.commons.logging.Log;
@@ -114,6 +115,8 @@ public interface NewsMapper {
      */
     List<NewsListFrontVO> queryNewsFrontList(Map<String,Object> params);
 
+    NewsFrontVO queryNewsFrontInfo(Long nid);
+
     /**
      * 前台-- 单篇类型的文章信息
      * @param ntype
@@ -128,4 +131,10 @@ public interface NewsMapper {
      */
     List<PartnerFrontVO> queryPartnerFrontList(Map<String,Object> params);
 
+    /**
+     * 更新文章阅读次数
+     * @param nid
+     * @return
+     */
+    Integer updateViewCount(Long nid);
 }

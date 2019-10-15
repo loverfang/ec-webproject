@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: dev
+    active: pro
 
   # Freemarker静态资源配置
   freemarker:
@@ -16,5 +16,4 @@ spring:
     expose-session-attributes: true
     request-context-attribute: request
     suffix: .html
-    allow-session-override: true
 

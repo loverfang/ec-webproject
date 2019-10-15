@@ -3,6 +3,7 @@ package com.goodcub.vci.entity;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.goodcub.common.enums.NewsTypeEnum;
+import com.goodcub.common.enums.RecomendEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -23,7 +24,7 @@ public class News implements Serializable {
     private String title;
     private String content;
     private Integer sindex;
-    private String ifindex;
+    private RecomendEnum ifindex;
     private Integer viewcount;
     private String coverImg;
     private String authorImg;

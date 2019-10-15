@@ -1,8 +1,14 @@
 package com.goodcub.vci.controller.site;
 
+import com.goodcub.common.enums.NewsTypeEnum;
 import com.goodcub.common.page.TableDataInfo;
 import com.goodcub.vci.service.site.NewsFrontService;
+import com.goodcub.vci.service.site.NewsPdfFrontService;
+import com.goodcub.vci.service.site.NewsPhotoFrontService;
+import com.goodcub.vci.vo.site.NewsFrontVO;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -23,6 +29,12 @@ public class NewsFrontController {
 
     @Resource
     NewsFrontService newsFrontService;
+
+    @Resource
+    NewsPdfFrontService newsPdfFrontService;
+
+    @Resource
+    NewsPhotoFrontService newsPhotoFrontService;
 
     /**
      * Aboutus
@@ -171,16 +183,16 @@ public class NewsFrontController {
      */
     @RequestMapping("/stories")
     public String stories(HttpServletRequest request,
-                          @RequestParam(value = "page", required = false)Integer page,
-                          @RequestParam(value = "limit", required = false)Integer limit){
+       @RequestParam(value = "page", required = false)Integer page,
+       @RequestParam(value = "limit", required = false)Integer limit){
 
         // 初始化分页默认数据
         if(page == null || "".equals(page)){
-            page = 1;
+        page = 1;
         }
 
         if(limit == null || "".equals(limit)){
-            limit = 6;
+        limit = 6;
         }
 
         Map<String,Object> params = new HashMap<>();
@@ -192,12 +204,30 @@ public class NewsFrontController {
         return "site/storieslist";
     }
 
-
     /**
      * Insights 详情
      * @return
      */
-    public String insightsDetail(){
+    @GetMapping("/insights/{nid}.html")
+    public String insightsDetail(HttpServletRequest request, @PathVariable("nid") Long nid){
+
+        // 查询详情
+        NewsFrontVO newsDetail = newsFrontService.queryNewsFrontInfo(nid);
+
+        // 更新阅读次数
+        newsFrontService.updateViewCount(nid);
+
+        // 获得新闻对应的PDF文件信息,只取得一条
+        Map<String,Object> param = new HashMap<String,Object>();
+        param.put("nid", newsDetail.getNid());
+        param.put("source", "news");
+        TableDataInfo pdfTableDataInfo = newsPdfFrontService.queryNewsPdfFrontList(param, 1 ,1);
+
+        request.setAttribute("pdfList", pdfTableDataInfo.getItems());
+        request.setAttribute("newsDetail", newsDetail);
+        request.setAttribute("newstype", NewsTypeEnum.INSIGHTS);
+        request.setAttribute("ntype","insights");
+
         return "site/insights_content";
     }
 
@@ -205,16 +235,66 @@ public class NewsFrontController {
      * Events 详情
      * @return
      */
-    public String eventsDetail(){
-        return null;
+    @GetMapping("/events/{nid}.html")
+    public String eventsDetail(HttpServletRequest request, @PathVariable("nid") Long nid){
+
+        // 查询详情
+        NewsFrontVO newsDetail = newsFrontService.queryNewsFrontInfo(nid);
+
+        // 更新阅读次数
+        newsFrontService.updateViewCount(nid);
+
+        // 获得新闻对应的PDF文件信息,只取得一条
+        Map<String,Object> param = new HashMap<String,Object>();
+        param.put("nid", newsDetail.getNid());
+        param.put("source", "news");
+        TableDataInfo pdfTableDataInfo = newsPdfFrontService.queryNewsPdfFrontList(param, 1 ,1);
+
+        request.setAttribute("pdfList", pdfTableDataInfo.getItems());
+        request.setAttribute("newsDetail", newsDetail);
+        request.setAttribute("newstype", NewsTypeEnum.INSIGHTS);
+        request.setAttribute("ntype","insights");
+
+        // 图片列表
+        TableDataInfo photoList = newsPhotoFrontService.queryNewsPhotoFrontList(nid, 1 ,1);
+        request.setAttribute("photos", photoList.getItems());
+
+        // 广告列表
+        // List<NewsAd> adList = CommonDAO.commonQueryForList("news_ad.frontAll", newsDetail.getNid());
+        // request.setAttribute("advertise", adList);
+
+        return "site/events_content";
     }
 
     /**
      * Stories 详情
      * @return
      */
-    public String storiesDetail(){
-        return null;
+    @GetMapping("/stories/{nid}.html")
+    public String storiesDetail(HttpServletRequest request, @PathVariable("nid") Long nid){
+
+        // 查询详情
+        NewsFrontVO newsDetail = newsFrontService.queryNewsFrontInfo(nid);
+
+        // 更新阅读次数
+        newsFrontService.updateViewCount(nid);
+
+        // 获得新闻对应的PDF文件信息,只取得一条
+        Map<String,Object> param = new HashMap<String,Object>();
+        param.put("nid", newsDetail.getNid());
+        param.put("source", "news");
+        TableDataInfo pdfTableDataInfo = newsPdfFrontService.queryNewsPdfFrontList(param, 1 ,1);
+
+        request.setAttribute("pdfList", pdfTableDataInfo.getItems());
+        request.setAttribute("newsDetail", newsDetail);
+        request.setAttribute("newstype", NewsTypeEnum.INSIGHTS);
+        request.setAttribute("ntype","insights");
+
+        // 图片列表
+        TableDataInfo photoList = newsPhotoFrontService.queryNewsPhotoFrontList(nid, 1 ,1);
+        request.setAttribute("photos", photoList.getItems());
+
+        return "site/stories_content";
     }
 
 }

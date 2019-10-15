@@ -68,6 +68,8 @@
             n.title,
             n.author,
             n.content,
+            n.cover_img,
+            n.author_img,
             n.sindex,
             n.ifindex,
             n.viewcount,
@@ -77,6 +79,7 @@
             n.pdescription,
             n.pkeywords,
             n.pubtime,
+
             e.nlable,
             e.ndigest,
             e.endate,
@@ -217,6 +220,39 @@
         </where>
     </select>
 
+    <!-- 前台的新闻详情查询 -->
+    <select id="queryNewsFrontInfo" parameterType="java.lang.Long" resultType="com.goodcub.vci.vo.site.NewsFrontVO">
+     select
+     n.nid as nid,
+     n.ntype as ntype,
+     n.title as title,
+     n.ifindex as ifindex,
+     n.viewcount asviewcount,
+     n.content as content,
+     n.author as  author,
+     n.ptitle as ptitle,
+     n.pkeywords as pkeywords,
+     n.pdescription as pdescription,
+
+     ext.nlable as nlable,
+     ext.endate as endate,
+     ext.province as province,
+     ext.city as city,
+     ext.ndigest as ndigest,
+     ext.video as video,
+     ext.txt1 as txt1,
+     ext.txt2 as txt2,
+     ext.txt3 as txt3,
+     ext.txt4 as txt4,
+     ext.txt5 as txt5,
+     ext.txt6 as txt6
+
+     from news as n
+       inner join news_ext as ext on ext.nid = n.nid
+     where
+       n.nid = #{nid}
+    </select>
+
     <!-- 前台的单篇内容 -->
     <select id="queryArticleFrontInfo" parameterType="java.lang.String" resultType="com.goodcub.vci.vo.site.ArticleFrontVO">
         select
@@ -243,5 +279,11 @@
         where
            ntype = #{ntype}
     </select>
+
+    <!-- 更新文章阅读次数 -->
+    <update id="updateViewCount" parameterType="java.lang.Long">
+		update news set viewcount = viewcount+1
+		where nid = #{nid}
+	</update>
 
 </mapper>

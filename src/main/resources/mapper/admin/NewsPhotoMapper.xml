@@ -88,4 +88,8 @@
         </where>
     </delete>
 
+    <select id="queryNewsPhotoFrontList" resultType="com.goodcub.vci.vo.site.NewsPhotoListFrontVO" parameterType="java.lang.Long" >
+		select * from news_photos where nid = #{nid}
+	</select>
+
 </mapper>

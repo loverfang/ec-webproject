@@ -94,7 +94,7 @@ public class NewsServiceImpl implements NewsService {
         // 默认排序索引
         news.setSindex(1);
         // 默认不推荐/置顶
-        news.setIfindex(RecomendEnum.FAILER.getCode());
+        news.setIfindex(RecomendEnum.N);
         news.setViewcount(0);
         newsMapper.insertNews(news);
 

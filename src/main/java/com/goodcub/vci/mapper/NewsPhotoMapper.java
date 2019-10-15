@@ -2,6 +2,7 @@ package com.goodcub.vci.mapper;
 
 import com.goodcub.vci.entity.NewsPhoto;
 import com.goodcub.vci.vo.admin.NewsPhotoListVO;
+import com.goodcub.vci.vo.site.NewsPhotoListFrontVO;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -30,4 +31,6 @@ public interface NewsPhotoMapper {
     Integer deleteNewsPhoto(@Param("idList") List<Integer> idList);
 
     Integer deleteNewsPhotoByPid(@Param("idList") List<Integer> idList);
+
+    List<NewsPhotoListFrontVO> queryNewsPhotoFrontList(Long nid);
 }

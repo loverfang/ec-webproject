@@ -16,7 +16,7 @@
     <div class="insights-list">
         <ul><#if data??><#if data.items??> <#list data.items as item>
             <li>
-                <a href="/insights/id_${item.nid}" target="_blank">
+                <a href="/insights/${item.nid?c}.html" target="_blank">
                     <article class="leftcon">
                         <p class="tit">${item.nlable}</p>
                         <p class="tit-2">${item.title}</p>
@@ -36,7 +36,7 @@
             <!-- 导入自定义ftl -->
             <#import "/ftl/page.ftl" as p/>
             <!-- 使用该标签 -->
-            <@p.pager data "/insights" {} 3/>
+            <@p.pager data "/stories" {} 3/>
         </#if></#if>
       </div>
     </div>
