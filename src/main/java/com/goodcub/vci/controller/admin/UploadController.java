@@ -34,7 +34,7 @@ public class UploadController {
     @PostMapping("/uploadFile")
     @ResponseBody
     public JsonResult uploadFile(@RequestParam("file")MultipartFile file) throws IOException {
-        return JsonResult.success(FileuploadUtil.saveFile(file, "/upload/files/" + DateUtil.parseDateToStr(DateUtil.YYYYMM, new Date()), PropertiesUtils.getInstance().getFileExtension()));
+        return JsonResult.success(FileuploadUtil.saveFile(file, "upload/files/" + DateUtil.parseDateToStr(DateUtil.YYYYMM, new Date()), PropertiesUtils.getInstance().getFileExtension()));
     }
 
     /**
@@ -46,7 +46,7 @@ public class UploadController {
     @PostMapping("/uploadImage")
     @ResponseBody
     public JsonResult uploadImage(@RequestParam("file")MultipartFile file) throws IOException {
-        return JsonResult.success(FileuploadUtil.saveImage(file, "/upload/images/" + DateUtil.parseDateToStr(DateUtil.YYYYMM, new Date()), PropertiesUtils.getInstance().getImageExtension()));
+        return JsonResult.success(FileuploadUtil.saveImage(file, "upload/images/" + DateUtil.parseDateToStr(DateUtil.YYYYMM, new Date()), PropertiesUtils.getInstance().getImageExtension()));
     }
 
     /**
@@ -58,6 +58,6 @@ public class UploadController {
     @PostMapping("/uploadEditorImage")
     @ResponseBody
     public JsonResult uploadEditorImage(@RequestParam("file")MultipartFile file) throws IOException {
-        return JsonResult.success(FileuploadUtil.saveImage(file, "/upload/editor/" + DateUtil.parseDateToStr(DateUtil.YYYYMM, new Date()), PropertiesUtils.getInstance().getImageExtension()));
+        return JsonResult.success(FileuploadUtil.saveImage(file, "upload/editor/" + DateUtil.parseDateToStr(DateUtil.YYYYMM, new Date()), PropertiesUtils.getInstance().getImageExtension()));
     }
 }

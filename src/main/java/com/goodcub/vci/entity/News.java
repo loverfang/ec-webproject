@@ -23,7 +23,7 @@ public class News implements Serializable {
     private String title;
     private String content;
     private Integer sindex;
-    private Integer ifindex;
+    private String ifindex;
     private Integer viewcount;
     private String coverImg;
     private String authorImg;
