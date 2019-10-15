@@ -10,6 +10,7 @@ import com.goodcub.vci.vo.site.VendorFrontVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
@@ -34,9 +35,9 @@ public class VendorFrontController {
     @Resource
     NewsPdfFrontService newsPdfFrontService;
 
-    @GetMapping({"/vendors","/vendors_search/{cid}/"})
+    @RequestMapping("/vendors")
     public String vendorAllList(HttpServletRequest request,
-        @PathVariable("cid") Integer cid,
+        @RequestParam(value = "cid", required = false)Integer cid,
         @RequestParam(value = "name", required = false)String name,
         @RequestParam(value = "page", required = false)Integer page,
         @RequestParam(value = "limit", required = false)Integer limit){
@@ -47,12 +48,9 @@ public class VendorFrontController {
 
         // 供应商列表类别,用于页面下拉
         List<CategoryListFrontVO> categoryList = categoryFrontService.queryCategoryFrontList(catoryParam);
-        request.setAttribute("cid", null);
+        request.setAttribute("cid", cid);
         request.setAttribute("categoryList", categoryList);
 
-        Map<String,Object> param = new HashMap<String, Object>();
-        param.put("cid", null);
-        param.put("name", null);
 
         // 初始化分页默认数据
         if(page == null || "".equals(page)){
@@ -62,6 +60,10 @@ public class VendorFrontController {
         if(limit == null || "".equals(limit)){
             limit = 10;
         }
+
+        Map<String,Object> param = new HashMap<String, Object>();
+        param.put("cid", cid);
+        param.put("name", name);
 
         // 分页查询出指定类别下的
         TableDataInfo tableDataInfo = vendorFrontService.queryVendorFrontList(param, page, limit);

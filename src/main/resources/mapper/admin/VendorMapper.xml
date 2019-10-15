@@ -137,10 +137,10 @@
     <select id="queryVendorFrontList" resultType="com.goodcub.vci.vo.site.VendorListFrontVO" parameterType="java.util.Map">
         select * from products
         <where>
-            <if test="cid != null">
+            <if test="cid != null and cid !=''">
                 and cid = #{cid}
             </if>
-            <if test="name != null">
+            <if test="name != null and name !=''">
                 and name like concat('%',#{name},'%')
             </if>
         </where>

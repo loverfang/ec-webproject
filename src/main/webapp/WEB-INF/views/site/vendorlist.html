@@ -22,13 +22,13 @@
         <div class="fl" >
             <div class="vendors-all" style="display:none;opacity:0;cursor: pointer;">
                 <ul><#if categoryList??><#list categoryList as item>
-                    <li <#if cid??><#if (cid == item.cid)>class="on"</#if></#if> ><a href="/vendors/${item.cid}/">${item.cname}</a></li></#list></#if>
+                    <li <#if cid??> <#if item.cid == cid>class="on"</#if> </#if>><a href="/vendors?cid=${item.cid}">${item.cname}</a></li></#list></#if>
                 </ul>
             </div>
             <div class="xiala-tit"><a href="/vendors/"><img src="${base}/res/site/images/flei.jpg" width="142" height="50" ></a></div>
         </div>
 
-        <form action="/vendors_search/" method="post">
+        <form action="/vendors/" method="get">
             <input type="hidden" name="cid" value="<#if cid??>${cid}</#if>"/>
 
             <div class="inp-con">
@@ -58,7 +58,7 @@
             <!-- 导入自定义ftl -->
             <#import "/ftl/page.ftl" as p/>
             <!-- 使用该标签 -->
-            <@p.pager data "/vendor" {} 3/>
+            <@p.pager data "/vendors" {} 3/>
         </#if></#if>
     </div>
 
