@@ -53,7 +53,7 @@ public class NewsPdfServiceImpl implements NewsPdfService {
 
     @Override
     public Integer deleteNewsPdf(Map<String, Object> param) {
-        return newsPdfMapper.deleteNewsPdf(param);
+        return newsPdfMapper.deleteNewsPdfByNid(param);
     }
 
     @Override

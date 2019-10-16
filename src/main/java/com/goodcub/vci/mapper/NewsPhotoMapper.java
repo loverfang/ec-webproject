@@ -28,7 +28,7 @@ public interface NewsPhotoMapper {
 
     Integer updateNewsPhoto(NewsPhoto newsPhoto);
 
-    Integer deleteNewsPhoto(@Param("idList") List<Integer> idList);
+    Integer deleteNewsPhotoByNid(@Param("idList") List<Long> idList);
 
     Integer deleteNewsPhotoByPid(@Param("idList") List<Integer> idList);
 

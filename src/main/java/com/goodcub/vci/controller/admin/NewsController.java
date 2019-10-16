@@ -30,7 +30,7 @@ public class NewsController {
     @Resource
     NewsService newsService;
 
-    // 根据ntype加载新闻列表
+    // 通用的根据ntype加载新闻列表
     @GetMapping("/newsList")
     @ResponseBody
     public JsonResult queryNewsList(
@@ -48,28 +48,6 @@ public class NewsController {
         param.put("title",title);
         return JsonResult.success(newsService.queryNewsList(param, page, limit));
     }
-//
-//    // 根据新闻ID加载图片列表
-//    @GetMapping("/newsImgList")
-//    @ResponseBody
-//    public JsonResult queryNewsImgList(
-//            @RequestParam(value = "nid", required = false)Long nid,
-//            @RequestParam(value = "page", required = false)Integer page,
-//            @RequestParam(value = "limit", required = false)Integer limit){
-//
-//        return JsonResult.success(newsService.queryNewsImgList(nid, page, limit));
-//    }
-//
-//    // 根据新闻ID加载PDF文件列表
-//    @GetMapping("/newsPdfList")
-//    @ResponseBody
-//    public JsonResult queryNewsPdfList(
-//            @RequestParam(value = "nid", required = false)Long nid,
-//            @RequestParam(value = "page", required = false)Integer page,
-//            @RequestParam(value = "limit", required = false)Integer limit){
-//
-//        return JsonResult.success(newsService.queryNewsPdfList(nid, page, limit));
-//    }
 
     // 通用的修改新闻排序索引
     @PostMapping("/updateNewsSindex")
@@ -83,7 +61,7 @@ public class NewsController {
         return JsonResult.success();
     }
 
-    // 删除新闻信息：删除新闻基本信息,扩展信息,图片信息,pdf信息
+    // 删除新闻信息: 删除新闻基本信息,扩展信息,图片信息,pdf信息
     @PostMapping("/deleteAllNews")
     @ResponseBody
     public JsonResult delete(@RequestBody Map<String,Object> data){
@@ -97,11 +75,11 @@ public class NewsController {
         String[] idsArr = ids_str.split(",");
         // 根据自己的后台逻辑，调用service的方法，我就不写了
 
-        List<Integer> idList = new ArrayList<>();
+        List<Long> idList = new ArrayList<>();
         if(idsArr != null && idsArr.length>0){
             for (String id: idsArr){
                 if(id!=null) {
-                    idList.add(Integer.valueOf(id));
+                    idList.add(Long.valueOf(id));
                 }
             }
         }
@@ -110,8 +88,7 @@ public class NewsController {
         return JsonResult.success();
     }
 
-
-    // 查询新闻详情信息
+    // 通用的查询新闻详情信息
     @GetMapping("/newsInfo")
     @ResponseBody
     public JsonResult queryNewsInfo(Long nid){
@@ -171,5 +148,14 @@ public class NewsController {
         newsService.updateNews(news, newsExt);
         return JsonResult.success();
     }
+
+    // 添加events
+    // 修改events
+
+    // 添加partner
+    // 修改partner
+
+    // 添加stories
+    // 修改stories
 
 }

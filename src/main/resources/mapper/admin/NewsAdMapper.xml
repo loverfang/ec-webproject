@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.goodcub.vci.mapper.NewsAdMapper">
+
+    <insert id="saveNewsAd" parameterType="com.goodcub.vci.entity.NewsAd" >
+        insert into news_ad(nid, title, link, state, uptime)
+        values(#{nid:BIGINT},#{title:VARCHAR},#{link:VARCHAR},#{state:INTEGER},#{uptime:TIMESTAMP})
+    </insert>
+
+    <select id="queryNewsAdList" resultType="com.goodcub.vci.vo.admin.NewsAdListVO" parameterType="java.util.Map" >
+        select * from news_ad
+        <where>
+            <if test="nid != null">
+                nid = #{nid}
+            </if>
+            <if test="title != null">
+                title like concat('%',#{title},'%')
+            </if>
+        </where>
+        order by uptime desc
+    </select>
+
+    <update id="updateNewsAd" parameterType="com.goodcub.vci.entity.NewsAd" >
+        update news_ad
+        <set>
+            <if test="title != null">
+                title = #{title:VARCHAR}
+            </if>
+            <if test="link!= null">
+                link = #link:VARCHAR#
+            </if>
+            <if test="state!= null">
+                state = #state:INTEGER#
+            </if>
+        </set>
+        where id = #{id:INTEGER}
+    </update>
+
+    <!-- 根据nid和source删除某篇文章下的所有pdf信息 -->
+    <delete id="deleteNewsAdByNid" parameterType="java.util.Map">
+        delete from news_ad
+        <where>
+            nid in
+            <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </delete>
+
+    <delete id="deleteNewsAdById" parameterType="java.util.List">
+        delete from news_ad
+        <where>
+            id in
+            <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </delete>
+
+    <!-- 前台查询NewsAd列表 -->
+    <select id="queryNewsAdFrontList" resultType="com.goodcub.vci.vo.site.NewsAdListFrontVO" parameterType="java.lang.Integer" >
+        select id,nid,link from news_ad where nid = #{nid}
+    </select>
+
+
+</mapper>

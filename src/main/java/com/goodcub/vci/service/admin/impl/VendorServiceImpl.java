@@ -69,7 +69,7 @@ public class VendorServiceImpl implements VendorService {
         result = vendorMapper.deleteVendor((List<Integer>)param.get("idList"));
 
         // 删除vendor对应的pdf文件记录
-        newsPdfMapper.deleteNewsPdf(param);
+        newsPdfMapper.deleteNewsPdfByNid(param);
 
         // 删除对应的文件信息,或者统一交由一个定时器来处理,文件夹下不用的图片信息
         return result;

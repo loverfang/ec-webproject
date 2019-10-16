@@ -51,7 +51,7 @@ public interface NewsPhotoService {
      * @param idList
      * @return
      */
-    Integer deleteNewsPhoto(List<Integer> idList);
+    Integer deleteNewsPhoto(List<Long> idList);
 
     /**
      * 根据Photo的idList直接删除选中的Photo文件信息

@@ -30,7 +30,7 @@ public interface NewsPdfMapper {
 
     Integer updateNewsPdf(NewsPdf newsPdf);
 
-    Integer deleteNewsPdf(Map<String,Object> param);
+    Integer deleteNewsPdfByNid(Map<String,Object> param);
 
     Integer deleteNewsPdfByPid(@Param("idList") List<Integer> idList);
 

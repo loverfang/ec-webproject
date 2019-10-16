@@ -8,16 +8,22 @@ import com.goodcub.common.utils.DateUtil;
 import com.goodcub.vci.entity.Members;
 import com.goodcub.vci.entity.News;
 import com.goodcub.vci.entity.NewsExt;
+import com.goodcub.vci.mapper.NewsAdMapper;
 import com.goodcub.vci.mapper.NewsMapper;
+import com.goodcub.vci.mapper.NewsPdfMapper;
+import com.goodcub.vci.mapper.NewsPhotoMapper;
 import com.goodcub.vci.service.admin.NewsService;
 import com.goodcub.vci.vo.admin.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,8 +36,18 @@ import java.util.Map;
 @Service
 public class NewsServiceImpl implements NewsService {
 
+    private static final Logger logger = LoggerFactory.getLogger(NewsServiceImpl.class);
     @Resource
     NewsMapper newsMapper;
+
+    @Resource
+    NewsPhotoMapper newsPhotoMapper;
+
+    @Resource
+    NewsPdfMapper newsPdfMapper;
+
+    @Resource
+    NewsAdMapper newsAdMapper;
 
     @Override
     public SingleNewsVO querySingleNews(String ntype) {
@@ -116,18 +132,28 @@ public class NewsServiceImpl implements NewsService {
 
     @Override
     @Transactional
-    public Integer deleteNews(List<Integer> idList) {
+    public Integer deleteNews(List<Long> idList) {
+        Integer base_count = 0;
+        Integer ext_count = 0;
+        Integer photo_count = 0;
+        Integer pdf_count = 0;
+        Integer ad_count = 0;
 
         // 1新闻基本信息
-
+        base_count = newsMapper.deleteNewsByNids(idList);
         // 2新闻扩展信息
-
+        ext_count = newsMapper.deleteNewsExtByNids(idList);
         // 3新闻图片信息
-
+        photo_count = newsPhotoMapper.deleteNewsPhotoByNid(idList);
         // 4新闻PDF信息
+        Map<String,Object> param = new HashMap<>();
+        param.put("source","news");
+        param.put("idList",idList);
+        pdf_count = newsPdfMapper.deleteNewsPdfByNid(param);
 
         // 5新闻广告信息
-
-        return null;
+        ad_count = newsAdMapper.deleteNewsAdByNid(idList);
+        logger.info("成功删除,基本信息{}条,扩展{}条,图片{}条,PDF{}条,广告{}条!", base_count, ext_count, photo_count, pdf_count, ad_count);
+        return base_count;
     }
 }

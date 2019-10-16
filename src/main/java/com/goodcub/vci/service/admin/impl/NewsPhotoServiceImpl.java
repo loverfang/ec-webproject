@@ -93,8 +93,8 @@ public class NewsPhotoServiceImpl implements NewsPhotoService {
     }
 
     @Override
-    public Integer deleteNewsPhoto(List<Integer> idList) {
-        return newsPhotoMapper.deleteNewsPhoto(idList);
+    public Integer deleteNewsPhoto(List<Long> idList) {
+        return newsPhotoMapper.deleteNewsPhotoByNid(idList);
     }
 
     @Override

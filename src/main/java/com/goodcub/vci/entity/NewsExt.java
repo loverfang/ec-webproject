@@ -2,6 +2,8 @@ package com.goodcub.vci.entity;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @ClassName NewsExt
  * @Description TODO
@@ -10,7 +12,7 @@ import lombok.Data;
  * @Version 1.0
  */
 @Data
-public class NewsExt {
+public class NewsExt implements Serializable {
     private Long nid;
     private String nlable;//新闻类别或新闻标签',
     private String ndigest;//新闻摘要',

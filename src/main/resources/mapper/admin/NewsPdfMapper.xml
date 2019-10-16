@@ -82,7 +82,7 @@
     </update>
 
     <!-- 根据nid和source删除某篇文章下的所有pdf信息 -->
-    <delete id="deleteNewsPdf" parameterType="java.util.Map">
+    <delete id="deleteNewsPdfByNid" parameterType="java.util.Map">
         delete from news_pdf
         <where>
             <if test="source != null">

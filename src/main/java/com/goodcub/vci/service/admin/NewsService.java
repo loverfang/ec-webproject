@@ -92,5 +92,5 @@ public interface NewsService {
      * @param idList
      * @return
      */
-    Integer deleteNews(List<Integer> idList);
+    Integer deleteNews(List<Long> idList);
 }

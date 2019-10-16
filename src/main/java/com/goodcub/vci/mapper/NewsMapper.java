@@ -11,6 +11,7 @@ import com.goodcub.vci.vo.site.NewsListFrontVO;
 import com.goodcub.vci.vo.site.PartnerFrontVO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -107,7 +108,23 @@ public interface NewsMapper {
      */
     Integer batchInsertPdfList(List<NewsPdf> photoList);
 
+    /**
+     * 批量删除新闻信息
+     * @param idList
+     * @return
+     */
+    Integer deleteNewsByNids(@Param("idList") List<Long> idList);
 
+    /**
+     * 批量删除新闻扩展信息
+     * @param idList
+     * @return
+     */
+    Integer deleteNewsExtByNids(@Param("idList") List<Long> idList);
+
+    ////////////////////////////////////////////////////后台方法到此为止/////////////////////////////////////////////
+
+    ////////////////////////////////////////////////////前台方法从此开始/////////////////////////////////////////////
     /**
      * 前台--根据新闻类型查询不同类型下的新闻列表
      * @param params

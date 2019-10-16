@@ -68,7 +68,7 @@
     </update>
 
     <!-- 根据nid删除某篇文章下的所有图片信息 -->
-    <delete id="deleteNewsPhoto" parameterType="java.util.List">
+    <delete id="deleteNewsPhotoByNid" parameterType="java.util.List">
         delete from news_photos
         <where>
             nid in
