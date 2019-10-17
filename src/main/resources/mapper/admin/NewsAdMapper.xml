@@ -50,7 +50,7 @@
         </where>
     </delete>
 
-    <delete id="deleteNewsAdById" parameterType="java.util.List">
+    <delete id="deleteNewsAdByAid" parameterType="java.util.List">
         delete from news_ad
         <where>
             id in

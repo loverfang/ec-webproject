@@ -32,7 +32,7 @@ public interface NewsAdMapper {
 
     Integer deleteNewsAdByNid(@Param("idList") List<Long> idList);
 
-    Integer deleteNewsAdById(@Param("idList") List<Integer> idList);
+    Integer deleteNewsAdByAid(@Param("idList") List<Integer> idList);
 
     /**
      * 前台--查询新闻列表下的广告信息

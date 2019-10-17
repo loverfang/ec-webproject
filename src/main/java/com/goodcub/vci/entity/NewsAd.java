@@ -1,5 +1,6 @@
 package com.goodcub.vci.entity;
 
+import com.goodcub.common.enums.StatusEnum;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -15,7 +16,8 @@ public class NewsAd implements Serializable {
   private Integer id;
   private Long nid;
   private String title;
+  private String coverImg;
   private String link;
-  private String state;
+  private StatusEnum state;
   private String uptime;
 }
