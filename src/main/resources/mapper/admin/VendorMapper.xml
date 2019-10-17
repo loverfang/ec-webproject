@@ -18,10 +18,6 @@
         </where>
     </select>
 
-
-
-
-
     <select id="queryVendorInfoByPid" resultType="com.goodcub.vci.vo.admin.VendorInfoVO">
         select * from products where pid= #{pid}
     </select>
@@ -132,6 +128,10 @@
             </foreach>
         </where>
     </delete>
+
+    <select id="countTotal" resultType="java.lang.Integer">
+        select count(1) from products
+    </select>
 
     <!-- 前台根据Category类别ID和Vendor名称进行列表查询 -->
     <select id="queryVendorFrontList" resultType="com.goodcub.vci.vo.site.VendorListFrontVO" parameterType="java.util.Map">

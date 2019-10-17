@@ -37,4 +37,10 @@ public interface MemberService {
      * @return
      */
     JsonResult updateMember(Members members);
+
+    /**
+     * 统计总会员数
+     * @return
+     */
+    Integer countTotal();
 }

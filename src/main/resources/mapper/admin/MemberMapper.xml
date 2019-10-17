@@ -15,6 +15,11 @@
         </where>
     </select>
 
+    <!-- 查询用户首页列表 -->
+    <select id="queryMembersIndexList" resultType="com.goodcub.vci.vo.admin.MembersVO" parameterType="java.util.Map">
+        select * from vci_member
+    </select>
+
     <!-- 是否有指定用户名 -->
     <select id="usernameIsExist" resultType="java.lang.Integer">
         select count(1) from vci_member where username = #{username}
@@ -186,6 +191,10 @@
     <select id="queryOneByMemid" resultType="com.goodcub.vci.vo.admin.MembersVO">
         select * from vci_member
         where memid = #{memid:INTEGER}
+    </select>
+
+    <select id="countTotal" resultType="java.lang.Integer">
+        select count(1) from vci_member
     </select>
 
     <!-- 根据邮箱获得用户信息 -->

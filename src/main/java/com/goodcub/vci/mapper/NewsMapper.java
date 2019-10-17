@@ -46,6 +46,13 @@ public interface NewsMapper {
     List<NewsListVO> queryNewsList(Map<String,Object> params);
 
     /**
+     * 后台首页统计新闻列表
+     * @param params
+     * @return
+     */
+    List<NewsListVO> queryNewsAdminIndexList(Map<String,Object> params);
+
+    /**
      * 保存新闻基础信息
      * @param news
      * @return
@@ -122,6 +129,7 @@ public interface NewsMapper {
      */
     Integer deleteNewsExtByNids(@Param("idList") List<Long> idList);
 
+    Integer countTotal();
     ////////////////////////////////////////////////////后台方法到此为止/////////////////////////////////////////////
 
     ////////////////////////////////////////////////////前台方法从此开始/////////////////////////////////////////////

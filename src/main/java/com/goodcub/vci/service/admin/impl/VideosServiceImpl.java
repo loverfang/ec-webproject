@@ -44,6 +44,12 @@ public class VideosServiceImpl implements VideosService {
         return tableDataInfo;
     }
 
+
+    @Override
+    public Integer countTotal() {
+        return videosMapper.countTotal();
+    }
+
     @Override
     public Integer saveVideos(Videos videos) {
         return videosMapper.insertVideos(videos);

@@ -47,6 +47,11 @@ public class VendorServiceImpl implements VendorService {
     }
 
     @Override
+    public Integer countTotal() {
+        return vendorMapper.countTotal();
+    }
+
+    @Override
     public Integer insertVendor(Vendor vendor) {
         return vendorMapper.insertVendor(vendor);
     }

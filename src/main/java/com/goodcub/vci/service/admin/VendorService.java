@@ -32,6 +32,8 @@ public interface VendorService {
     VendorInfoVO queryVendorInfoByPid(Integer pid);
 
     Integer deleteVendor(Map<String,Object> param);
+
+    Integer countTotal();
 }
 
 

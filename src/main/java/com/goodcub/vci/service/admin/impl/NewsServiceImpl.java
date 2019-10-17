@@ -88,6 +88,11 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
+    public Integer countTotal() {
+        return newsMapper.countTotal();
+    }
+
+    @Override
     public TableDataInfo queryNewsPdfList(Long nid, int pageNum, int pageSize) {
         PageHelper.startPage(pageNum,pageSize,"sindex asc");
         List<NewsPdfVO> newsPdfList = newsMapper.queryPdfByNid(nid);

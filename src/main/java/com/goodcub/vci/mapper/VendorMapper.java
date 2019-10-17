@@ -32,4 +32,6 @@ public interface VendorMapper {
     List<VendorListFrontVO> queryVendorFrontList(Map<String,Object> params);
 
     VendorFrontVO queryVendorFrontInfo(Integer pid);
+
+    Integer countTotal();
 }

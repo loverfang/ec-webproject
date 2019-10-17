@@ -23,4 +23,5 @@ public interface VideosService {
 
     Integer deleteVideos(List<Integer> idList);
 
+    Integer countTotal();
 }

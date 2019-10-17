@@ -14,6 +14,10 @@
         </where>
     </select>
 
+    <select id="queryVideosIndexList" resultType="com.goodcub.vci.vo.admin.VideosListVO" parameterType="java.util.Map">
+        select * from videos
+    </select>
+
     <insert id="insertVideos" parameterType="com.goodcub.vci.entity.Videos" >
         insert into videos(vid, title, vurl, cover_img, needcount, memo, sindex, viewcount, addtime)
         values(
@@ -67,6 +71,10 @@
         </foreach>
     </delete>
 
+    <select id="countTotal" resultType="java.lang.Integer">
+        select count(1) from videos
+    </select>
+    
     <!-- 前台视频列表 -->
     <select id="queryFrontVideosList" resultType="com.goodcub.vci.vo.site.VideosListFrontVO" parameterType="java.util.Map" >
         select * from videos

@@ -93,4 +93,10 @@ public interface NewsService {
      * @return
      */
     Integer deleteNews(List<Long> idList);
+
+    /**
+     * 统计instghts, events, stories总数
+     * @return
+     */
+    Integer countTotal();
 }

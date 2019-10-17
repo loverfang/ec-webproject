@@ -24,6 +24,12 @@ public interface VideosMapper {
      * @return
      */
     List<VideosListVO> queryVideosList(Map<String, Object> params);
+    /**
+     * 查询后台首页视频列表
+     * @param params
+     * @return
+     */
+    List<VideosListVO> queryVideosIndexList(Map<String, Object> params);
 
     Integer insertVideos(Videos videos);
 
@@ -31,6 +37,7 @@ public interface VideosMapper {
 
     Integer deleteVideos(@Param("idList") List<Integer> idList);
 
+    Integer countTotal();
 
 
     List<VideosListFrontVO> queryFrontVideosList(Map<String, Object> params);

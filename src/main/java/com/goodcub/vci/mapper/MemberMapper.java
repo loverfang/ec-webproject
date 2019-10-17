@@ -18,6 +18,8 @@ public interface MemberMapper {
 
     List<Members> queryMembersList(Map<String, Object> params);
 
+    List<Members> queryMembersIndexList(Map<String, Object> params);
+
     Integer usernameIsExist(Map<String, Object> params);
 
     Integer emailIsExist(Map<String, Object> params);
@@ -36,6 +38,7 @@ public interface MemberMapper {
 
     Integer updatePasswordByEmail(String email);
 
+    Integer countTotal();
     /**
      * 判断是否存在username或email或phone的用户记录
      *

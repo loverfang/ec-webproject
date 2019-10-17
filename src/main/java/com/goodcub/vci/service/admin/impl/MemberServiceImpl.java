@@ -44,6 +44,11 @@ public class MemberServiceImpl implements MemberService {
     }
 
     @Override
+    public Integer countTotal() {
+        return memberMapper.countTotal();
+    }
+
+    @Override
     public JsonResult insertMember(Members members) {
 
         Map<String,Object> params = new HashMap<>();
