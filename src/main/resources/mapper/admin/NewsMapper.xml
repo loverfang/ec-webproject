@@ -95,7 +95,7 @@
             e.txt6
         from
           news as n
-          inner join news_ext as e on n.nid = e.nid
+          left join news_ext as e on n.nid = e.nid
         <where>
             n.nid = #{nid}
         </where>

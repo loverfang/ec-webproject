@@ -95,7 +95,6 @@ public class NewsController {
         return JsonResult.success(newsService.queryNewsInfoByNid(nid));
     }
 
-
     // 添加Insights
     @PostMapping("/createInsights")
     @ResponseBody
@@ -152,10 +151,106 @@ public class NewsController {
     // 添加events
     // 修改events
 
-    // 添加partner
-    // 修改partner
+    // 添加Partner
+    @PostMapping("/createPartner")
+    @ResponseBody
+    public JsonResult createPartner(@RequestBody NewsInfoVO newsInfoVO){
+        News news = new News();
+        Long newId = new IdWorker().nextId();
+        news.setNid(newId);
+        news.setNtype(newsInfoVO.getNtype());
+        news.setAuthor(newsInfoVO.getAuthor());
+        news.setTitle(newsInfoVO.getTitle());
+        news.setContent(newsInfoVO.getContent());
+        news.setCoverImg(newsInfoVO.getCoverImg());
+        news.setPtitle(newsInfoVO.getPtitle());
+        news.setPkeywords(newsInfoVO.getPkeywords());
+        news.setPdescription(newsInfoVO.getPdescription());
 
-    // 添加stories
-    // 修改stories
+        newsService.insertNews(news, null);
+        return JsonResult.success();
+    }
+
+    // 修改partner
+    @PostMapping("/updatePartner")
+    @ResponseBody
+    public JsonResult updatePartner(@RequestBody NewsInfoVO newsInfoVO){
+        News news = new News();
+        news.setNid(newsInfoVO.getNid());
+        news.setNtype(newsInfoVO.getNtype());
+        news.setAuthor(newsInfoVO.getAuthor());
+        news.setTitle(newsInfoVO.getTitle());
+        news.setContent(newsInfoVO.getContent());
+        news.setCoverImg(newsInfoVO.getCoverImg());
+        news.setPtitle(newsInfoVO.getPtitle());
+        news.setPkeywords(newsInfoVO.getPkeywords());
+        news.setPdescription(newsInfoVO.getPdescription());
+
+        newsService.updateNews(news, null);
+        return JsonResult.success();
+    }
+
+    // 添加Stories
+    @PostMapping("/createStories")
+    @ResponseBody
+    public JsonResult createStories(@RequestBody NewsInfoVO newsInfoVO){
+        News news = new News();
+        Long newId = new IdWorker().nextId();
+        news.setNid(newId);
+        news.setNtype(newsInfoVO.getNtype());
+        news.setAuthor(newsInfoVO.getAuthor());
+        news.setTitle(newsInfoVO.getTitle());
+        news.setCoverImg(newsInfoVO.getCoverImg());
+
+        news.setPtitle(newsInfoVO.getPtitle());
+        news.setPkeywords(newsInfoVO.getPkeywords());
+        news.setPdescription(newsInfoVO.getPdescription());
+
+        NewsExt newsExt = new NewsExt();
+        newsExt.setNid(newId);
+        newsExt.setNdigest(newsInfoVO.getNdigest());
+        newsExt.setNlable(newsInfoVO.getNlable());
+        newsExt.setEndate(newsInfoVO.getEndate());
+        newsExt.setProvince(newsInfoVO.getProvince());
+        newsExt.setCity(newsInfoVO.getCity());
+        newsExt.setVideo(newsInfoVO.getVideo());
+        newsExt.setTxt1(newsInfoVO.getTxt1());
+        newsExt.setTxt2(newsInfoVO.getTxt2());
+        newsExt.setTxt3(newsInfoVO.getTxt3());
+
+        newsService.insertNews(news, newsExt);
+        return JsonResult.success();
+    }
+
+    // 修改Stories
+    @PostMapping("/updateStories")
+    @ResponseBody
+    public JsonResult updateStories(@RequestBody NewsInfoVO newsInfoVO){
+        News news = new News();
+        news.setNid(newsInfoVO.getNid());
+        news.setNtype(newsInfoVO.getNtype());
+        news.setAuthor(newsInfoVO.getAuthor());
+        news.setTitle(newsInfoVO.getTitle());
+        news.setCoverImg(newsInfoVO.getCoverImg());
+
+        news.setPtitle(newsInfoVO.getPtitle());
+        news.setPkeywords(newsInfoVO.getPkeywords());
+        news.setPdescription(newsInfoVO.getPdescription());
+
+        NewsExt newsExt = new NewsExt();
+        newsExt.setNid(newsInfoVO.getNid());
+        newsExt.setNdigest(newsInfoVO.getNdigest());
+        newsExt.setNlable(newsInfoVO.getNlable());
+        newsExt.setEndate(newsInfoVO.getEndate());
+        newsExt.setProvince(newsInfoVO.getProvince());
+        newsExt.setCity(newsInfoVO.getCity());
+        newsExt.setVideo(newsInfoVO.getVideo());
+        newsExt.setTxt1(newsInfoVO.getTxt1());
+        newsExt.setTxt2(newsInfoVO.getTxt2());
+        newsExt.setTxt3(newsInfoVO.getTxt3());
+
+        newsService.updateNews(news, newsExt);
+        return JsonResult.success();
+    }
 
 }

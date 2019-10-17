@@ -115,14 +115,18 @@ public class NewsServiceImpl implements NewsService {
         newsMapper.insertNews(news);
 
         // 测试事务问题
-        newsMapper.insertNewsExt(newsExt);
+        if(newsExt!=null) {
+            newsMapper.insertNewsExt(newsExt);
+        }
     }
 
     public void updateNews(News news, NewsExt newsExt) {
         newsMapper.updateNews(news);
 
         // 测试事务问题
-        newsMapper.updateNewsExt(newsExt);
+        if(newsExt!=null) {
+            newsMapper.updateNewsExt(newsExt);
+        }
     }
 
     @Override
