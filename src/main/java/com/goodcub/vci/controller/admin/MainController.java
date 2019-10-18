@@ -26,69 +26,9 @@ import java.util.Map;
 @RequestMapping("manage")
 public class MainController {
 
-    @Resource
-    MemberService memberService;
-
-    @Resource
-    VendorService vendorService;
-
-    @Resource
-    VideosService videosService;
-
-    @Resource
-    NewsService newsService;
-
-    @Resource
-    MainService  mainService;
-
     @GetMapping({"/", "/index"})
     public String to_main(){
         return "admin/index";
-    }
-
-    /**
-     * 统计总数
-     * @return
-     */
-    @GetMapping({"/groupData"})
-    @ResponseBody
-    public JsonResult goupData(){
-
-        Map<String,Integer> data = new HashMap<>();
-        // 会员数量
-        data.put("memberCount",memberService.countTotal());
-        // 供应商
-        data.put("vendorCount",vendorService.countTotal());
-        // 新闻总数
-        data.put("newsCount",newsService.countTotal());
-        // 视频总数
-        data.put("videosCount",videosService.countTotal());
-
-        return JsonResult.success(data);
-    }
-
-    // 新闻5条,按观看次数降序
-    @GetMapping({"/indexNewsList"})
-    @ResponseBody
-    public TableDataInfo lastNews(){
-        Map<String,Object> param = new HashMap<>();
-        return mainService.queryIndexNewsList(param,1,5);
-    }
-
-    // 视频5条,按观看次数降序
-    @GetMapping({"/indexVideosList"})
-    @ResponseBody
-    public TableDataInfo lastVideos(){
-        Map<String,Object> param = new HashMap<>();
-        return mainService.queryIndexVideosList(param,1,5);
-    }
-
-    // 会员5条,注册时间
-    @GetMapping({"/indexMemberList"})
-    @ResponseBody
-    public TableDataInfo lastMember(){
-        Map<String,Object> param = new HashMap<>();
-        return mainService.queryIndexMembersList(param,1,5);
     }
 
 }
