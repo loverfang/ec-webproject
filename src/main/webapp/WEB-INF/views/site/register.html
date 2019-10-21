@@ -1,0 +1,254 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>member register</title>
+    <link href="${base}/res/site/style/default.css" rel="stylesheet" type="text/css">
+    <link href="${base}/res/site/style/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<#include "/site/components/title.html"/>
+<#include "/site/components/navbar.html"/>
+
+<div class="maincontent pt45">
+    <div class="wrap">
+        <p><img src="${base}/res/site/images/images_015.jpg" width="230" height="41"></p>
+        <p class="f16px pt10 lh24 pb20">Please register for our site. Your subscription includes: free downloads of VCI Insights, full access to VCI Vendors Directory, and VCI Success Stories. For existing members please<span class="lanse2 underline"> <a href="javascript:void(0);" onclick="openLoginLayer();">login here.</a></span><br>
+        </p>
+
+        <p class="reg-tit f16px lh30"><span class="red2">* </span>These fields are mandatory</p>
+        <form name="form1" method="post" id="registForm">
+            <div class="reg-list btline">
+                <dl>
+                    <dt><span class="red2">* </span>Name </dt>
+                    <dd>
+                        <input name="member.name" type="text" class="inp w1" autocomplete="off">
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt><span class="red2">* </span>Job Title </dt>
+                    <dd>
+                        <input name="member.jobtitle" type="text" class="inp w1" autocomplete="off">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt><span class="red2">* </span>Company Name </dt>
+                    <dd>
+                        <input name="member.company" type="text" class="inp w1" autocomplete="off">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt><span class="red2">* </span>E-mail Address </dt>
+                    <dd>
+                        <input name="member.email" type="text" class="inp w1" autocomplete="off">
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt><span class="red2">* </span>UserName </dt>
+                    <dd>
+                        <input name="member.username" type="text" class="inp w1" autocomplete="off">
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt><span class="red2">* </span>Password</dt>
+                    <dd>
+                        <input name="member.password" type="password" class="inp w1" autocomplete="off">
+                        <P class="f16px pt10 huise2">Your password should be between 6 and 10 characters
+                            <br>and should ideally include both letters and numbers.</P>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt><span class="red2">* </span>Confirm Password </dt>
+                    <dd>
+                        <input type="password" id="confirm_password" class="inp w1" autocomplete="off">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt><span class="red2">* </span>Phone</dt>
+                    <dd>
+                        <input name="member.phone" type="text" class="inp w1" autocomplete="off">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt><span class="red2">* </span>Security Code</dt>
+                    <dd>
+                        <div class="fl">
+                            <input name="vcode" type="text" class="inp w2" autocomplete="off">
+                        </div>
+                        <div class="fl yzm"><img src="/patchca.png" id="patchca" width="84" height="35" onclick="this.src=this.src+'?'+Math.random();" style="cursor: pointer;"></div>
+                        <div class="refresh fl"><a href="javascript:void(0);" onclick="document.getElementById('patchca').click();">Refresh</a></div>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt>&nbsp;</dt>
+                    <dd class="f16px huise2"> Please enter the security code above - this is to check that
+                        <br>your login is genuine</dd>
+                </dl>
+
+                <dl>
+                    <dt>&nbsp;</dt>
+                    <dd class="f16px huise2">
+                        <input type="checkbox" name="checkbox" id="checkbox" value="agree" autocomplete="off">
+                        I agree to the <span class="lanse2 underline"><a href="/regist/terms/" target="_blank"  class="huise2">terms and conditions</a></span>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt>&nbsp;</dt>
+                    <dd class="f16px  underline"><a href="#" target="_blank"  class="huise2">Please tick the terms and conditions checkbox</a><br>
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="register-btn">
+                <input type="button" name="button" id="Register_button" value="Register" class="btn" onclick="submitForm();">
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="window2" id="regist_suc_tip" style="display:none;margin: 0px;padding:0px;">
+    <div class="tit">
+        <span class="fl f18px imp">Complete Your Registration</span>
+        <span class="fr f18px"><a href="javascript:void(0);" class="baise" onclick="divClose();">Close ×</a></span>
+    </div>
+    <div class="con f16px  lh24">You have been sent an e-mail to this registered address to complete the registration.  If the email hasn't arrived within 10 minutes, please check your spam box or contact us directly at <br>
+        registration@vcintegration.com<br><br>Return to <span class="lanse2 underline"><a href="/regist/">Registration Page.</a> </span>
+    </div>
+</div>
+
+<#include "/site/components/footer.html"/>
+<script type="text/javascript" src="${base}/res/site/js/validate.utils.js"></script>
+<script type="text/javascript" src="${base}/res/site/layer/layer.js"></script>
+<script type="text/javascript" src="${base}/res/site/js/common_login.js"></script>
+<script type="text/javascript">
+    var layerIndex;
+    function submitForm(){
+        var name = $("input[name='member.name']").val();
+        if(name==''){
+            alert('please input your name!');
+            return false;
+        }
+
+        var jobtitle = $("input[name='member.jobtitle']").val();
+        if(jobtitle==''){
+            alert('please input your jobtitle!');
+            return false;
+        }
+
+        var company = $("input[name='member.company']").val();
+        if(company==''){
+            alert('please input your company!');
+            return false;
+        }
+
+        var email = $("input[name='member.email']").val();
+        if(email==''){
+            alert('please input your email!');
+            return false;
+        }
+
+        if(!validateRules.isEmail(email)){
+            alert('Please enter the correct email address!');
+            return false;
+        }
+
+        var username = $("input[name='member.username']").val();
+        if(username==''){
+            alert('please input your username!');
+            return false;
+        }
+
+        var password = $("input[name='member.password']").val();
+        if(password==''){
+            alert('please input your username!');
+            return false;
+        }
+
+        if(!validateRules.betweenLength(password,6,10)){
+            alert('Your password should be between 6 and 10 characters!');
+            return false;
+        }
+
+        var confirm_password = $("#confirm_password").val();
+        if(confirm_password==''){
+            alert('please input your confirm cpassword!');
+            return false;
+        }
+
+        if(password!=confirm_password){
+            alert('The two password input must be the same!');
+            return false;
+        }
+
+        var phone = $("input[name='member.phone']").val();
+        if(phone==''){
+            alert('please input your phone!');
+            return false;
+        }
+
+        var vcode = $("input[name='vcode']").val();
+        if(vcode==''){
+            alert('please input vcode!');
+            return false;
+        }
+
+        var hasChk = $('#checkbox').is(':checked');
+        if(!hasChk){
+            alert('Please tick the terms and conditions checkbox!');
+            return false;
+        }
+
+        $("#Register_button").val("Waitting...");
+        $("#Register_button").removeAttr("onclick");
+
+        //提交表单
+        $.ajax({
+            url:'/regist/sub_regist/',
+            type:"POST",
+            data:$("#registForm").serialize(),
+            success:function(data){
+                var results = eval("("+data+")");
+                if(results.code == 1){
+
+                    //注册成功后展示提示信息
+                    divOpen();
+
+                }else{
+                    alert(results.message);
+                    $("#Register_button").val("Register");
+                    $("#Register_button").attr("onclick","submitForm()");
+                    return false;
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
+
+    function divOpen(){
+        //页面层-自定义
+        layerIndex = layer.open({
+            type: 1,
+            title: false,
+            fix:false,
+            closeBtn: 0,
+            area: ['835px', '227px'],
+            shadeClose: false,
+            content: $("#regist_suc_tip")
+        });
+    }
+
+    function divClose(){
+        $("#registForm")[0].reset();
+        layer.close(layerIndex);
+    }
+</script>
+
+</body>
+</html>

@@ -16,6 +16,7 @@ import java.util.Date;
 
 /**
  * 参考方法 https://blog.csdn.net/chuoerqiao8180/article/details/100979152
+ * 过滤上传文件类型 https://blog.csdn.net/zknxx/article/details/72633444
  * @Author Luo.z.x
  * @Description: 文件上传公共方法
  * @Date 2019/9/29

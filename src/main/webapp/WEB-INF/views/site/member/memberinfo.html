@@ -1,0 +1,190 @@
+<!DOCTYpE HTML>
+<html>
+<head>
+    <title>Member Infomatio</title>
+    <link href="${base}/res/site/style/default.css" rel="stylesheet" type="text/css">
+    <link href="${base}/res/site/style/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<#include "/site/components/title.html"/>
+<#include "/site/components/navbar.html"/>
+
+<div class="maincontent">
+    <!-- two-->
+    <div class="wrap" style="margin-top:35px;">
+        <div class="mainleft fl">
+            <div class="huisebj">
+                <div class="pdfimg"><img src="/res/site/images/mem_center.jpg" width="269" height="80"></div>
+            </div>
+
+            <div class="down p20">
+                <p class="btn"><a href="/members/">Member Infomation</a></p>
+                <p class="btn-2"><a href="/members/changepwd/">Change Password</a></p>
+                <p class="red f16px pb20 pt10"><a>If error, please contact the admin!</a></p>
+            </div>
+        </div>
+
+        <div class="mainright fr">
+            <div class="wrap">
+                <!--
+                <p><img src="/images/images_015.jpg" width="230" height="41"></p>
+                -->
+                <!-- <p class="f16px pt10 lh24 pb20">Please register for our site. Your subscription includes: free downloads of VCI Insights, full access to VCI Vendors Directory, and VCI Success Stories. For existing members please<span class="lanse2 underline"> <a href="#">login here.</a></span><br></p> -->
+                <p class="reg-tit f16px lh30"><span class="red2"></span>Member Infomation</p>
+                <div class="reg-list btline">
+                    <dl>
+                        <dt><span class="red2">* </span>登录用户名 </dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.username}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>会员卡类型 </dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.usertype}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>会员卡号 </dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.cardnum}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>会员姓名 </dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.name}" readonly="readonly">
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt><span class="red2">* </span>电话</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.phone}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>邮箱</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.email}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>公司</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.company}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>职位</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.jobtitle}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>VCI服务顾问</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.vciguwen}" readonly="readonly">
+                        </dd>
+                    </dl>
+
+                    <dl>
+                        <dt><span class="red2">* </span>可观看视频场次</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.viewcount}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>总共可培训天数</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.totaldays}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>剩余可培训天数</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.avldays}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>已享用会员权益1</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.txt1}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>已享用会员权益2</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.txt2}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>已享用会员权益3</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.txt3}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>已享用会员权益4</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.txt4}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>已享用会员权益5</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.txt5}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>已享用会员权益6</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.txt6}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>已享用会员权益7</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.txt7}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>已享用会员权益8</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.txt8}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>已享用会员权益9</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.txt9}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>已享用会员权益10</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.txt10}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>已享用会员权益11</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.txt11}" readonly="readonly">
+                        </dd>
+                    </dl>
+                    <dl>
+                        <dt><span class="red2">* </span>已享用会员权益12</dt>
+                        <dd>
+                            <input name="" type="text" class="inp w1" value="${member.txt12}" readonly="readonly">
+                        </dd>
+                    </dl>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<#include "/site/components/footer.html"/>
+</body>
+</html>

@@ -7,7 +7,7 @@ import java.io.Serializable;
 public class VideosViewLog implements Serializable {
     private Integer vlid;
     private Integer vid;
-    private Integer memid;
+    private Long memid;
     private String title;
     private Integer usecount;
     private String vtime;

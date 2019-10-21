@@ -158,7 +158,7 @@ public class FileuploadUtil {
      * @param destPath 文件的相对路径
      * @author "lixingwu"
      */
-    private static String getServerPath(String destPath) {
+    public static String getServerPath(String destPath) {
         // 文件分隔符转化为当前系统的格式
         return FilenameUtils.separatorsToSystem(pro.getUploadFolder() + destPath);
     }

@@ -67,7 +67,7 @@
         txt11,
         txt12)
         values (
-        #{memid:INTEGER},
+        #{memid},
         #{username:VARCHAR},
         #{password:VARCHAR},
         #{usertype:VARCHAR},
@@ -183,14 +183,14 @@
             </if>
         </set>
         <where>
-            memid = #{memid:INTEGER}
+            memid = #{memid}
         </where>
     </update>
 
     <!-- 根据ID获得用户信息 -->
     <select id="queryOneByMemid" resultType="com.goodcub.vci.vo.admin.MembersVO">
         select * from vci_member
-        where memid = #{memid:INTEGER}
+        where memid = #{memid}
     </select>
 
     <select id="countTotal" resultType="java.lang.Integer">
@@ -200,7 +200,7 @@
     <!-- 根据邮箱获得用户信息 -->
     <select id="queryOneByEmail" resultType="com.goodcub.vci.vo.admin.MembersVO">
         select * from vci_member
-        where email = #{email:INTEGER}
+        where email = #{email}
     </select>
 
     <!-- 判断是否存在username或email或phone的用户记录 -->
@@ -222,7 +222,7 @@
     <!-- 删除指定ID的用户信息 -->
     <delete id="deleteMemberById">
         delete from vci_member
-        where memid = #{memid:INTEGER}
+        where memid = #{memid}
     </delete>
 
     <!-- 根据邮箱更新用户密码 -->
@@ -244,13 +244,18 @@
         limit 1
     </select>
 
+    <!-- 前台根据ID获得用户信息 -->
+    <select id="queryFrontMemberByMemId" resultType="com.goodcub.vci.vo.site.MemberFrontVO">
+        select * from vci_member where memid = #{memid}
+    </select>
+
     <!-- 自动登录方法 -->
     <select id="mAutoLogin" resultType="com.goodcub.vci.vo.site.MemberFrontVO" parameterType="java.lang.String">
         select * from vci_member where phone = #{phone}
    </select>
 
     <!-- 查询会员的可用观看次数 -->
-    <select id="queryMemberViewCount" resultType="com.goodcub.vci.vo.site.MemberFrontVO" parameterType="java.lang.Integer">
+    <select id="queryMemberViewCount" resultType="com.goodcub.vci.vo.site.MemberFrontVO" parameterType="java.lang.Long">
         select memid, viewcount from vci_member where memid = #{memid}
     </select>
 

@@ -12,7 +12,7 @@ import lombok.Data;
  */
 @Data
 public class Members {
-    protected Integer memid;
+    protected Long memid;
     protected String username;
     protected String password;
     protected String usertype;

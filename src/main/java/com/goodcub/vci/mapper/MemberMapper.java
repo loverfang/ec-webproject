@@ -32,13 +32,14 @@ public interface MemberMapper {
 
     Members queryOneByMemid(Integer memid);
 
-    Members queryOneByEmail(Integer memid);
+    Members queryOneByEmail(String email);
 
     Integer deleteMemberById(Integer memid);
 
     Integer updatePasswordByEmail(String email);
 
     Integer countTotal();
+
     /**
      * 判断是否存在username或email或phone的用户记录
      *
@@ -66,7 +67,7 @@ public interface MemberMapper {
      * @param memid
      * @return
      */
-    MemberFrontVO queryMemberViewCount(Integer memid);
+    MemberFrontVO queryMemberViewCount(Long memid);
 
     /**
      * 更新会员可用次数
@@ -75,4 +76,10 @@ public interface MemberMapper {
      */
     Integer updateMemberViewCount(Members members);
 
+    /**
+     * 前台更具会员ID查询会员信息
+     * @param memid
+     * @return
+     */
+    MemberFrontVO queryFrontMemberByMemId(Long memid);
 }

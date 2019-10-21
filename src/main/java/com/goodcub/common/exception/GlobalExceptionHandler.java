@@ -5,9 +5,13 @@ import com.goodcub.common.utils.JsonResult;
 import com.goodcub.vci.exception.UploadException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -37,6 +41,13 @@ public class GlobalExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public JsonResult cmsException(HttpServletRequest request, Exception e) {
+        if ("org.apache.catalina.connector.ClientAbortException".equals(e.getClass().getName())) {
+            logger.error("发生clientAbortException");
+            return null;
+        }
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.set("Content-Type", "application/json;charset=UTF-8");
+
         logger.error("请求的url为{}出现系统异常,异常信息为:", request.getRequestURI(), e);
         return JsonResult.error(GlobalExceptionCodeEnum.ERROR.getCode(), GlobalExceptionCodeEnum.ERROR.getMessage());
     }

@@ -13,7 +13,7 @@ import org.apache.commons.logging.LogFactory;
  **/
 @Data
 public class MemberFrontVO {
-    private Integer memid;
+    private Long memid;
     private String username;
     private String password;
     private String usertype;
@@ -42,4 +42,6 @@ public class MemberFrontVO {
     private String txt10;
     private String txt11;
     private String txt12;
+
+    private String vcode;
 }

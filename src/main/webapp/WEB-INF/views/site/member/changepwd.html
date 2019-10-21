@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Change the password</title>
+    <link href="${base}/res/site/style/default.css" rel="stylesheet" type="text/css">
+    <link href="${base}/res/site/style/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="topbj">
+    <div class="wrap">
+        <div class="logo"><img src="/res/site/images/logo.png" width="248" height="83"></div>
+        <div class="r-list">
+            <div class="two-t pt10">
+                <ul>
+                    <li>
+                        <input class="inp" type="text" name="textfield" id="textfield" value="Username">
+                    </li>
+                    <li>
+                        <input class="inp" type="text" name="textfield" id="textfield"  value="Password" >
+                    </li>
+                    <li>
+                        <input class="btn" name="" type="button" value="lOGIN">
+                    </li>
+                </ul>
+            </div>
+            <div class="thr-t"><span><a href="#">Forget Password </a></span><span><a href="#">Register</a> </span></div>
+        </div>
+    </div>
+</div>
+<#include "/site/components/navbar.html"/>
+<div class="maincontent pt45">
+    <div class="wrap">
+        <p><img src="/images/images_020.jpg" width="387" height="41"></p>
+        <p class="f16px pt10 lh24 pb20">&nbsp;</p>
+
+        <form name="form1" method="post" id="resetForm">
+            <div class="reg-list ">
+                <dl>
+                    <dt><span class="red2">* </span>E-mail Address </dt>
+                    <dd>
+                        <input name="member.email" type="text" class="inp w1" autocomplete="off">
+                    </dd>
+                </dl>
+
+                <!--
+                <dl>
+                    <dt><span class="red2">* </span>Current Password </dt>
+                    <dd>
+                        <input name="" type="text" class="inp w1">
+                    </dd>
+                </dl>
+                -->
+
+                <dl>
+                    <dt><span class="red2">* </span>New Password</dt>
+                    <dd>
+                        <input name="member.password" type="password" class="inp w1">
+                        <P class="f16px pt10 huise2">Your password should be between 6 and 10 characters
+                            <br>	and should ideally include both letters and numbers.</P>
+                    </dd>
+                </dl>
+
+                <dl>
+                    <dt><span class="red2">* </span>Confirm Password </dt>
+                    <dd>
+                        <input name="confirm_password" id="confirm_password" type="password" class="inp w1">
+                    </dd>
+                </dl>
+            </div>
+
+            <div class="register-btn">
+                <input type="button" name="button" id="Reset_button" value="Change Password" class="btn" onclick="resetpwd();">
+            </div>
+        </form>
+    </div>
+</div>
+
+<#include "/site/components/footer.html"/>
+<div class="window5" style="margin-top:0px;">
+    <div class="tit">
+        <span class="fl f18px imp">Change the password</span>
+        <span class="fr f18px"><a href="javascript:void(0)" onclick="closeStep1Layer();" class="baise">Close ×</a></span>
+    </div>
+    <div class="con f16px  lh24 ">
+        <p><span class="imp f20px">Your password has been changed.</span><br><br>Return to <span class="lanse2 underline"><a href="javascript:void(0)" onclick="openLoginLayer();">Login Page. </a> </span></p>
+        <p>&nbsp;</p>
+    </div>
+</div>
+
+<script type="text/javascript" src="/res/site/js/validate.utils.js"></script>
+<script type="text/javascript" src="/res/site/layer/layer.js"></script>
+<script type="text/javascript" src="/res/site/js/common_login.js"></script>
+<script type="text/javascript">
+    var step1Layer;
+    function resetpwd(){
+
+        var email = $("input[name='member.email']").val();
+
+        if(email==''){
+            alert('please input your email!');
+            return false;
+        }
+
+        if(!validateRules.isEmail(email)){
+            alert('Please enter the correct email address!');
+            return false;
+        }
+
+        var password = $("input[name='member.password']").val();
+        if(password==''){
+            alert('please input your username!');
+            return false;
+        }
+
+        if(!validateRules.betweenLength(password,6,10)){
+            alert('Your password should be between 6 and 10 characters!');
+            return false;
+        }
+
+        var confirm_password = $("#confirm_password").val();
+        if(confirm_password==''){
+            alert('please input your confirm cpassword!');
+            return false;
+        }
+
+        if(password!=confirm_password){
+            alert('The two password input must be the same!');
+            return false;
+        }
+
+        $("#Reset_button").val("Waitting...");
+        $("#Reset_button").removeAttr("onclick");
+        //提交表单
+        $.ajax({
+            url:'/resetpwd/',
+            type:"POST",
+            data:$("#resetForm").serialize(),
+            success:function(data){
+                var results = eval("("+data+")");
+                if(results.code == 1){
+
+                    //页面层-自定义
+                    step1Layer = layer.open({
+                        type: 1,
+                        title: false,
+                        fix:false,
+                        closeBtn: 0,
+                        area: ['630px', '206px'],
+                        shadeClose: true,
+                        content: $(".window5")
+                    });
+
+                    $("#Reset_button").val("Change Password");
+                    $("#Reset_button").attr("onclick","resetpwd()");
+
+                }else{
+                    layer.alert(results.message);
+
+                    $("#Reset_button").val("Change Password");
+                    $("#Reset_button").attr("onclick","resetpwd()");
+
+                    return false;
+
+                }
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) { }
+        });
+
+    }
+    function closeStep1Layer(){
+        $("#resetForm")[0].reset();
+        layer.close(step1Layer);
+    }
+</script>
+</body>
+</html>

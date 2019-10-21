@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.goodcub.vci.mapper.VciFilesMapper">
+
+    <!-- 查询文件列表 -->
+    <select id="queryVciFilesList" resultType="com.goodcub.vci.vo.admin.VciFileListVO" parameterType="java.util.Map">
+        select * from vci_files
+        <where>
+            <if test="nid != null">
+                and fid = #{fid}
+            </if>
+            <if test="name != null">
+                and name = #{name}
+            </if>
+        </where>
+    </select>
+
+    <!-- 批量插入文件 -->
+    <insert id="saveVciFilesBatch" parameterType="java.util.List">
+        insert into vci_files(fid, name, file_path, psize, status, down_count, uptime)
+        value
+        <foreach collection="vciFilesList" index="index" item="item" separator=",">
+            ( #{fid:BIGINT},
+            #{name:VARCHAR},
+            #{file_path:VARCHAR},
+            #{psize:VARCHAR},
+            #{status:INTEGER},
+            #{down_count:INTEGER},
+            #{uptime:TIMESTAMP})
+        </foreach>
+    </insert>
+
+    <delete id="deleteVciFilesById" parameterType="java.util.List">
+        delete from vci_files
+        <where>
+            fid in
+            <foreach collection="idList" index="index" item="item" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </where>
+    </delete>
+
+    <!-- 前台查询一个文件 -->
+    <select id="queryVciFileByFid" resultType="com.goodcub.vci.vo.site.VciFileFrontVO" parameterType="java.lang.Long" >
+		select * from vci_files where fid = #{fid}
+	</select>
+
+</mapper>
