@@ -12,5 +12,7 @@ import lombok.Data;
 public class NewsAdListFrontVO {
     private Integer id;
     private Long nid;
+    private String title;
     private String link;
+    private String coverImg;
 }

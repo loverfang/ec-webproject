@@ -24,7 +24,7 @@
                             ${item.ndigest}
                         </article>
                     </article>
-                    <span class="img"><img src="/upload/news/PIC_${item.nid}.jpg" width="329" height="264"></span>
+                    <span class="img"><#if item.coverImg??><img src="${item.coverImg}" width="329" height="264"></#if></span>
                 </a>
             </li></#list></#if></#if>
         </ul>

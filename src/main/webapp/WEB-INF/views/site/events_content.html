@@ -1,10 +1,212 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Event</title>
+    <link href="${base}/res/site/style/default.css" rel="stylesheet" type="text/css">
+    <link href="${base}/res/site/style/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="${base}/res/site/style/jquery.slider.css" />
+    <!--[if IE 6]>
+    <link rel="stylesheet" type="text/css" href="${base}/res/site/style/jquery.slider.ie6.css" />
+    <![endif]-->
 </head>
-<body>
 
+<body>
+<#include "/site/components/title.html"/>
+<#include "/site/components/navbar.html"/>
+
+<div class="maincontent">
+    <div class="banner_b">
+        <div class="i_adbanner_2">
+            <div id="KinSlideshow_2">
+                <did class="banner_2">
+                    <#if newsDetail??><#if newsDetail.authorImg??>
+                    <img src="newsDetail.authorImg??" onerror="this.src='${base}/res/site/images/b-enent.jpg'" title=" "/>
+                    </#if></#if>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--  one-->
+    <div class="wrap" id="p1">
+        <div class="mainleft fl">
+            <div class="lansebj">
+                <div class="menulist">
+                    <ul class="mainnav">
+                        <li><a href="#p1" class="now" onclick="tags(this);">Event Highlight </a></li>
+                        <li><a href="#p2" onclick="tags(this);">Event Snapshot </a></li>
+                        <li><a href="#p3" onclick="tags(this);">Acknowledgement</a></li>
+                        <li><a href="#p4" onclick="tags(this);">Onsite Photo</a> </li>
+                        <li><a href="#p5" onclick="tags(this);">Event Video</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="mainright fr">
+            <div class="tit">Event Highlight</div>
+            <div class="con">
+                <#if newsDetail??>${newsDetail.txt1}</#if>
+            </div>
+        </div>
+    </div>
+    <!-- two-->
+    <div class="wrap" id="p2">
+        <div class="mainleft fl">
+            <#if pdfList??><#list pdfList as item>
+            <div class="lansebj">
+                <div class="pdfimg">
+                    <#if item.coverImg??>
+                    <img src="${item.coverImg}" width="270" height="360">
+                    </#if>
+                </div>
+            </div></#list></#if>
+
+            <div class="down p20">
+                <#if pdfList??>
+                    <#list pdfList as item>
+                        <p class="btn">
+                            <a href="/front/downpdfUpload.action?id=${item.pid}">Download full report</a>
+                        </p>
+                    </#list>
+                </#if>
+
+                <p class="btn-2"><a href="/insights/">About VCI Insights </a></p>
+                <p class="red f16px pb20 pt10"><a href="/insights/">Go to VCI Insights </a></p>
+
+            </div>
+        </div>
+        <div class="mainright fr">
+            <div class="tit">Event Snapshot</div>
+            <div class="con">
+                <#if newsDetail??>${newsDetail.txt2}</#if>
+            </div>
+        </div>
+    </div>
+
+    <!--  three-->
+    <div class="wrap" id="p3">
+        <div class="mainleft fl">
+            <div class="lansebj">
+                <div class="pdfimg">
+                    <#if advertise??>
+                        <#list advertise as ad>
+                            <#if ad_index==0>
+                                <a href="${ad.link}" target="_blank">
+                                    <#if ad.coverImg??>
+                                    <img src="${ad.coverImg}" width="272" height="255">
+                                    </#if>
+                                </a>
+                            </#if>
+                        </#list>
+                    <#else>
+                        <img src="${base}/res/site/images/images_009.jpg" width="272" height="255">
+                    </#if>
+                </div>
+            </div>
+        </div>
+        <div class="mainright fr">
+            <div class="tit">Acknowledgement</div>
+            <div class="con">
+                <#if newsDetail??>${newsDetail.txt3}</#if>
+            </div>
+        </div>
+    </div>
+    <!--four-->
+    <div class="wrap" id="p4">
+        <div class="mainleft fl">
+            <div class="hsbj ">
+                <p class="tit">VCI Executive network</p>
+                <div class="con">
+                    <dl>
+                        <dt><span  class="f20px">Network with like-minded professionals in specific vertical industries </span></dt>
+                        <dd>
+                            <article>D-club or C-suite decision makers today are looking for new format of events which is small group, higher level and of which demonstrates deep understanding of the vertical industry. We holds 20+ D-club & C-suite events in a year to enable effective communication and best practice sharing in specific vertical industries.</article>
+                            <p><a href="/events/" class="red f16px ">Learn more about VCI Upcoming Events</a></p>
+                        </dd>
+                    </dl>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <dl>
+                        <dd>
+                            <p>&nbsp;</p>
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+        <div class="mainright fr">
+            <div class="tit-2">Onsite Photo</div>
+            <div class="con-5">
+                <div class="slider">
+                    <#if photos??><#list photos as photo>
+                    <div><#if photo.imgPath??>
+                        <img src="${photo.imgPath}" alt="" width="776" height="525"/></#if>
+                    </div></#list></#if>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- five-->
+    <div class="wrap" id="p5">
+        <div class="mainleft fl">
+            <div class="hsbj">
+                <div class="down pl20">
+                    <p class="btn"><a hidden="#">Contact Us </a></p>
+                </div>
+                <article class="f16px lh24 p20 yahei "> <span class="f24px imp "> VCIntegration Co.,Ltd </span><br>
+                    <p class="huise2"> 3F, Building C, Sunlee Business <br>
+                        Center, 905 Yuyuan Road, Shanghai 200050, China <br>
+                        上海韦司埃供应链管理有限公司 <br>
+                        上海长宁区愚园路905号新利商务中心C座，3楼<br>
+                        邮编 : 200050 <br>
+                        <br>
+                        <span class="f15px"> E-mail: demand@vcintegration.com</span>
+                </article>
+                </p>
+            </div>
+        </div>
+
+        <div class="mainright fr">
+            <div class="tit-2">Event Viedo</div>
+            <div class="con-4">
+                <#if newsDetail??>
+                    <iframe height=525 width=776 src="${newsDetail.video}" frameborder=0 allowfullscreen></iframe>
+                <#else>
+                    <img src="${base}/res/site/images/images_010.jpg" width="776" height="525">
+                </#if>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<#include "/site/components/footer.html"/>
+<script type="text/javascript" src="${base}/res/site/js/jquery.slider.min.js"></script>
+<script type="text/javascript" src="${base}/res/site/js/jquery.smooth-scroll.js"></script>
+<script type="text/javascript" src="${base}/res/site/js/common_login.js"></script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $(".slider").slideshow({
+            width: 776,
+            height: 525,
+            transition: ['bar', 'Rain', 'square', 'squareRandom', 'explode']
+        });
+        $('ul.mainnav a').smoothScroll({
+            offset: 3,
+            easing: 'swing',
+            speed: 400
+        });
+    });
+
+    function tags(obj){
+        var currentObj = $(obj);
+        $("ul.mainnav li a").removeClass();
+        currentObj.addClass("now");
+    }
+</script>
 </body>
 </html>

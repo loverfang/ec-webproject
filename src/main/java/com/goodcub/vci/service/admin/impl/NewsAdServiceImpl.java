@@ -28,7 +28,7 @@ public class NewsAdServiceImpl implements NewsAdService {
 
     @Override
     public TableDataInfo queryNewsAdList(Map<String, Object> params, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum,pageSize,"sindex asc ,addtime desc");
+        PageHelper.startPage(pageNum,pageSize,"uptime desc");
         List<NewsAdListVO> newsAdList = newsAdMapper.queryNewsAdList(params);
 
         // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo

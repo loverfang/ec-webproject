@@ -43,7 +43,13 @@
 
     <div class="vendors-list"><#if data??><#if data.items??> <#list data.items as item>
         <dl>
-            <dt><a href="${item.doman}" target="_blank"><img src="/upload/products/PIC_${item.cid}_${item.pid}.jpg" width="330" height="255"></a></dt>
+            <dt>
+                <a href="${item.doman}" target="_blank">
+                    <#if item.coverImg??>
+                    <img src="${item.coverImg}" width="330" height="255">
+                    </#if>
+                </a>
+            </dt>
             <dd>
                 <article class="f16px lh24 pb50 con">
                     ${item.intro}

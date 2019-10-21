@@ -19,4 +19,5 @@ public class NewsListFrontVO {
     private String province;
     private String title;
     private String pubtime;
+    private String coverImg;
 }

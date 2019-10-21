@@ -250,7 +250,7 @@
     <!-- 前台的新闻列表查询 -->
     <select id="queryNewsFrontList" parameterType="java.util.Map" resultType="com.goodcub.vci.vo.site.NewsListFrontVO">
         select
-        n.nid, e.nlable, e.endate, e.city, e.province, e.ndigest, n.title, n.pubtime
+        n.nid, e.nlable, e.endate, e.city, e.province, e.ndigest, n.title, n.pubtime, cover_img
         from news as n
         inner join news_ext as e on e.nid = n.nid
         <where>
@@ -313,6 +313,7 @@
             pkeywords,
             nid,
             author,
+            cover_img,
             content
         from news
         where

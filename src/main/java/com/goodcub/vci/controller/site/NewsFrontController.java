@@ -2,10 +2,13 @@ package com.goodcub.vci.controller.site;
 
 import com.goodcub.common.enums.NewsTypeEnum;
 import com.goodcub.common.page.TableDataInfo;
+import com.goodcub.vci.service.site.NewsAdFrontService;
 import com.goodcub.vci.service.site.NewsFrontService;
 import com.goodcub.vci.service.site.NewsPdfFrontService;
 import com.goodcub.vci.service.site.NewsPhotoFrontService;
+import com.goodcub.vci.vo.site.NewsAdListFrontVO;
 import com.goodcub.vci.vo.site.NewsFrontVO;
+import com.goodcub.vci.vo.site.NewsPhotoListFrontVO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,6 +39,9 @@ public class NewsFrontController {
 
     @Resource
     NewsPhotoFrontService newsPhotoFrontService;
+
+    @Resource
+    NewsAdFrontService newsAdFrontService;
 
     /**
      * Aboutus
@@ -252,16 +259,16 @@ public class NewsFrontController {
 
         request.setAttribute("pdfList", pdfTableDataInfo.getItems());
         request.setAttribute("newsDetail", newsDetail);
-        request.setAttribute("newstype", NewsTypeEnum.INSIGHTS);
-        request.setAttribute("ntype","insights");
+        request.setAttribute("newstype", NewsTypeEnum.EVENTS);
+        request.setAttribute("ntype","events");
 
-        // 图片列表
-        TableDataInfo photoList = newsPhotoFrontService.queryNewsPhotoFrontList(nid, 1 ,1);
-        request.setAttribute("photos", photoList.getItems());
+        // 图片列表(全部图片)
+        List<NewsPhotoListFrontVO> photoList = newsPhotoFrontService.queryNewsPhotoFrontList(nid);
+        request.setAttribute("photos", photoList);
 
-        // 广告列表
-        // List<NewsAd> adList = CommonDAO.commonQueryForList("news_ad.frontAll", newsDetail.getNid());
-        // request.setAttribute("advertise", adList);
+        // 广告列表(全部广告)
+        List<NewsAdListFrontVO> adList = newsAdFrontService.queryNewsAdFrontList( nid );
+        request.setAttribute("advertise", adList);
 
         return "site/events_content";
     }
@@ -291,8 +298,8 @@ public class NewsFrontController {
         request.setAttribute("ntype","insights");
 
         // 图片列表
-        TableDataInfo photoList = newsPhotoFrontService.queryNewsPhotoFrontList(nid, 1 ,1);
-        request.setAttribute("photos", photoList.getItems());
+        List<NewsPhotoListFrontVO> photoList = newsPhotoFrontService.queryNewsPhotoFrontList(nid);
+        request.setAttribute("photos", photoList);
 
         return "site/stories_content";
     }

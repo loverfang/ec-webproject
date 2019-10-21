@@ -7,7 +7,7 @@
 
     <insert id="saveNewsAd" parameterType="com.goodcub.vci.entity.NewsAd" >
         insert into news_ad(nid, title, link, state, uptime)
-        values(#{nid:BIGINT},#{title:VARCHAR},#{link:VARCHAR},#{state:INTEGER},#{uptime:TIMESTAMP})
+        values(#{nid:BIGINT},#{title:VARCHAR},#{link:VARCHAR},#{state:VARCHAR},#{uptime:TIMESTAMP})
     </insert>
 
     <select id="queryNewsAdList" resultType="com.goodcub.vci.vo.admin.NewsAdListVO" parameterType="java.util.Map" >
@@ -27,13 +27,16 @@
         update news_ad
         <set>
             <if test="title != null">
-                title = #{title:VARCHAR}
+                title = #{title:VARCHAR},
             </if>
             <if test="link!= null">
-                link = #link:VARCHAR#
+                link = #{link:VARCHAR},
             </if>
             <if test="state!= null">
-                state = #state:INTEGER#
+                state = #{state:VARCHAR},
+            </if>
+            <if test="coverImg!= null">
+                cover_img = #{coverImg:VARCHAR},
             </if>
         </set>
         where id = #{id:INTEGER}
@@ -61,8 +64,8 @@
     </delete>
 
     <!-- 前台查询NewsAd列表 -->
-    <select id="queryNewsAdFrontList" resultType="com.goodcub.vci.vo.site.NewsAdListFrontVO" parameterType="java.lang.Integer" >
-        select id,nid,link from news_ad where nid = #{nid}
+    <select id="queryNewsAdFrontList" resultType="com.goodcub.vci.vo.site.NewsAdListFrontVO">
+        select id,nid,link from news_ad where nid = #{nid} order by uptime desc
     </select>
 
 

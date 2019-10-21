@@ -54,7 +54,11 @@
         <div class="mainleft fr">
             <#if pdfList??><#list pdfList as item>
                     <div class="lansebj">
-                        <div class="pdfimg"><img src="/upload/news/pdf/IMG_${item.pid}?c.jpg" width="270" height="360"> </div>
+                        <div class="pdfimg">
+                            <#if item.coverImg??>
+                                <img src="${item.coverImg}" width="270" height="360">
+                            </#if>
+                        </div>
                     </div></#list>
             </#if>
             <div class="down p20">

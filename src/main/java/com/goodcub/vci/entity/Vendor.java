@@ -14,22 +14,22 @@ import java.io.Serializable;
  */
 @Data
 public class Vendor implements Serializable {
-    private Integer pid;
-    private Integer cid;
-    private String name;
-    private String content;
-    private String coverImg;
-    private Integer viewcount;
-    private RecomendEnum ifindex;
-    private Integer sindex;
-    private String intro;
-    private String doman;
-    private String info;
-    private String introduction;
-    private String solutions;
-    private String highlights;
-    private String pubtime;
-    private String pkeywords;
-    private String ptitle;
-    private String pdescription;
+    protected Integer pid;
+    protected Integer cid;
+    protected String name;
+    protected String content;
+    protected String coverImg;
+    protected Integer viewcount;
+    protected RecomendEnum ifindex;
+    protected Integer sindex;
+    protected String intro;
+    protected String doman;
+    protected String info;
+    protected String introduction;
+    protected String solutions;
+    protected String highlights;
+    protected String pubtime;
+    protected String pkeywords;
+    protected String ptitle;
+    protected String pdescription;
 }

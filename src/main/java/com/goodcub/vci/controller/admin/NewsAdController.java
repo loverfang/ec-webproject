@@ -59,6 +59,7 @@ public class NewsAdController {
     @ResponseBody
     public JsonResult updatePdf(@RequestBody NewsAdVO newsAdVO){
         NewsAd newsAd = new NewsAd();
+        newsAd.setId(newsAdVO.getId());
         newsAd.setNid(newsAdVO.getNid());
         newsAd.setTitle(newsAdVO.getTitle());
         newsAd.setCoverImg(newsAdVO.getCoverImg());
@@ -72,7 +73,7 @@ public class NewsAdController {
     @ResponseBody
     public JsonResult deleteVendor(@RequestBody Map<String,Object> data){
         // 获取传回来的id字符串
-        String ids_str = data.get("pids").toString();
+        String ids_str = data.get("ids").toString();
         if(ids_str == null || "".equals(ids_str)){
             return JsonResult.error("请选中需要删除的记录");
         }

@@ -14,7 +14,7 @@
     <div class="banner_b">
         <div class="i_adbanner_2">
             <div id="KinSlideshow_2">
-                <div id="banner_2"><img src="${base}/res/site/upload/advertise/PIC_8.jpg" title=" "/></div>
+                <div id="banner_2"><img src="${base}/res/site/images/membership.jpg" title=" "/></div>
             </div>
         </div>
     </div>
@@ -23,7 +23,11 @@
         <dl>
             <!-- <a href="javascript:;" onclick="openVideo('${item.vurl}',${item.vid})"> -->
             <a href="/videos/${item.vid}.html" target="_blank">
-                <dt> <img src="/upload/videos/PIC_${item.vid}.jpg" width="335" height="196"></dt>
+                <dt>
+                    <#if item.coverImg??>
+                    <img src="${item.coverImg}" width="335" height="196">
+                </#if>
+                </dt>
                 <dd  class="f16px lh24 con">
                     <i>${item.title}</i>
                     <div>${item.memo}</div></dd>
@@ -43,8 +47,8 @@
 </div>
 
 <#include "/site/components/footer.html"/>
-<script type="text/javascript" src="/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="/js/validate.utils.js"></script>
+<script type="text/javascript" src="${base}/res/site/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="${base}/res/site/js/validate.utils.js"></script>
 <script type="text/javascript">
     function openVideo(vrul,vid){
         var url = "/front/detailVideos.action";

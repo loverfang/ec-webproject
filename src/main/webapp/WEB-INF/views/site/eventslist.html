@@ -15,7 +15,7 @@
     <div class="event-list">
         <ul><#if data??><#if data.items??><#list data.items as item>
             <li>
-                <a href="/events/id_${item.nid}" target="_blank">
+                <a href="/events/${item.nid?c}.html" target="_blank">
                     <article class="leftcon">
                         <span class="tit">${item.nlable}</span>
                         <span class="tit-2">${item.title}</span>
@@ -25,14 +25,25 @@
                     </article>
                     <article class="fr"> <span class="date-tit">Date + Location</span>
                         <p class="date-con"> <span>${item.endate}</span> <span>${item.city},${item.province}</span> </p>
-                        <span class="img"> <img src="/upload/news/PIC_${item.nid}.jpg" width="329" height="264"></span>
+                        <span class="img">
+                            <#if item.coverImg??>
+                            <img src="${item.coverImg}" width="329" height="264">
+                            </#if>
+                        </span>
                     </article>
                 </a>
             </li></#list></#if></#if>
         </ul>
     </div>
     <div class="wrap">
-        11 22 33 44 55
+        <div class="pages">
+            <#if data??><#if data.items??>
+            <!-- 导入自定义ftl -->
+            <#import "/ftl/page.ftl" as p/>
+            <!-- 使用该标签 -->
+            <@p.pager data "/events" {} 3/>
+            </#if></#if>
+        </div>
     </div>
 </div>
 <#include "/site/components/footer.html"/>

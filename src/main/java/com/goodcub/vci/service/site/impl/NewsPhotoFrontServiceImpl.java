@@ -28,22 +28,8 @@ public class NewsPhotoFrontServiceImpl implements NewsPhotoFrontService {
     NewsPhotoMapper newsPhotoMapper;
 
     @Override
-    public TableDataInfo queryNewsPhotoFrontList(Long nid, int pageNum, int pageSize) {
-
-        PageHelper.startPage(pageNum, pageSize,"sindex desc ,uptime desc");
-        List<NewsPhotoListFrontVO> photoList = newsPhotoMapper.queryNewsPhotoFrontList(nid);
-
-        // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo
-        PageInfo<NewsPhotoListFrontVO> pageInfo = new PageInfo<>(photoList, pageSize);
-
-        TableDataInfo tableDataInfo = new TableDataInfo();
-        tableDataInfo.setTotal(pageInfo.getTotal());
-        tableDataInfo.setItems(pageInfo.getList());
-        tableDataInfo.setPageNum(pageInfo.getPageNum());
-        tableDataInfo.setPageSize(pageInfo.getPageSize());
-        tableDataInfo.setPages(pageInfo.getPages());
-
-        return tableDataInfo;
+    public List<NewsPhotoListFrontVO> queryNewsPhotoFrontList(Long nid) {
+        return newsPhotoMapper.queryNewsPhotoFrontList(nid);
     }
 
 }

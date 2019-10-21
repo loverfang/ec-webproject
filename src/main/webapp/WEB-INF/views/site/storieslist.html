@@ -10,12 +10,21 @@
 <#include "/site/components/title.html"/>
 <#include "/site/components/navbar.html"/>
 
-<div class="maincontent pt70  clear"  >
+<div class="maincontent pt70 clear"  >
     <div class="wrap pb50"><img src="${base}/res/site/images/success-tit.jpg" width="1003" height="146"></div>
     <div class="success-list">
-        <ul><#if data??><#if data.items??> <#list data.items as item>
+        <ul><#if data??><#if data.items??><#list data.items as item>
             <li>
-                <span class="img"><a href="/stories/id_${item.nid}" target="_blank"><img src="/upload/news/PIC_${item.nid}.jpg" width="339" height="228"></a></span> <span class="tit centerdiv"><a href="/stories/id_${item.nid}" target="_blank">${item.nlable}</a></span>
+                <span class="img">
+                    <#if item.coverImg??>
+                    <a href="/stories/${item.nid?c}.html" target="_blank">
+                        <img src="${item.coverImg}" width="339" height="228">
+                    </a>
+                    </#if>
+                </span>
+                <span class="tit centerdiv">
+                    <a href="/stories/${item.nid?c}.html" target="_blank">${item.nlable}</a>
+                </span>
                 <p class="con centerdiv">${item.title}</p>
             </li></#list></#if></#if>
         </ul>

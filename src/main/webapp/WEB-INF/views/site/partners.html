@@ -23,8 +23,8 @@
     <div class="partners-list"><#if data??><#if data.items??> <#list data.items as item>
         <dl>
             <a href="${item.author}" target="_blank">
-                <dt><img src="/upload/news/PIC_${item.nid}.jpg" width="335" height="196"></dt>
-                <dd  class="f16px lh24 con">${item.content}</dd>
+                <dt><#if item.coverImg??><img src="${item.coverImg}" width="335" height="196"></#if></dt>
+                <dd class="f16px lh24 con">${item.content}</dd>
             </a>
         </dl></#list></#if></#if>
     </div>
