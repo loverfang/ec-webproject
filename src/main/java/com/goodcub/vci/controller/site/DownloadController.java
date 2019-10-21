@@ -49,7 +49,6 @@ public class DownloadController {
             // 下载文件能正常显示中文
             String filename = URLEncoder.encode(vciFile.getName(), "UTF-8");
 
-
             File file = new File(serverPath);
             // 清空response
             response.reset();
