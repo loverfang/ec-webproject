@@ -19,7 +19,7 @@ public interface MainService {
      * @param pageSize
      * @return
      */
-    TableDataInfo queryIndexNewsList(Map<String,Object> params, int pageNum, int pageSize);
+    TableDataInfo queryIndexNewsList(Map<String, Object> params, int pageNum, int pageSize);
 
     /**
      * 首页视频列表
@@ -37,6 +37,6 @@ public interface MainService {
      * @param pageSize
      * @return
      */
-    TableDataInfo queryIndexMembersList(Map<String,Object> params, int pageNum, int pageSize);
+    TableDataInfo queryIndexMembersList(Map<String, Object> params, int pageNum, int pageSize);
 
 }

@@ -412,7 +412,7 @@ public class MemberFrontController {
             if(tempMem != null){
                 MemberFrontVO tempMember = (MemberFrontVO)tempMem;
                 MemberFrontVO member = memberFrontService.queryFrontMemberByMemId(tempMember.getMemid()) ;
-                request.setAttribute("member", member);
+                session.setAttribute("member", member);
             }
             return "site/member/memberinfo";
         }

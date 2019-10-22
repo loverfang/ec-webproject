@@ -8,4 +8,14 @@
         <welcome-file>index.html</welcome-file>
         <welcome-file>welcome.htm</welcome-file>
     </welcome-file-list>
+    
+    <error-page>
+        <error-code>404</error-code>
+        <location>/error/error_404</location>
+    </error-page>
+
+    <error-page>
+        <error-code>401</error-code>
+        <location>/error/error_401</location>
+    </error-page>
 </web-app>
