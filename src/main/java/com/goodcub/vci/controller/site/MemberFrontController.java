@@ -53,7 +53,7 @@ public class MemberFrontController {
      * @return
      */
     @ResponseBody
-    @RequestMapping("/dologin")
+    @PostMapping("/dologin")
     public JsonResult doLogin(HttpServletRequest request, HttpServletResponse response,
         @RequestParam(value = "username", required = true)String username,
         @RequestParam(value = "password", required = true)String password,
@@ -158,13 +158,22 @@ public class MemberFrontController {
     }
 
     /**
+     * 注册协议页面
+     * @return
+     */
+    @GetMapping("/terms")
+    public String terms(){
+        return "site/member/terms-of-use";
+    }
+
+    /**
      * 执行会员注册
      * @return
      * @throws Exception
      */
     @ResponseBody
     @PostMapping("/doreg")
-    public JsonResult doreg(@RequestBody MemberFrontVO memberFrontVO) throws Exception{
+    public JsonResult doreg(MemberFrontVO memberFrontVO) throws Exception{
         if(null==(memberFrontVO.getName())||"".equals(memberFrontVO.getName())){
             return JsonResult.error("please input your name!");
         }
@@ -221,9 +230,32 @@ public class MemberFrontController {
         Members members = new Members();
         Long memId = new IdWorker().nextId();
         members.setMemid(memId);
+        members.setUsername(memberFrontVO.getUsername());
+        members.setPassword(MD5Util.MD5(memberFrontVO.getPassword()));
         members.setRegtime(DateUtil.parseDateToStr("yyyy-MM-dd HH:mm:ss", new Date()));
         members.setStatus(StatusEnum.WAITCHECK);
-        members.setPassword(MD5Util.MD5(memberFrontVO.getPassword()));
+
+        members.setName(memberFrontVO.getName());
+        members.setJobtitle(memberFrontVO.getJobtitle());
+        members.setCompany(memberFrontVO.getCompany());
+        members.setEmail(memberFrontVO.getEmail());
+        members.setPhone(memberFrontVO.getPhone());
+        members.setViewcount(0);
+        members.setTotaldays(0);
+        members.setAvldays(0);
+
+        members.setTxt1("暂无");
+        members.setTxt2("暂无");
+        members.setTxt3("暂无");
+        members.setTxt4("暂无");
+        members.setTxt5("暂无");
+        members.setTxt6("暂无");
+        members.setTxt7("暂无");
+        members.setTxt8("暂无");
+        members.setTxt9("暂无");
+        members.setTxt10("暂无");
+        members.setTxt11("暂无");
+        members.setTxt12("暂无");
 
         String validateCode = WebUtil.getNumStrByLength(6);
 
@@ -443,7 +475,7 @@ public class MemberFrontController {
      */
     @ResponseBody
     @PostMapping("/resetpwd")
-    public JsonResult resetpwd(HttpServletRequest request, @RequestBody MemberFrontVO memberFrontVO) throws Exception{
+    public JsonResult resetpwd(HttpServletRequest request, MemberFrontVO memberFrontVO) throws Exception{
 
         Members tempMemberInfo = memberFrontService.queryMemberByEmail(memberFrontVO.getEmail());
         if(tempMemberInfo == null){
@@ -452,8 +484,8 @@ public class MemberFrontController {
 
         //修改密码为新密码
         Members pwdMember = new Members();
-        pwdMember.setPassword(memberFrontVO.getEmail());
-        pwdMember.setMemid(memberFrontVO.getMemid());
+        pwdMember.setPassword(MD5Util.MD5( memberFrontVO.getPassword() ));
+        pwdMember.setMemid(tempMemberInfo.getMemid());
 
         Integer updateResult = memberFrontService.updateMemberNewPwd(pwdMember);
 

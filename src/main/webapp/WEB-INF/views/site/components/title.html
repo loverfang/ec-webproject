@@ -5,14 +5,14 @@
             <#if member??>
             <!-- @ login -->
             <div class="two-t" align="right">
-                <a href="/members/" style="color:#FFFFFF;"><img src="${base}/res/site/images/images_021.jpg" width="24" height="26" align="absmiddle" class="pr15"></a>
+                <a href="/member/tocenter/" style="color:#FFFFFF;"><img src="${base}/res/site/images/images_021.jpg" width="24" height="26" align="absmiddle" class="pr15"></a>
             </div>
             <div class="two-t" align="right">
                 <input class="btn" type="button" value="LOGIN OUT" onclick="window.location.href='/logout'">
             </div>
             <#else>
             <div class="two-t pt10">
-                <form action="/tologin/" id="Top_Login_From">
+                <form action="/member/dologin/" id="Top_Login_From">
                     <ul>
                         <li>
                             <input class="inp" type="text" name="username" autocomplete="off" placeholder="Username">

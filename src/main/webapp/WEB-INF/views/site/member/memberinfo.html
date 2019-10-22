@@ -19,8 +19,8 @@
             </div>
 
             <div class="down p20">
-                <p class="btn"><a href="/members/">Member Infomation</a></p>
-                <p class="btn-2"><a href="/members/changepwd/">Change Password</a></p>
+                <p class="btn"><a href="/member/tocenter">Member Infomation</a></p>
+                <p class="btn-2"><a href="/member/tochangepwd">Change Password</a></p>
                 <p class="red f16px pb20 pt10"><a>If error, please contact the admin!</a></p>
             </div>
         </div>
@@ -35,148 +35,220 @@
                 <div class="reg-list btline">
                     <dl>
                         <dt><span class="red2">* </span>登录用户名 </dt>
-                        <dd>
-                            <input name="" type="text" class="inp w1" value="${member.username}" readonly="readonly">
+                        <dd><#if member ??><#if member.username ??>
+                            <input name="" type="text" class="inp w1" value="${member.username}" readonly="readonly" />
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly" />
+                            </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>会员卡类型 </dt>
-                        <dd>
+                        <dd><#if member ??><#if member.usertype ??>
                             <input name="" type="text" class="inp w1" value="${member.usertype}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                            </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>会员卡号 </dt>
-                        <dd>
+                        <dd><#if member ??><#if member.cardnum ??>
                             <input name="" type="text" class="inp w1" value="${member.cardnum}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                            </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>会员姓名 </dt>
-                        <dd>
+                        <dd><#if member ??><#if member.name ??>
                             <input name="" type="text" class="inp w1" value="${member.name}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                            </#if></#if>
                         </dd>
                     </dl>
 
                     <dl>
                         <dt><span class="red2">* </span>电话</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.phone ??>
                             <input name="" type="text" class="inp w1" value="${member.phone}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                            </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>邮箱</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.email ??>
                             <input name="" type="text" class="inp w1" value="${member.email}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                            </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>公司</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.company ??>
                             <input name="" type="text" class="inp w1" value="${member.company}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                            </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>职位</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.jobtitle ??>
                             <input name="" type="text" class="inp w1" value="${member.jobtitle}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                            </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>VCI服务顾问</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.vciguwen ??>
                             <input name="" type="text" class="inp w1" value="${member.vciguwen}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                        </#if></#if>
                         </dd>
                     </dl>
 
                     <dl>
                         <dt><span class="red2">* </span>可观看视频场次</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.viewcount ??>
                             <input name="" type="text" class="inp w1" value="${member.viewcount}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                        </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>总共可培训天数</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.totaldays ??>
                             <input name="" type="text" class="inp w1" value="${member.totaldays}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                        </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>剩余可培训天数</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.avldays ??>
                             <input name="" type="text" class="inp w1" value="${member.avldays}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                        </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>已享用会员权益1</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.txt1 ??>
                             <input name="" type="text" class="inp w1" value="${member.txt1}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                        </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>已享用会员权益2</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.txt2 ??>
                             <input name="" type="text" class="inp w1" value="${member.txt2}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                        </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>已享用会员权益3</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.txt3 ??>
                             <input name="" type="text" class="inp w1" value="${member.txt3}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                        </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>已享用会员权益4</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.txt4 ??>
                             <input name="" type="text" class="inp w1" value="${member.txt4}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                        </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>已享用会员权益5</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.txt5 ??>
                             <input name="" type="text" class="inp w1" value="${member.txt5}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                        </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>已享用会员权益6</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.txt6 ??>
                             <input name="" type="text" class="inp w1" value="${member.txt6}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                        </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>已享用会员权益7</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.txt7 ??>
                             <input name="" type="text" class="inp w1" value="${member.txt7}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                        </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>已享用会员权益8</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.txt8 ??>
                             <input name="" type="text" class="inp w1" value="${member.txt8}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                        </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>已享用会员权益9</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.txt9 ??>
                             <input name="" type="text" class="inp w1" value="${member.txt9}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                        </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>已享用会员权益10</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.txt10 ??>
                             <input name="" type="text" class="inp w1" value="${member.txt10}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                        </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>已享用会员权益11</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.txt11 ??>
                             <input name="" type="text" class="inp w1" value="${member.txt11}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                        </#if></#if>
                         </dd>
                     </dl>
                     <dl>
                         <dt><span class="red2">* </span>已享用会员权益12</dt>
-                        <dd>
+                        <dd><#if member ??><#if member.txt12 ??>
                             <input name="" type="text" class="inp w1" value="${member.txt12}" readonly="readonly">
+                            <#else>
+                            <input name="" type="text" class="inp w1" value="" readonly="readonly">
+                        </#if></#if>
                         </dd>
                     </dl>
                 </div>

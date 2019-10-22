@@ -83,14 +83,13 @@ function loginSubmit(){
     
     //提交表单
 	$.ajax({
-        url:'/login/dologin/',
+        url:'/member/dologin/',
        type:"POST",
        data:$("#commonLoginForm").serialize(),
     success:function(data){
-              var results = eval("("+data+")");
-              if(results.code == 1){
+              if(data.flag == 1){
                   //发送成功后弹出提示框
-                  layer.msg(results.message, {time: 2000,icon: 1}, function(){
+                  layer.msg(data.message, {time: 2000,icon: 1}, function(){
 	                layer.closeAll();
 	                window.location.reload();
 	              });
@@ -98,17 +97,16 @@ function loginSubmit(){
 				  //$("#Forget_Send").html("SEND");
         		  //$("#Forget_Send").attr("onclick","validateEmail()");
 			  }else{
-				  layer.msg(results.message, {time: 2000,icon: 2}, function(){
+				  layer.msg(data.message, {time: 2000,icon: 2}, function(){
 	                //layer.closeAll();
 	                //window.location.reload();
 	              });
 				  return false;
 			  }
-			  
-			  
+
           },
       error: function (XMLHttpRequest, textStatus, errorThrown) {
-	      
+	      console.log(errorThrown)
 	  }
   	});
 }

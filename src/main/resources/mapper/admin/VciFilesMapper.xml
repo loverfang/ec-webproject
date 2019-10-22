@@ -12,7 +12,7 @@
             <if test="nid != null">
                 and fid = #{fid}
             </if>
-            <if test="name != null">
+            <if test="name != null and name != ''">
                 and name = #{name}
             </if>
         </where>
@@ -20,16 +20,17 @@
 
     <!-- 批量插入文件 -->
     <insert id="saveVciFilesBatch" parameterType="java.util.List">
-        insert into vci_files(fid, name, file_path, psize, status, down_count, uptime)
+        insert into vci_files(fid, name, file_path, ext_name, psize, status, down_count, uptime)
         value
         <foreach collection="vciFilesList" index="index" item="item" separator=",">
-            ( #{fid:BIGINT},
-            #{name:VARCHAR},
-            #{file_path:VARCHAR},
-            #{psize:VARCHAR},
-            #{status:INTEGER},
-            #{down_count:INTEGER},
-            #{uptime:TIMESTAMP})
+            (#{item.fid},
+            #{item.name},
+            #{item.filePath},
+            #{item.extName},
+            #{item.psize},
+            #{item.status},
+            #{item.downCount},
+            #{item.uptime})
         </foreach>
     </insert>
 

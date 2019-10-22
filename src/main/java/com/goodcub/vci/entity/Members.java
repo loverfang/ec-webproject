@@ -1,5 +1,7 @@
 package com.goodcub.vci.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 import com.goodcub.common.enums.StatusEnum;
 import lombok.Data;
 
@@ -12,6 +14,7 @@ import lombok.Data;
  */
 @Data
 public class Members {
+    @JsonSerialize(using = ToStringSerializer.class)
     protected Long memid;
     protected String username;
     protected String password;

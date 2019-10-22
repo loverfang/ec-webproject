@@ -22,40 +22,40 @@
                 <dl>
                     <dt><span class="red2">* </span>Name </dt>
                     <dd>
-                        <input name="member.name" type="text" class="inp w1" autocomplete="off">
+                        <input name="name" type="text" class="inp w1"/>
                     </dd>
                 </dl>
 
                 <dl>
                     <dt><span class="red2">* </span>Job Title </dt>
                     <dd>
-                        <input name="member.jobtitle" type="text" class="inp w1" autocomplete="off">
+                        <input name="jobtitle" type="text" class="inp w1"/>
                     </dd>
                 </dl>
                 <dl>
                     <dt><span class="red2">* </span>Company Name </dt>
                     <dd>
-                        <input name="member.company" type="text" class="inp w1" autocomplete="off">
+                        <input name="company" type="text" class="inp w1"/>
                     </dd>
                 </dl>
                 <dl>
                     <dt><span class="red2">* </span>E-mail Address </dt>
                     <dd>
-                        <input name="member.email" type="text" class="inp w1" autocomplete="off">
+                        <input name="email" type="text" class="inp w1"/>
                     </dd>
                 </dl>
 
                 <dl>
                     <dt><span class="red2">* </span>UserName </dt>
                     <dd>
-                        <input name="member.username" type="text" class="inp w1" autocomplete="off">
+                        <input name="username" id="user_name" type="text" class="inp w1"/>
                     </dd>
                 </dl>
 
                 <dl>
                     <dt><span class="red2">* </span>Password</dt>
                     <dd>
-                        <input name="member.password" type="password" class="inp w1" autocomplete="off">
+                        <input name="password" id="pass_word" type="password" class="inp w1"/>
                         <P class="f16px pt10 huise2">Your password should be between 6 and 10 characters
                             <br>and should ideally include both letters and numbers.</P>
                     </dd>
@@ -63,22 +63,22 @@
                 <dl>
                     <dt><span class="red2">* </span>Confirm Password </dt>
                     <dd>
-                        <input type="password" id="confirm_password" class="inp w1" autocomplete="off">
+                        <input type="password" id="confirm_password" class="inp w1"/>
                     </dd>
                 </dl>
                 <dl>
                     <dt><span class="red2">* </span>Phone</dt>
                     <dd>
-                        <input name="member.phone" type="text" class="inp w1" autocomplete="off">
+                        <input name="phone" type="text" class="inp w1" />
                     </dd>
                 </dl>
                 <dl>
                     <dt><span class="red2">* </span>Security Code</dt>
                     <dd>
                         <div class="fl">
-                            <input name="vcode" type="text" class="inp w2" autocomplete="off">
+                            <input name="vcode" type="text" class="inp w2"/>
                         </div>
-                        <div class="fl yzm"><img src="/patchca.png" id="patchca" width="84" height="35" onclick="this.src=this.src+'?'+Math.random();" style="cursor: pointer;"></div>
+                        <div class="fl yzm"><img src="/captcha.jpg" id="patchca" width="84" height="35" onclick="this.src=this.src+'?'+Math.random();" style="cursor: pointer;"></div>
                         <div class="refresh fl"><a href="javascript:void(0);" onclick="document.getElementById('patchca').click();">Refresh</a></div>
                     </dd>
                 </dl>
@@ -93,7 +93,7 @@
                     <dt>&nbsp;</dt>
                     <dd class="f16px huise2">
                         <input type="checkbox" name="checkbox" id="checkbox" value="agree" autocomplete="off">
-                        I agree to the <span class="lanse2 underline"><a href="/regist/terms/" target="_blank"  class="huise2">terms and conditions</a></span>
+                        I agree to the <span class="lanse2 underline"><a href="/member/terms/" target="_blank"  class="huise2">terms and conditions</a></span>
                     </dd>
                 </dl>
 
@@ -128,25 +128,25 @@
 <script type="text/javascript">
     var layerIndex;
     function submitForm(){
-        var name = $("input[name='member.name']").val();
+        var name = $("input[name='name']").val();
         if(name==''){
             alert('please input your name!');
             return false;
         }
 
-        var jobtitle = $("input[name='member.jobtitle']").val();
+        var jobtitle = $("input[name='jobtitle']").val();
         if(jobtitle==''){
             alert('please input your jobtitle!');
             return false;
         }
 
-        var company = $("input[name='member.company']").val();
+        var company = $("input[name='company']").val();
         if(company==''){
             alert('please input your company!');
             return false;
         }
 
-        var email = $("input[name='member.email']").val();
+        var email = $("input[name='email']").val();
         if(email==''){
             alert('please input your email!');
             return false;
@@ -157,15 +157,15 @@
             return false;
         }
 
-        var username = $("input[name='member.username']").val();
+        var username = $("#user_name").val();
         if(username==''){
             alert('please input your username!');
             return false;
         }
 
-        var password = $("input[name='member.password']").val();
+        var password = $("#pass_word").val();
         if(password==''){
-            alert('please input your username!');
+            alert('please input your password!');
             return false;
         }
 
@@ -185,7 +185,7 @@
             return false;
         }
 
-        var phone = $("input[name='member.phone']").val();
+        var phone = $("input[name='phone']").val();
         if(phone==''){
             alert('please input your phone!');
             return false;
@@ -208,24 +208,22 @@
 
         //提交表单
         $.ajax({
-            url:'/regist/sub_regist/',
-            type:"POST",
+            url:'/member/doreg/',
+            type:"post",
             data:$("#registForm").serialize(),
             success:function(data){
-                var results = eval("("+data+")");
-                if(results.code == 1){
-
+                if(data.flag == 1){
                     //注册成功后展示提示信息
                     divOpen();
-
                 }else{
-                    alert(results.message);
+                    layer.msg(data.message,{time: 5000,icon: 2});
                     $("#Register_button").val("Register");
                     $("#Register_button").attr("onclick","submitForm()");
                     return false;
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) {
+                $("#registForm")[0].reset();
                 console.log(errorThrown);
             }
         });

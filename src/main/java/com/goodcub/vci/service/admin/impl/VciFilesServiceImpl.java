@@ -39,7 +39,7 @@ public class VciFilesServiceImpl implements VciFilesService {
 
     @Override
     public TableDataInfo queryVciFilesList(Map<String, Object> params, int pageNum, int pageSize) {
-        PageHelper.startPage(pageNum, pageSize,"sindex asc ,uptime desc");
+        PageHelper.startPage(pageNum, pageSize,"uptime desc");
         List<VciFileListVO> vciFileList = vciFilesMapper.queryVciFilesList(params);
 
         // 需要把Page包装成PageInfo对象才能序列化。该插件也默认实现了一个PageInfo

@@ -7,31 +7,11 @@
 </head>
 
 <body>
-<div class="topbj">
-    <div class="wrap">
-        <div class="logo"><img src="/res/site/images/logo.png" width="248" height="83"></div>
-        <div class="r-list">
-            <div class="two-t pt10">
-                <ul>
-                    <li>
-                        <input class="inp" type="text" name="textfield" id="textfield" value="Username">
-                    </li>
-                    <li>
-                        <input class="inp" type="text" name="textfield" id="textfield"  value="Password" >
-                    </li>
-                    <li>
-                        <input class="btn" name="" type="button" value="lOGIN">
-                    </li>
-                </ul>
-            </div>
-            <div class="thr-t"><span><a href="#">Forget Password </a></span><span><a href="#">Register</a> </span></div>
-        </div>
-    </div>
-</div>
+<#include "/site/components/title.html"/>
 <#include "/site/components/navbar.html"/>
 <div class="maincontent pt45">
     <div class="wrap">
-        <p><img src="/images/images_020.jpg" width="387" height="41"></p>
+        <p><img src="/res/site/images/images_020.jpg" width="387" height="41"></p>
         <p class="f16px pt10 lh24 pb20">&nbsp;</p>
 
         <form name="form1" method="post" id="resetForm">
@@ -39,7 +19,7 @@
                 <dl>
                     <dt><span class="red2">* </span>E-mail Address </dt>
                     <dd>
-                        <input name="member.email" type="text" class="inp w1" autocomplete="off">
+                        <input name="email" type="text" class="inp w1" autocomplete="off">
                     </dd>
                 </dl>
 
@@ -55,7 +35,7 @@
                 <dl>
                     <dt><span class="red2">* </span>New Password</dt>
                     <dd>
-                        <input name="member.password" type="password" class="inp w1">
+                        <input name="password" id="pass_word" type="password" class="inp w1">
                         <P class="f16px pt10 huise2">Your password should be between 6 and 10 characters
                             <br>	and should ideally include both letters and numbers.</P>
                     </dd>
@@ -95,7 +75,7 @@
     var step1Layer;
     function resetpwd(){
 
-        var email = $("input[name='member.email']").val();
+        var email = $("input[name='email']").val();
 
         if(email==''){
             alert('please input your email!');
@@ -107,7 +87,7 @@
             return false;
         }
 
-        var password = $("input[name='member.password']").val();
+        var password = $("#pass_word").val();
         if(password==''){
             alert('please input your username!');
             return false;
@@ -133,13 +113,11 @@
         $("#Reset_button").removeAttr("onclick");
         //提交表单
         $.ajax({
-            url:'/resetpwd/',
-            type:"POST",
+            url:'/member/resetpwd/',
+            type:"post",
             data:$("#resetForm").serialize(),
             success:function(data){
-                var results = eval("("+data+")");
-                if(results.code == 1){
-
+                if(data.flag == 1){
                     //页面层-自定义
                     step1Layer = layer.open({
                         type: 1,
@@ -155,13 +133,12 @@
                     $("#Reset_button").attr("onclick","resetpwd()");
 
                 }else{
-                    layer.alert(results.message);
-
+                    layer.msg(data.message,{time: 5000,icon: 2});
+                    $("#resetForm")[0].reset();
                     $("#Reset_button").val("Change Password");
                     $("#Reset_button").attr("onclick","resetpwd()");
 
                     return false;
-
                 }
             },
             error: function (XMLHttpRequest, textStatus, errorThrown) { }
