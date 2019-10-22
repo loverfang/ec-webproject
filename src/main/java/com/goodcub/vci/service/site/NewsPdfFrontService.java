@@ -1,6 +1,7 @@
 package com.goodcub.vci.service.site;
 
 import com.goodcub.common.page.TableDataInfo;
+import com.goodcub.vci.vo.site.NewsPdfFrontVO;
 
 import java.util.Map;
 
@@ -12,5 +13,8 @@ import java.util.Map;
  * @Version 1.0
  */
 public interface NewsPdfFrontService {
+
     TableDataInfo queryNewsPdfFrontList(Map<String, Object> params, int pageNum, int pageSize);
+
+    NewsPdfFrontVO queryNewsPdfFrontInfo(Integer pid);
 }

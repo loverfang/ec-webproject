@@ -1,7 +1,9 @@
 package com.goodcub.vci.controller.site;
 
 import com.goodcub.common.upload.FileuploadUtil;
+import com.goodcub.vci.service.site.NewsPdfFrontService;
 import com.goodcub.vci.service.site.VciFilesFrontService;
+import com.goodcub.vci.vo.site.NewsPdfFrontVO;
 import com.goodcub.vci.vo.site.VciFileFrontVO;
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
@@ -28,6 +30,9 @@ public class DownloadController {
 
     @Resource
     VciFilesFrontService vciFilesFrontService;
+
+    @Resource
+    NewsPdfFrontService newsPdfFrontService;
 
     /**
      * 通用文件下载
@@ -80,23 +85,23 @@ public class DownloadController {
 
     /**
      * News的Pdf文件下载
-     * @param fileId
+     * @param pId
      * @param response
      * @throws Exception
      */
     @GetMapping("/downloadNewsPdf")
-    public void downloadNewsPdf(HttpServletRequest request, HttpServletResponse response, Long fileId) throws Exception {
+    public void downloadNewsPdf(HttpServletRequest request, HttpServletResponse response, Integer pId) throws Exception {
 
         // 根据fileId查询出其对应的路径 和 原生文件名
-        VciFileFrontVO vciFile = vciFilesFrontService.queryVciFile(fileId);
-        if(vciFile != null) {
+        NewsPdfFrontVO newsPdfFrontVO = newsPdfFrontService.queryNewsPdfFrontInfo(pId);
+        if(newsPdfFrontVO != null) {
             // 文件的实际路径
-            String serverPath = FileuploadUtil.getServerPath( vciFile.getFilePath() );
+            String serverPath = FileuploadUtil.getServerPath( newsPdfFrontVO.getPdfPath() );
             logger.info("文件的实际路径" + serverPath);
 
             // 配置文件下载
             // 下载文件能正常显示中文
-            String filename = URLEncoder.encode(vciFile.getName(), "UTF-8");
+            String filename = URLEncoder.encode(newsPdfFrontVO.getPdfname(), "UTF-8");
 
             File file = new File(serverPath);
             // 清空response

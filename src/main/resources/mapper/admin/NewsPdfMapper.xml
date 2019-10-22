@@ -120,5 +120,10 @@
             </if>
         </where>
     </select>
+    <!-- 前台 查询单篇文章类型信息 -->
+
+    <select id="queryNewsPdfFrontInfo" resultType="com.goodcub.vci.vo.site.NewsPdfFrontVO">
+        select * from news_pdf where pid = #{pid}
+    </select>
 
 </mapper>

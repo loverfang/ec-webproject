@@ -5,6 +5,7 @@ import com.goodcub.vci.entity.NewsExt;
 import com.goodcub.vci.entity.NewsPdf;
 import com.goodcub.vci.entity.NewsPhoto;
 import com.goodcub.vci.vo.admin.*;
+import com.goodcub.vci.vo.site.NewsPdfFrontVO;
 import com.goodcub.vci.vo.site.NewsPdfListFrontVO;
 import org.apache.ibatis.annotations.Param;
 
@@ -36,4 +37,5 @@ public interface NewsPdfMapper {
 
     List<NewsPdfListFrontVO> queryNewsPdfFrontList(Map<String,Object> params);
 
+    NewsPdfFrontVO queryNewsPdfFrontInfo(Integer pid);
 }

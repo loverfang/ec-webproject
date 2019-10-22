@@ -5,6 +5,7 @@ import com.github.pagehelper.PageInfo;
 import com.goodcub.common.page.TableDataInfo;
 import com.goodcub.vci.mapper.NewsPdfMapper;
 import com.goodcub.vci.service.site.NewsPdfFrontService;
+import com.goodcub.vci.vo.site.NewsPdfFrontVO;
 import com.goodcub.vci.vo.site.NewsPdfListFrontVO;
 import org.springframework.stereotype.Service;
 
@@ -43,4 +44,8 @@ public class NewsPdfFrontServiceImpl implements NewsPdfFrontService {
         return tableDataInfo;
     }
 
+    @Override
+    public NewsPdfFrontVO queryNewsPdfFrontInfo(Integer pid) {
+        return newsPdfMapper.queryNewsPdfFrontInfo(pid);
+    }
 }
