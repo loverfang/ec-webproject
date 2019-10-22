@@ -159,6 +159,7 @@ public class NewsController {
         news.setAuthor(newsInfoVO.getAuthor());
         news.setTitle(newsInfoVO.getTitle());
         news.setCoverImg(newsInfoVO.getCoverImg());
+        news.setAuthorImg(newsInfoVO.getAuthorImg());
         news.setPtitle(newsInfoVO.getPtitle());
         news.setPkeywords(newsInfoVO.getPkeywords());
         news.setPdescription(newsInfoVO.getPdescription());
@@ -189,6 +190,7 @@ public class NewsController {
         news.setAuthor(newsInfoVO.getAuthor());
         news.setTitle(newsInfoVO.getTitle());
         news.setCoverImg(newsInfoVO.getCoverImg());
+        news.setAuthorImg(newsInfoVO.getAuthorImg());
         news.setPtitle(newsInfoVO.getPtitle());
         news.setPkeywords(newsInfoVO.getPkeywords());
         news.setPdescription(newsInfoVO.getPdescription());
