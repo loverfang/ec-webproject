@@ -2,16 +2,15 @@
 <html>
 <head>
 	<title>vendor directory</title>
-	<link href="/style/default.css" rel="stylesheet" type="text/css">
-	<link href="/style/style.css" rel="stylesheet" type="text/css">
+    <link href="${base}/res/site/style/default.css" rel="stylesheet" type="text/css">
+    <link href="${base}/res/site/style/style.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-<jsp:include page="/title.jsp" />
-<jsp:include page="/navbar.jsp" />
+<#include "/site/components/title.html"/>
+<#include "/site/components/navbar.html"/>
 
 <div class="maincontent">
-  
   <div class="seach-area">
 	<div class="fl" >
 		<div class="vendors-all" style="display:block;opacity:0;cursor: pointer;">
