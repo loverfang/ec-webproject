@@ -15,4 +15,5 @@ public class VciFileFrontVO {
     private Long fid;
     private String name;
     private String filePath;
+    private String extName;
 }

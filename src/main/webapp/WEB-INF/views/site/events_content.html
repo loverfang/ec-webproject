@@ -65,7 +65,7 @@
                 <#if pdfList??>
                     <#list pdfList as item>
                         <p class="btn">
-                            <a href="/front/downpdfUpload.action?id=${item.pid}">Download full report</a>
+                            <a href="/downloadNewsPdf?pId=${item.pid}">Download full report</a>
                         </p>
                     </#list>
                 </#if>

@@ -28,7 +28,7 @@
                 <div class="time fl pl20">${newsDetail.endate}</div>
                 <div class="shareicon">
                     <ul>
-                        <li><a class="jiathis_button_email"><img src="${base}/res/site//images/btn3.png" width="47" height="50"></a></li>
+                        <li><a class="jiathis_button_email"><img src="${base}/res/site/images/btn3.png" width="47" height="50"></a></li>
                         <li><a><img src="${base}/res/site/images/btn2.png" width="47" height="50"></a></li>
                         <li><a class="jiathis_button_linkedin"><img src="${base}/res/site/images/btn1.png" width="47" height="50"></a></li>
                     </ul>
@@ -71,7 +71,7 @@
                         <a href="javascript:void(0);" onclick="openLoginLayer();">Download full report</a>
                         </#if>
                         -->
-                        <a href="/front/downpdfUpload.action?id=${item.pid}?c">Download full report</a>
+                        <a href="/downloadNewsPdf?pId=${item.pid}">Download full report</a>
                     </p>
                 </#list></#if>
                 <p class="btn-2"><a href="/insights/">About VCI Insights </a></p>

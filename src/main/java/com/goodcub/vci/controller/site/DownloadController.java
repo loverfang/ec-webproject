@@ -1,6 +1,8 @@
 package com.goodcub.vci.controller.site;
 
 import com.goodcub.common.upload.FileuploadUtil;
+import com.goodcub.vci.exception.DownloadException;
+import com.goodcub.vci.exception.DownloanExceptionCodeEnum;
 import com.goodcub.vci.service.site.NewsPdfFrontService;
 import com.goodcub.vci.service.site.VciFilesFrontService;
 import com.goodcub.vci.vo.site.NewsPdfFrontVO;
@@ -52,13 +54,18 @@ public class DownloadController {
 
             // 配置文件下载
             // 下载文件能正常显示中文
-            String filename = URLEncoder.encode(vciFile.getName(), "UTF-8");
+            String filename = URLEncoder.encode(vciFile.getName() + "." + vciFile.getExtName(), "UTF-8");
 
             File file = new File(serverPath);
+            if(!file.exists()){
+                response.sendError(404);
+                throw new DownloadException(DownloanExceptionCodeEnum.DOWNLOAN_FILE_NO_EXISTS);
+            }
+
             // 清空response
             response.reset();
             // 设置response的Header
-            response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(filename, "UTF-8"));
+            response.addHeader("Content-Disposition", "attachment;filename=" + filename);
             response.addHeader("Content-Length", "" + file.length());
             response.setContentType("application/octet-stream");
             OutputStream toClient = null;
@@ -101,13 +108,18 @@ public class DownloadController {
 
             // 配置文件下载
             // 下载文件能正常显示中文
-            String filename = URLEncoder.encode(newsPdfFrontVO.getPdfname(), "UTF-8");
+            String filename = URLEncoder.encode(newsPdfFrontVO.getPdfname() + "." + "pdf", "UTF-8");
 
             File file = new File(serverPath);
+            if(!file.exists()){
+                response.sendError(404);
+                throw new DownloadException(DownloanExceptionCodeEnum.DOWNLOAN_FILE_NO_EXISTS);
+            }
+
             // 清空response
             response.reset();
             // 设置response的Header
-            response.addHeader("Content-Disposition", "attachment;filename=" + URLEncoder.encode(filename, "UTF-8"));
+            response.addHeader("Content-Disposition", "attachment;filename=" + filename);
             response.addHeader("Content-Length", "" + file.length());
             response.setContentType("application/octet-stream");
             OutputStream toClient = null;
