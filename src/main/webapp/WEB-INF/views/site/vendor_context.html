@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>vendor directory</title>
+    <link href="${base}/res/site/style/default.css" rel="stylesheet" type="text/css">
+    <link href="${base}/res/site/style/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<#include "/site/components/title.html"/>
+<#include "/site/components/navbar.html"/>
+
+<div class="maincontent">
+    <div class="seach-area">
+        <div class="fl" >
+            <div class="vendors-all" style="display:block;opacity:0;cursor: pointer;">
+                <ul><#if categoryList??><#list categoryList as item>
+                    <li <#if cid??> <#if item.cid == cid>class="on"</#if> </#if>><a href="/vendors?cid=${item.cid}">${item.cname}</a></li></#list></#if>
+                </ul>
+            </div>
+           <div class="xiala-tit"><a href="/vendors/"><img src="/res/site/images/flei.jpg" width="142" height="50"></a></div>
+</div>
+
+<form action="/vendors/" method="post">
+    <input type="hidden" name="cid" value="<#if cid??>${cid}</#if>"/>
+    <div class="inp-con">
+        <input type="text" name="name" placeholder="Enter vendor name" class="inp" <#if cname??>value="${cname}"</#if> />
+    </div>
+    <div class="btn-con">
+        <input type="submit" value=" "  class="btn" />
+    </div>
+</form>
+</div>
+
+<div class="conmpanydiv">
+    <dl>
+        <dt class="imp f24px huise2">COMPANY NAME </dt>
+        <dd>
+            <#if vendor??>
+                <input type="text" class="inp" value="${vendor.name}">
+            <#else>
+                <input type="text" class="inp" value="">
+            </#if>
+        </dd>
+    </dl>
+    <dl>
+        <dt class="imp f24px huise2">CATEGORY  </dt>
+        <dd>
+            <input type="text" class="inp" value="${currentCategory.cname}">
+        </dd>
+    </dl>
+</div>
+
+<!--  one-->
+<div class="wrap ">
+    <div class="mainleft fl">
+        <div class="down ">
+            <p class="oneleft">
+                <#if vendor??><#if vendor.coverImg??>
+                <img src="${vendor.coverImg}" width="290" height="170">
+            </#if></#if>
+        </p>
+        <p class="f16px lh24 p20">
+	        <span class="underline">
+                <#if vendor??><#if vendor.doman??>
+                <a href="${vendor.doman}">${vendor.doman}</a>
+                </#if></#if>
+        </span>
+        <br/>
+        <span class="imp f24px lh30">
+                <#if vendor??><#if vendor.name??>${vendor.name}</#if></#if>
+    </span>
+    <br/>
+    <#if vendor??><#if vendor.info??>${vendor.info}</#if></#if>
+</p>
+</div>
+</div>
+
+<div class="mainright fr">
+    <div class="tit">Company Introduction</div>
+    <div class="con">
+        <#if vendor??><#if vendor.introduction??>${vendor.introduction}</#if></#if>
+</div>
+</div>
+</div>
+<!-- two-->
+<div class="wrap">
+
+    <div class="mainleft fl">
+        <#if pdfList??><#list pdfList as item>
+        <div class="huisebj">
+            <div class="pdfimg"><img src="${item.coverImg}" width="270" height="360"></div>
+        </div></#list>
+</#if>
+
+<div class="down p20">
+    <#if pdfList??>
+    <#list pdfList as item>
+    <p class="btn">
+        <a href="${item.coverImg}">Download brochure</a>
+    </p>
+</#list>
+</#if>
+<p class="btn-2"><a href="/marketingwithus/">About VCI Marketing with Us ®</a></p>
+<p class="red f16px pb20 pt10"><a href="/stories/">Learn more about successful stories</a></p>
+</div>
+</div>
+
+<div class="mainright fr">
+    <div class="tit">Solutions</div>
+    <div class="con">
+        <#if vendor??><#if vendor.solutions??>${vendor.solutions}</#if></#if>
+</div>
+</div>
+</div>
+<!--  three-->
+<div class="wrap">
+    <div class="mainleft fl">
+        <div class="blackline"></div>
+        <div class="down p20">
+            <p class="imp f24px lh30 pb20">The VCI Vendors Directory is the database dedicated to help supply chain, procurement, and logistics professionals to find the products &amp; services they need.</p>
+            <p class="btn"><a href="Mailto:demand@vcintegration.com?subject=I would like to add listing at VCI Supply Chain and Logistics Vendors Directory">Add Listing </a></p>
+            <p class="f16px lh24 pt10">Contact us to add listing<br>
+                <a href="Mailto:demand@vcintegration.com" class="underline">demand@vcintegration.com </a></p>
+        </div>
+    </div>
+    <div class="mainright fr">
+        <div class="tit">Highlights<br>
+        </div>
+        <div class="con">
+            <#if vendor??><#if vendor.highlights??>${vendor.highlights}</#if></#if>
+</div>
+</div>
+</div>
+</div>
+
+<#include "/site/components/footer.html"/>
+<script type="text/javascript" src="/js/common_login.js"></script>
+<script type="text/javascript">
+    $(window).load(function(){
+        //显示
+        $(".fl").on("mouseenter",".xiala-tit",function(e){
+            $(".vendors-all").show();
+            $(".vendors-all").animate({opacity:'1'},500);
+            e.stopPropagation();
+        });
+
+        $(".fl").on("mouseleave",function(e){
+            $(".vendors-all").animate({opacity:'0'},500,function(){
+                $(this).hide();
+            });
+            e.stopPropagation();
+        });
+    });
+</script>
+</body>
+</html>

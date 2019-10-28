@@ -148,7 +148,7 @@
 
     <!-- 前台根据Pid查询产品(Vender)详情 -->
     <select id="queryVendorFrontInfo" resultType="com.goodcub.vci.vo.site.VendorFrontVO" parameterType="java.lang.Integer" >
-		select * from products where pid =  #pid#
+		select * from products where pid = #{pid}
 	</select>
 
 </mapper>
