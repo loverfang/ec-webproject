@@ -58,7 +58,7 @@ public class DownloadController {
 
             File file = new File(serverPath);
             if(!file.exists()){
-                response.sendError(404);
+                // response.sendError("");
                 throw new DownloadException(DownloanExceptionCodeEnum.DOWNLOAN_FILE_NO_EXISTS);
             }
 
@@ -112,7 +112,7 @@ public class DownloadController {
 
             File file = new File(serverPath);
             if(!file.exists()){
-                response.sendError(404);
+                // response.sendError(404);
                 throw new DownloadException(DownloanExceptionCodeEnum.DOWNLOAN_FILE_NO_EXISTS);
             }
 
