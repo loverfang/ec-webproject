@@ -54,7 +54,7 @@ public class DownloadController {
 
             // 配置文件下载
             // 下载文件能正常显示中文
-            String filename = URLEncoder.encode(vciFile.getName() + "." + vciFile.getExtName(), "UTF-8");
+            String filename = URLEncoder.encode(vciFile.getName(), "UTF-8");
 
             File file = new File(serverPath);
             if(!file.exists()){

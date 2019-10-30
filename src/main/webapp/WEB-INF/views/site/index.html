@@ -15,7 +15,7 @@
         <div class="top_slide_wrap">
             <div id="slidebody">
                 <div class="bx-wrapper" style="max-width: 100%;">
-                    <class="slide_box bxslider" >
+                    <ul class="slide_box bxslider" >
                         <#if adList??><#list adList as ad>
                         <li <#if ad_index == 0>class="bx-clone"</#if>>
                           <a href="${ad.adurl}" target="_blank"><#if ad.coverImg??><img src="${ad.coverImg}" width="1920" height="653"><#else><p align="center">图片准备中...</p></#if></a>

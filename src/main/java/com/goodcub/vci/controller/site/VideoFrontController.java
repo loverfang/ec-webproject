@@ -60,7 +60,7 @@ public class VideoFrontController {
 
         HttpSession session = request.getSession(false);
         if(session == null){
-            response.sendRedirect("/");
+            response.sendRedirect("/member/tologin");
             return null;
         }else{
             Object tempMem = session.getAttribute("member");
@@ -82,7 +82,7 @@ public class VideoFrontController {
                 request.setAttribute("ntype", "videos");
                 return "site/membership";
             }else{
-                response.sendRedirect("/");
+                response.sendRedirect("/member/tologin");
                 return null;
             }
         }
