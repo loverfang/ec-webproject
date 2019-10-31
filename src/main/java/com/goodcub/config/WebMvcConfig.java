@@ -35,7 +35,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
         registry.viewResolver(resolver);
     }
 
-
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // 设置文件上传的文件不拦截
