@@ -64,28 +64,46 @@ public class DownloadController {
 
             // 清空response
             response.reset();
-            // 设置response的Header
-            response.addHeader("Content-Disposition", "attachment;filename=" + filename);
-            response.addHeader("Content-Length", "" + file.length());
-            response.setContentType("application/octet-stream");
-            OutputStream toClient = null;
-            InputStream fis = null;
 
-            //打开文件输入流 和 servlet输出流
+            // 实现pdf预览
+            response.setContentType("application/pdf");
             try {
-                toClient = new BufferedOutputStream(response.getOutputStream());
-                fis = new BufferedInputStream(new FileInputStream(file));
-                //通过ioutil 对接输入输出流，实现文件下载
-                IOUtils.copy(fis, toClient);
-                toClient.flush();
-            } catch (Exception e) {
-                logger.error("【文件下载失败】", e);
-                // throw new RuntimeException("文件下载失败");
-            } finally {
-                //关闭流
-                IOUtils.closeQuietly(fis);
-                IOUtils.closeQuietly(toClient);
+                FileInputStream fileInputStream = new FileInputStream(file);
+                OutputStream outputStream = response.getOutputStream();
+                IOUtils.write(IOUtils.toByteArray(fileInputStream), outputStream);
+                response.setHeader("Content-Disposition", "inline; filename=" + filename);
+                outputStream.flush();
+            } catch (FileNotFoundException e) {
+                // e.printStackTrace();
+                throw new RuntimeException("文件未找到!");
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new RuntimeException("文件读取异常");
             }
+
+            // 实现pdf文件下载
+            // 设置response的Header
+//            response.addHeader("Content-Disposition", "attachment;filename=" + filename);
+//            response.addHeader("Content-Length", "" + file.length());
+//            response.setContentType("application/octet-stream");
+//            OutputStream toClient = null;
+//            InputStream fis = null;
+//
+//            //打开文件输入流 和 servlet输出流
+//            try {
+//                toClient = new BufferedOutputStream(response.getOutputStream());
+//                fis = new BufferedInputStream(new FileInputStream(file));
+//                //通过ioutil 对接输入输出流，实现文件下载
+//                IOUtils.copy(fis, toClient);
+//                toClient.flush();
+//            } catch (Exception e) {
+//                logger.error("【文件下载失败】", e);
+//                // throw new RuntimeException("文件下载失败");
+//            } finally {
+//                //关闭流
+//                IOUtils.closeQuietly(fis);
+//                IOUtils.closeQuietly(toClient);
+//            }
         }
 
     }
