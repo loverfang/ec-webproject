@@ -43,10 +43,14 @@
     <div class="tit">TFC 橙色供应链行动</div>
     <div class="con">
         <div class="vido-list">
-            <ul><#if data??><#if data.items??> <#list data.items as item>
+            <ul><#if data??><#if data.items??><#list data.items as item>
                 <li>
                     <a href="${item.vurl}" target="_blank">
-                      <div class="vido-div"><#if item.coverImg??><img src="${item.coverImg}" width="225" height="160"></#if></div>
+                      <div class="vido-div">
+                          <#if item.coverImg??>
+                          <img src="${item.coverImg!''}" width="225" height="160">
+                          </#if>
+                      </div>
                       <div class="vido-con">${item.title}</div>
                     </a>
                 </li></#list></#if></#if>
