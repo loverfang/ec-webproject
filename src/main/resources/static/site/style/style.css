@@ -1,6 +1,7 @@
 @charset "utf-8";
 /* CSS Document */
 /*home*/
+a{ text-decoration: none;}
 .topbj { width: 100%; background: #49134c; height: 158px; margin-left: auto; margin-right: auto; }
 .topbj .logo { float: left; width: 248px; padding-top: 40px; }
 .topbj .r-list { width: 303px; float: right; padding-top: 40px; color: #ffffff; font-size: 14px; }
@@ -43,7 +44,7 @@
 .wz-home .left-tit { font-family: Impact, Arial, Helvetica, sans-serif; width: 250px; float: left; overflow: hidden; white-space: nowrap; -o-text-overflow: ellipsis; text-overflow: ellipsis; vertical-align: bottom; height: 18px; }
 .wz-home .left-time { font-family: Impact, Arial, Helvetica, sans-serif; width: 250px; float: right; overflow: hidden; white-space: nowrap; -o-text-overflow: ellipsis; text-overflow: ellipsis; vertical-align: bottom; height: 18px; }
 .wz-home .right-tit { font-family: Impact, Arial, Helvetica, sans-serif; width: 500px; float: left; overflow: hidden; white-space: nowrap; -o-text-overflow: ellipsis; text-overflow: ellipsis; vertical-align: bottom; height: 18px; }
-.morelist ul li { width: 520px; float: left; text-align: right; padding-top: 45px; padding-bottom: 100px; }
+.morelist ul li { width: 520px; float: left; text-align: right; padding-top: 45px; padding-bottom: 40px; }
 .morelist .inp { width: 103px; height: 33px; line-height: 33px; text-align: center; background: #ff6600; color: #FFF; cursor: pointer }
 .footer { width: 100%; margin-left: auto; margin-right: auto; overflow: hidden; }
 .f-1 { background: #ff6600; height: 240px; padding-top: 55px; padding-bottom: 55px; }
@@ -215,4 +216,56 @@
 .window5 .tit span { display:blockl; line-height:45px; color:#FFF; padding-left:10px; padding-right:10px; }
 .window5 .con { border:1px solid #949292; padding:30px; }
 
- 
+/*2020.02.26新增*/
+#boxscroll-1 {
+    height: 300px;
+    width: 520px;
+    padding-left: 20px;
+
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 18px;
+    overflow-y: scroll;
+    float: left;
+    margin-bottom: 50px;
+}
+
+#boxscroll-2 {
+    height: 300px;
+    width: 520px;
+    padding-left: 20px;
+
+    font-family: Georgia, "Times New Roman", Times, serif;
+    font-size: 18px;
+    overflow-y: scroll;
+    float: left;
+    margin-bottom: 50px;
+}
+
+#boxscroll-1 .wrapper {
+    min-height: 300px;
+    background: #fff;
+
+}
+
+#boxscroll-2 .wrapper {
+    min-height: 300px;
+    background: #fff;
+}
+
+.wz-vido { padding-top: 20px;  overflow: hidden; padding-bottom: 0px; }
+.wz-vido dl { float: left; width: 520px; padding-left: 20px; }
+.wz-vido dt a { font-size: 18px; color: #ff6600; background: url(../images/line1.jpg) no-repeat bottom left; padding-bottom: 10px; margin-bottom: 20px; display: block; font-weight: bold; }
+.wz-vido dd p { width: 500px; height: 40px; font-size: 16px; line-height: 20px; overflow: hidden; padding-top: 14px; clear: both }
+.wz-vido dd { display: block; clear: both; width: 520px; }
+.wz-vido dd ul li { width: 520px; padding-bottom: 30px; }
+.wz-vido .left-tit { font-family: Impact, Arial, Helvetica, sans-serif; width: 250px; float: left; overflow: hidden; white-space: nowrap; -o-text-overflow: ellipsis; text-overflow: ellipsis; vertical-align: bottom; height: 18px; }
+.wz-vido .left-time { font-family: Impact, Arial, Helvetica, sans-serif; width: 250px; float: right; overflow: hidden; white-space: nowrap; -o-text-overflow: ellipsis; text-overflow: ellipsis; vertical-align: bottom; height: 18px; }
+.wz-vido .right-tit { font-family: Impact, Arial, Helvetica, sans-serif; width: 500px; float: left; overflow: hidden; white-space: nowrap; -o-text-overflow: ellipsis; text-overflow: ellipsis; vertical-align: bottom; height: 18px; }
+
+/*2020.03.01新增*/ 
+.vido-list{ width: 100%; margin: 0 auto; overflow: hidden;}
+.vido-list ul li{ float: left; width:215px; margin: 15px ; }
+.vido-list a{ text-decoration: none !important;}
+.vido-list .vido-con a{color:#7f7c7c; }
+.vido-list .vido-div{ width: 215px; height:160px ; clear: both;background: #f1f1f1; margin-bottom: 10px;}
+.vido-list .vido-con{ font-size:14px; width:215px; line-height: 28px; height:28px ;clear: both; text-align: center;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}

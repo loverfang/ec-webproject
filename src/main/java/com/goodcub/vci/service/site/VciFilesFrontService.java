@@ -10,7 +10,6 @@ import org.apache.commons.logging.LogFactory;
  * @Date 2019/10/21
  * @Version V1.0
  **/
-
 public interface VciFilesFrontService {
     VciFileFrontVO queryVciFile(Long fid);
 }

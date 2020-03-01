@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Event</title>
+    <link href="${base}/res/site/style/default.css" rel="stylesheet" type="text/css">
+    <link href="${base}/res/site/style/style.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<#include "/site/components/title.html"/>
+<#include "/site/components/navbar.html"/>
+
+<div class="maincontent pt70"  >
+    <div class="wrap pb50"> <img src="${base}/res/site/images/event-tit.jpg"  ></div>
+    <div class="event-list">
+        <ul><#if data??><#if data.items??><#list data.items as item>
+            <li>
+                <a href="/events/${item.nid?c}.html" target="_blank">
+                    <article class="leftcon">
+                        <span class="tit">${item.nlable}</span>
+                        <span class="tit-2">${item.title}</span>
+                        <article class="maincon">
+                            ${item.ndigest}
+                        </article>
+                    </article>
+                    <article class="fr"> <span class="date-tit">Date + Location</span>
+                        <p class="date-con"> <span>${item.endate}</span> <span>${item.city},${item.province}</span> </p>
+                        <span class="img">
+                            <#if item.coverImg??>
+                            <img src="${item.coverImg}" width="329" height="264">
+                            </#if>
+                        </span>
+                    </article>
+                </a>
+            </li></#list></#if></#if>
+        </ul>
+    </div>
+    <div class="wrap">
+        <div class="pages">
+            <#if data??><#if data.items??>
+            <!-- 导入自定义ftl -->
+            <#import "/ftl/page.ftl" as p/>
+            <!-- 使用该标签 -->
+            <@p.pager data "/events" {} 3/>
+            </#if></#if>
+        </div>
+    </div>
+</div>
+<#include "/site/components/footer.html"/>
+</body>
+</html>

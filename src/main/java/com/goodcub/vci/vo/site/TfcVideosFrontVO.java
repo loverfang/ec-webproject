@@ -1,5 +1,6 @@
 package com.goodcub.vci.vo.site;
 
+import com.goodcub.vci.entity.TfcVideos;
 import com.goodcub.vci.entity.Videos;
 import lombok.Data;
 
@@ -10,6 +11,6 @@ import lombok.Data;
  * @Version V1.0
  **/
 @Data
-public class VideosFrontVO extends Videos {
-
+public class TfcVideosFrontVO extends TfcVideos {
+    private String typeName;
 }

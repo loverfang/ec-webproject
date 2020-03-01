@@ -4,6 +4,7 @@ import com.goodcub.common.enums.NewsTypeEnum;
 import com.goodcub.common.page.TableDataInfo;
 import com.goodcub.vci.service.site.AdvertiseFrontService;
 import com.goodcub.vci.service.site.NewsFrontService;
+import com.goodcub.vci.service.site.TfcFrontService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -20,11 +21,15 @@ import java.util.Map;
  **/
 @Controller
 public class IndexController {
+
     @Resource
     AdvertiseFrontService advertiseFrontService;
 
     @Resource
     NewsFrontService newsFrontService;
+
+    @Resource
+    TfcFrontService tfcFrontService;
 
     /**
      * 网站首页
@@ -35,7 +40,7 @@ public class IndexController {
     public String home(HttpServletRequest request){
         Map<String, Object> newsParams= new HashMap<String, Object>();
 
-        //Insights
+        // Insights
         newsParams.put("ntype",  NewsTypeEnum.INSIGHTS);
         TableDataInfo insightsData = newsFrontService.queryNewsFrontList(newsParams,1,3);
         if(insightsData!=null){
@@ -44,7 +49,7 @@ public class IndexController {
             request.setAttribute("insightsList", null);
         }
 
-        //Events
+        // Events
         newsParams.put("ntype", NewsTypeEnum.EVENTS);
         TableDataInfo eventData =  newsFrontService.queryNewsFrontList(newsParams,1,3);
         if(eventData!=null){
@@ -53,13 +58,32 @@ public class IndexController {
             request.setAttribute("eventsList", null);
         }
 
-        //banner广告
+        // Banner广告
         Map<String,Object> adParams = new HashMap<>();
         TableDataInfo adTableDataInfo = advertiseFrontService.queryAdvertiseFrontVOList(adParams,1,20);
         if(adTableDataInfo!=null) {
             request.setAttribute("adList", adTableDataInfo.getItems());
         }else {
             request.setAttribute("adList", null);
+        }
+
+        // 2020.3.1新增加功能
+        // Lives
+        newsParams.put("ntype", NewsTypeEnum.LIVES);
+        TableDataInfo livesData =  newsFrontService.queryNewsFrontList(newsParams,1,1000);
+        if(livesData!=null){
+            request.setAttribute("livesList", livesData.getItems());
+        }else {
+            request.setAttribute("livesList", null);
+        }
+
+        // TFC类别列表
+        Map<String,Object> tfcParams = new HashMap<>();
+        TableDataInfo tfcTableDataInfo = tfcFrontService.queryTfcFrontVOList(tfcParams,1,1000);
+        if(tfcTableDataInfo!=null) {
+            request.setAttribute("tfcList", tfcTableDataInfo.getItems());
+        }else {
+            request.setAttribute("tfcList", null);
         }
 
         return "site/index";

@@ -24,4 +24,5 @@ public interface VciFilesMapper {
     Integer deleteVciFilesById(@Param("idList") List<Long> idList);
 
     VciFileFrontVO queryVciFileByFid(Long fid);
+
 }

@@ -313,4 +313,67 @@ public class NewsController {
         return JsonResult.success();
     }
 
+    // 添加Live
+    @PostMapping("/createLive")
+    @ResponseBody
+    public JsonResult createLive(@RequestBody NewsInfoVO newsInfoVO){
+        News news = new News();
+        Long newId = new IdWorker().nextId();
+        news.setNid(newId);
+        news.setNtype(newsInfoVO.getNtype());
+        news.setAuthor(newsInfoVO.getAuthor());
+        news.setTitle(newsInfoVO.getTitle());
+        news.setCoverImg(newsInfoVO.getCoverImg());
+        news.setAuthorImg(newsInfoVO.getAuthorImg());
+        news.setPtitle(newsInfoVO.getPtitle());
+        news.setPkeywords(newsInfoVO.getPkeywords());
+        news.setPdescription(newsInfoVO.getPdescription());
+        // 扩展信息
+        NewsExt newsExt = new NewsExt();
+        newsExt.setNid(newId);
+        newsExt.setNdigest(newsInfoVO.getNdigest());
+        newsExt.setNlable(newsInfoVO.getNlable());
+        newsExt.setEndate(newsInfoVO.getEndate());
+        newsExt.setProvince(newsInfoVO.getProvince());
+        newsExt.setCity(newsInfoVO.getCity());
+        newsExt.setVideo(newsInfoVO.getVideo());
+        newsExt.setTxt1(newsInfoVO.getTxt1());
+        newsExt.setTxt2(newsInfoVO.getTxt2());
+        newsExt.setTxt3(newsInfoVO.getTxt3());
+
+        newsService.insertNews(news, newsExt);
+        return JsonResult.success();
+    }
+
+    // 修改Live
+    @PostMapping("/updateLive")
+    @ResponseBody
+    public JsonResult updateLive(@RequestBody NewsInfoVO newsInfoVO){
+        News news = new News();
+        news.setNid(newsInfoVO.getNid());
+        news.setNtype(newsInfoVO.getNtype());
+        news.setAuthor(newsInfoVO.getAuthor());
+        news.setTitle(newsInfoVO.getTitle());
+        news.setCoverImg(newsInfoVO.getCoverImg());
+        news.setAuthorImg(newsInfoVO.getAuthorImg());
+        news.setPtitle(newsInfoVO.getPtitle());
+        news.setPkeywords(newsInfoVO.getPkeywords());
+        news.setPdescription(newsInfoVO.getPdescription());
+        // 扩展信息
+        NewsExt newsExt = new NewsExt();
+        newsExt.setNid(newsInfoVO.getNid());
+        newsExt.setNdigest(newsInfoVO.getNdigest());
+        newsExt.setNlable(newsInfoVO.getNlable());
+        newsExt.setEndate(newsInfoVO.getEndate());
+        newsExt.setProvince(newsInfoVO.getProvince());
+        newsExt.setCity(newsInfoVO.getCity());
+        newsExt.setVideo(newsInfoVO.getVideo());
+        newsExt.setTxt1(newsInfoVO.getTxt1());
+        newsExt.setTxt2(newsInfoVO.getTxt2());
+        newsExt.setTxt3(newsInfoVO.getTxt3());
+
+        newsService.updateNews(news, newsExt);
+        return JsonResult.success();
+    }
+
 }

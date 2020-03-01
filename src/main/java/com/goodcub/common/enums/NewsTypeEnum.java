@@ -32,6 +32,7 @@ public enum NewsTypeEnum {
 
         STORIES("Success Stories"),
 
+        LIVES("Live broadcast"),
 
     VENDORS("供应商管理"),
 

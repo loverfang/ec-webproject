@@ -304,4 +304,66 @@ public class NewsFrontController {
         return "site/stories_content";
     }
 
+
+    // 2020.3.1新增功能
+    /**
+     * Live 列表
+     * @return
+     */
+    @RequestMapping("/lives")
+    public String lives(HttpServletRequest request,
+                         @RequestParam(value = "page", required = false)Integer page,
+                         @RequestParam(value = "limit", required = false)Integer limit){
+        // 初始化分页默认数据
+        if(page == null || "".equals(page)){
+            page = 1;
+        }
+
+        if(limit == null || "".equals(limit)){
+            limit = 6;
+        }
+
+        Map<String,Object> params = new HashMap<>();
+        params.put("ntype", "LIVES");
+        TableDataInfo tableDataInfo = newsFrontService.queryNewsFrontList(params, page, limit);
+
+        request.setAttribute("data", tableDataInfo);
+        request.setAttribute("ntype", "events");
+        return "site/livelist";
+    }
+
+    /**
+     * Live 详情
+     * @return
+     */
+    @GetMapping("/lives/{nid}.html")
+    public String liveDetail(HttpServletRequest request, @PathVariable("nid") Long nid){
+
+        // 查询详情
+        NewsFrontVO newsDetail = newsFrontService.queryNewsFrontInfo(nid);
+
+        // 更新阅读次数
+        newsFrontService.updateViewCount(nid);
+
+        // 获得新闻对应的PDF文件信息,只取得一条
+        Map<String,Object> param = new HashMap<String,Object>();
+        param.put("nid", newsDetail.getNid());
+        param.put("source", "news");
+        TableDataInfo pdfTableDataInfo = newsPdfFrontService.queryNewsPdfFrontList(param, 1 ,1);
+
+        request.setAttribute("pdfList", pdfTableDataInfo.getItems());
+        request.setAttribute("newsDetail", newsDetail);
+        request.setAttribute("newstype", NewsTypeEnum.EVENTS);
+        request.setAttribute("ntype","events");
+
+        // 图片列表(全部图片)
+        List<NewsPhotoListFrontVO> photoList = newsPhotoFrontService.queryNewsPhotoFrontList(nid);
+        request.setAttribute("photos", photoList);
+
+        // 广告列表(全部广告)
+        List<NewsAdListFrontVO> adList = newsAdFrontService.queryNewsAdFrontList( nid );
+        request.setAttribute("advertise", adList);
+
+        return "site/live_content";
+    }
 }

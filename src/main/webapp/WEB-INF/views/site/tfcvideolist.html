@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>Event</title>
+    <link href="${base}/res/site/style/default.css" rel="stylesheet" type="text/css">
+    <link href="${base}/res/site/style/style.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" type="text/css" href="${base}/res/site/style/jquery.slider.css" />
+    <!--[if IE 6]>
+    <link rel="stylesheet" type="text/css" href="${base}/res/site/style/jquery.slider.ie6.css" />
+    <![endif]-->
+</head>
+
+<body>
+<#include "/site/components/title.html"/>
+<#include "/site/components/navbar.html"/>
+
+<div class="maincontent">
+    <div class="banner_b">
+        <div class="i_adbanner_2">
+            <div id="KinSlideshow_2">
+                <did class="banner_2">
+                    <img src="${base}/res/site/images/membership.jpg" title=" "/>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!--  one-->
+<div class="wrap" id="p1">
+    <div class="mainleft fl">
+        <div class="lansebj">
+            <div class="menulist">
+                <ul class="mainnav">
+                    <#if tfcTypeFrontList??> <#list tfcTypeFrontList as item>
+                    <li><a href="/tfcvideos?typeId=${item.typeId}" <#if typeId??><#if typeId == item.typeId>class="now"</#if></#if> onclick="tags(this);">${item.typeName}</a></li>
+            </#list></#if>
+        </ul>
+    </div>
+</div>
+</div>
+<div class="mainright fr">
+    <div class="tit">TFC 橙色供应链行动</div>
+    <div class="con">
+        <div class="vido-list">
+            <ul><#if data??><#if data.items??> <#list data.items as item>
+                <li>
+                    <a href="${item.vurl}" target="_blank">
+                      <div class="vido-div"><#if item.coverImg??><img src="${item.coverImg}" width="225" height="160"></#if></div>
+                      <div class="vido-con">${item.title}</div>
+                    </a>
+                </li></#list></#if></#if>
+            </ul>
+        </div>
+    </div>
+
+    <div style="clear:both;"/>
+    <div class="wrap">
+        <#if data??><#if data.items??>
+        <!-- 导入自定义ftl -->
+        <#import "/ftl/page.ftl" as p/>
+        <!-- 使用该标签 -->
+        <@p.pager data "/insights" {} 3/>
+    </#if></#if>
+    </div>
+</div>
+
+</div>
+
+</div>
+<#include "/site/components/footer.html"/>
+<script type="text/javascript" src="${base}/res/site/js/jquery.slider.min.js"></script>
+<script type="text/javascript" src="${base}/res/site/js/jquery.smooth-scroll.js"></script>
+<script type="text/javascript" src="${base}/res/site/js/common_login.js"></script>
+
+<script type="text/javascript">
+    jQuery(document).ready(function ($) {
+        $(".slider").slideshow({
+            width: 776,
+            height: 525,
+            transition: ['bar', 'Rain', 'square', 'squareRandom', 'explode']
+        });
+        $('ul.mainnav a').smoothScroll({
+            offset: 3,
+            easing: 'swing',
+            speed: 400
+        });
+    });
+    function tags(obj){
+        var currentObj = $(obj);
+        $("ul.mainnav li a").removeClass();
+        currentObj.addClass("now");
+    }
+</script>
+</body>
+</html>

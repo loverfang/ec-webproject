@@ -3,6 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <title>VCIntegration - Home</title>
+    <meta name="keywords" content="VCI,vci,vcintegration,greating the ecosystem for supply chain integration"/>
+    <meta name="description" content="VCIntegration is amost reliable, intelligent and interactive ecosystem in supply chain and logistics industry. Our mission is to bringing together the greatest minds,latest market fresh and most innovative solutions to being a catalyst for supply chain innovation."/>
     <link href="${base}/res/site/style/default.css" rel="stylesheet" type="text/css">
     <link href="${base}/res/site/style/style.css" rel="stylesheet" type="text/css">
 </head>
@@ -99,22 +101,78 @@
                 </ul>
             </dd>
         </dl>
-    </div>
-
-    <div class="morelist">
-        <ul>
-            <li><a href="/events/">
-                <input class="inp f16px" name="" type="button" value="Read More">
-            </a></li>
-            <li class="ml60"><a href="/insights/">
-                <input class="inp f16px" name="" type="button" value="Read More">
-            </a></li>
-        </ul>
+        <div class="morelist">
+            <ul>
+                <li><a href="/events/">
+                    <input class="inp f16px" name="" type="button" value="Read More">
+                </a></li>
+                <li class="ml60"><a href="/insights/">
+                    <input class="inp f16px" name="" type="button" value="Read More">
+                </a></li>
+            </ul>
+        </div>
     </div>
 </div>
 
+<div class="wrap">
+    <div class="wz-vido">
+        <dl>
+            <dt><a href="/lives/"> VCI Live broadcast </a></dt>
+            
+        </dl>
+        <dl>
+            <dt><a href="/tfcvideos/"> TFC(橙色供应链行动) </a></dt>
+        </dl>
+    </div>
+    <div id="boxscroll-1">
+        <div class="wrapper"> <div class="wz-vido" >
+            <dl>
+               
+                <dd>
+                    <ul><#if livesList??><#list livesList as item>
+                        <li>
+                            <div class="clear">
+                                <div class="left-tit f16px">${item.nlable}</div>
+                                <div class="left-time f16px"> [${item.endate}] ${item.city}, ${item.province}</div>
+                            </div>
+                            <p><a href="/lives/${item.nid?c}.html">${item.title}</a> </p>
+                        </li></#list></#if>
+                    </ul>
+                </dd>
+            </dl></div></div>
+    </div>
+
+    <div id="boxscroll-2">
+        <div class="wrapper"><div class="wz-vido" >
+            <dl>
+                <dd>
+                    <ul><#if tfcList??><#list tfcList as item>
+                        <li>
+                            <div class="clear">
+                                <div class="right-tit f16px">${item.typeName}</div>
+                            </div>
+                            <p><a href="/tfcvideos/${item.vid}.html">${item.title}</a></p>
+                        </li></#list></#if>
+                    </ul>
+                </dd>
+            </dl></div></div>
+    </div>
+</div>
+
+<!--<div class="wrap" style="margin-bottom: 50px;"> <div class="morelist">-->
+    <!--<ul>-->
+        <!--<li><a href="/events/">-->
+            <!--<input class="inp f16px" name="" type="button" value="Read More">-->
+        <!--</a></li>-->
+        <!--<li class="ml60"><a href="/insights/">-->
+            <!--<input class="inp f16px" name="" type="button" value="Read More">-->
+        <!--</a></li>-->
+    <!--</ul>-->
+<!--</div></div>-->
+
 <#include "/site/components/footer.html"/>
 <script type="text/javascript" src="${base}/res/site/js/jquery.bxslider.js"></script>
+<script type="text/javascript" src="${base}/res/site/js/jquery.nicescroll.min.js"></script>
 <!--控制banner特效-->
 <script type="text/javascript">
     $(window).load(function(){
@@ -135,6 +193,20 @@
             e.stopPropagation();
         });
     });
+
+    $(document).ready(function() {
+        $("#boxscroll-1").niceScroll("#boxscroll-1 .wrapper", {
+            cursorborder: "",
+            cursorcolor: "gray",
+
+        });
+        $("#boxscroll-2").niceScroll("#boxscroll-2 .wrapper", {
+            cursorborder: "",
+            cursorcolor: "gray",
+
+        });
+    });
+
 </script>
 </body>
 </html>

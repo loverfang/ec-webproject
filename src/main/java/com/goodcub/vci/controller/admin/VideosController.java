@@ -44,6 +44,7 @@ public class VideosController {
         videos.setVurl(videosInfoVO.getVurl());
         videos.setNeedcount(videosInfoVO.getNeedcount());
         videos.setMemo(videosInfoVO.getMemo());
+        videos.setCoverImg(videosInfoVO.getCoverImg());
 
         videos.setSindex(1);
         videos.setViewcount(0);
